@@ -21,7 +21,6 @@ from bson.objectid import ObjectId
 #         print("Could not connect to MongoDB: %s") % e
 # app.config["MONGO_DNAME"] = 'milestone3-recipe-app'
 # app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@cluster0-ghrjb.mongodb.net/cuisineAppDB?retryWrites=true'
-
 # mongo = PyMongo(app)
         
 #...........................................................Connect heroku app
