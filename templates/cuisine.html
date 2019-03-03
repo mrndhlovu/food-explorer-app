@@ -1,6 +1,12 @@
-{% extends 'base.html %}
-{% block content %}
+{% extends 'base.html' %}
+{% block head %}
 
-
-
+ {% for recipe in recipes %}
+ 
+     {{ recipe.first_name }}
+     {{ recipe.last_name }}
+     
+ {% endfor %}
+ 
+ 
 {% endblock %}
