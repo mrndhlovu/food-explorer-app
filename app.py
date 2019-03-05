@@ -20,55 +20,28 @@ mongo = PyMongo(app)
 def get_cuisine():
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
 
+@app.route('/add_recipe')
+def add_recipe():
+    categories = mongo.db.categories.find()
+    
+    category_found = [categories for categories in categories]
+    
+    return render_template("addrecipe.html", categories=category_found)
+
+
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipe = mongo.db.userRecipes
+    recipe.insert_one(request.form.to_dict())
+    return redirect(url_for('get_cuisine'))
+    
+    
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
         debug=True)
         
         
-#.......................start app       
-# def show_menu():
-#     print("")
-#     print("1. Add a record")
-#     print("2. Find a record by name")
-#     print("3. Edit a record")
-#     print("4. Delete a record")
-#     print("5. Exit")
-
-#     option = input("Enter option: ")
-#     return option
-
-
-# def main_loop():
-#     while True:
-#         option = show_menu()
-#         if option == "1":
-#             print("You have selected option 1")
-#         elif option == "2":
-#             print("You have selected option 2")
-#         elif option == "3":
-#             print("You have selected option 3")
-#         elif option == "4":
-#             print("You have selected option 4")
-#         elif option == "5":
-#             conn.close()
-#             break
-#         else:
-#             print("Invalid option")
-#         print("")
-        
-        
-# conn = mongo_connect(MONGODB_URI)  
-
-# coll = conn[DBS_NAME][COLLECTION_NAME]
-
-# main_loop()
-    
-    
-    
-    
-    
-
-    
-   
-    
+ 

@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>Add Recipe</h3>
+<div class="row">
+    <form action={{ url_for( 'insert_recipe') }} method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">poll</i></i>
+                <select class="category" name="category">
+                  <option value="" disabled selected>Pick Category</option>
+                  
+                 {% for cat in categories %}
+                 <option value="{{ cat.category_name }}"> {{ cat.category_name }}</option>
+                 {% endfor %}
+                </select>
+                <label> Recipe Category </label>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="first_name" type="text" name="first_name">
+                    <label for="icon_prefix">First Name</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="last_name" type="text" name="last_name">
+                <label for="icon_prefix">Last Name</label>
+            </div>
+        </div>
+               <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">world_map</i>
+                <input id="last_name" type="text" name="country">
+                <label for="icon_prefix">Country</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="description" id="description" type="textarea" class="materialize-textarea"></textarea>
+                <label for="icon_prefix">Recipe Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">today</i>
+                <input name="date_added" id="date_added" type="text" class="datepicker">
+                <label for="icon_prefix">Date</label>
+            </div>
+        </div>
+    
+
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit"">Add Recipe
+        <i class="material-icons right">playlist_add</i>
+      </button>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
