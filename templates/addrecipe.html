@@ -2,30 +2,10 @@
 
 
 <div class="ui container">
-
     <div class="ui segment">
         <div class="row">
             <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="First Name" id="first_name" name="first_name" type="text" >
-                        <label >First Name</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input placeholder="Last Name" id="last_name" type="text" name="last_name" >
-                        <label >Last Name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Username" id="first_name" name="username " type="text" >
-                        <label >Username</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input placeholder="Email" id="email" name="email" type="text">
-                        <label >Email</label>
-                    </div>
-                </div>
+               
                 <div class="row">
                     <div class="input-field col s6">
                         <select>
@@ -294,23 +274,24 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Dish Name" id="dish_name" name="dish_name " type="text">
-                        <label >Dish Name</label>
+                        <input placeholder="Recipe Name" id="recipe_name" name="recipe_name " type="text">
+                        <label>Recipe Name</label>
                     </div>
                 </div>
-                <div class="row">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
-                                <label >Instructions and Ingredients</label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div>
-                    <button name="name" type="submit" class="ui primary button">Add Recipe</button>
 
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+                        <label>Instructions and Ingredients</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <button class="btn waves-effect waves-light submit-button" type="submit" name="action">Add Recipe
+                <i class="material-icons right">playlist_add</i>
+             </button>
                 </div>
             </form>
         </div>

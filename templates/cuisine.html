@@ -1,18 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 <div class="ui container">
 
-
-
-   <div class="ui three column divided grid">
-    {% for recipe in recipes %}
-  <div class="row">
-    <div class="column">
-       <div class="ui card">
+    <div class="ui card">
         {% for recipe in recipes %}
         <div class="content">
             <div class="header">{{ recipe.dish_name }} - {{ recipe.category }}</div>
             <div class="meta">{{ recipe.first_name}} {{recipe.last_name }}</div>
-            <div class="meta">{{ recipe.date_added }}</div>
+            <div class="meta">{{ recipe.last_modified }}</div>
             <div class="description">
                 <p>{{ recipe.description }}</p>
             </div>
@@ -34,7 +28,6 @@
 
         {% endfor %}
 
-  {% endfor %}
-</div>
-    
+
+    </div>
     {% endblock %}

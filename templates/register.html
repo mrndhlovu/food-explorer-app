@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="ui container">
+    <form class="ui form" action="{{ url_for('register') }}" method="POST">
+        <div class="row ui container">
+            <div class="s6">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="s6">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Use 123 as Password">
+            </div>
+
+        </div>
+     
+            <button class="btn waves-effect waves-light submit-button" type="submit" name="action">SignUp
+                <i class="material-icons right">signup</i>
+             </button>
+       
+    </form>
+
+</div>
+
+
+
+{% endblock %}
