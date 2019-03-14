@@ -14,14 +14,45 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@cluster0-j5cta.mongodb.ne
 
 mongo = PyMongo(app)
 
+app.secret_key = 'the random string'
+app.config['SECRET_KEY'] = 'the random string' 
+SECRET_KEY = 'the random string'
+
+# os.urandom(24)
+
+# SECRET_KEY = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
+
 
 @app.route('/index')
 def index():
     if 'username' in session:
         return "You are logged in as " + session ['username']
     return render_template("register.html")
+    
+    
+@app.route('/get_cuisine')
+def get_cuisine():
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
 
-# check if user is h as a username already if true point to add recipe pag
+@app.route('/add_recipe')
+def add_recipe():
+    categories = mongo.db.categories.find()
+    category_found = [category for category in categories]
+    return render_template("addrecipe.html", categories = category_found)
+
+
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipe = mongo.db.userRecipes
+
+    last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
+    recipe.insert(last_modified)
+    recipe.insert_one(request.form.to_dict())
+    return redirect(url_for('get_cuisine'))
+
+    
+
+# check if user is has a username already if true point to add recipe pag
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     users = mongo.db.usersDB
@@ -55,25 +86,6 @@ if __name__  == '__main__':
     app.run(debug=True)
     
     
-@app.route('/get_cuisine')
-def get_cuisine():
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
-
-@app.route('/add_recipe')
-def add_recipe():
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
-    return render_template("addrecipe.html", categories = category_found)
-
-
-@app.route('/insert_recipe', methods=['POST'])
-def insert_recipe():
-    recipe = mongo.db.userRecipes
-
-    last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
-    recipe.insert(last_modified)
-    recipe.insert_one(request.form.to_dict())
-    return redirect(url_for('get_cuisine'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
