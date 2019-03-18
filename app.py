@@ -31,6 +31,7 @@ def index():
 def get_cuisine():
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
 
+
 @app.route('/add_recipe')
 def add_recipe():
     categories = mongo.db.categories.find()
@@ -38,6 +39,7 @@ def add_recipe():
     if 'username' in session:
         return render_template("addrecipe.html", categories = category_found)
     return "You are not logged in."
+
     
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -45,8 +47,28 @@ def insert_recipe():
     last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
     recipe.insert_one(request.form.to_dict())
     return redirect(url_for('get_cuisine'))
+    
+
+@app.route('/edit_recipe/<_id>')
+def edit_recipe(_id): 
+    id = mongo.db.userRecipes.find_one({'_id': ObjectId(_id)})
+    categories = mongo.db.categories.find()
+    category_found = [category for category in categories]
+    return render_template("editrecipe.html", recipe=id, categories = category_found)
+    
+ 
+@app.route('/update_recipe/<_id>', methods=['POST'])
+def update_recipe(_id): 
+    recipe = mongo.db.userRecipes
+    recipe.update({'_id': ObjectId(_id)}, 
+    { 
+        'category_name' : request.form.get['category_name'], 
+        'country' : request.form.get['country'],
+        'description':  request.form.get['description'],
+        'recipe_name':request.form.get['recipe_name']
         
-     
+    })
+    return redirect(url_for('get_cuisine'))
     
 
 # check if user is has a username already if true point to add recipe page
@@ -62,6 +84,14 @@ def login():
         return ('Invalid password or username')    
     return ('Invalid password or username') 
     
+    
+
+@app.route('/delete_recipe/<_id>', methods=["POST"])
+def delete_recipe(_id):
+    mongo.db.userRecipes.remove({'_id': ObjectId(_id)})
+    return redirect(url_for('get_cuisine'))
+    
+
   
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -88,6 +118,3 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
         debug=True)
-        
-        
- 

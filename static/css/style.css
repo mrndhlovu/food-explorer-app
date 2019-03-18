@@ -4,3 +4,7 @@ body {}
     background-color: #dededf !important;
     color: #4083c4 !important;
 }
+
+.recipes-list{
+    height: 80vh;
+}

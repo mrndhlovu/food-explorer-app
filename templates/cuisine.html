@@ -1,22 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
+<div class="container recipes-list">
 
-    <ul class="collapsible popout ">
+    <ul class="collapsible ">
         {% for recipe in recipes %}
-        <li class="collection-item avatar"><h4></h4>{{ recipe.recipe_name }} </li>
-        <li class="collection-item avatar"><h4></h4>{{ recipe.category }} </li>
-        <li class="collection-item avatar"><h4></h4>{{ recipe.country }} </li>
-        <li class="collection-item avatar"><h4></h4>{{ recipe.username}} </li>
-        <li class="collection-item avatar"><h4></h4>{{ recipe.description}} </li>
-    
-            <a href="#!" class="secondary-content"><i class="material-icons">local_dining</i></a>
-            
-    
-
+        <li>
+            <div class="collapsible-header"><i class="material-icons">local_dining</i>{{recipe.country}}</div>
+            <div class="collapsible-body"><span>{{recipe.description}}</span>
+                <a href="{{url_for('delete_recipe', _id=recipe._id)}}" class="secondary-content"><i class="material-icons">delete</i></a>
+                <a href="{{url_for('edit_recipe', _id=recipe._id)}}" class="secondary-content"><i class="material-icons">edit</i></a>
+                <a href="{{url_for('add_recipe')}}" class="secondary-content"><i class="material-icons">add</i></a>
+        </li>
         {% endfor %}
-        
     </ul>
 
-
-</div>
-{% endblock %}
+    </div>
+    {% endblock %}
