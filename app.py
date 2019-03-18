@@ -19,14 +19,14 @@ app.config['SECRET_KEY'] = 'a random password'
 SECRET_KEY = 'a random password'
 
 
-@app.route('/') 
+
 @app.route('/index')
 def index():
     if 'username' in session:
         return  "You have logged in"
     return render_template("index.html")
     
-    
+@app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
@@ -88,7 +88,8 @@ def login():
 
 @app.route('/delete_recipe/<_id>', methods=["POST"])
 def delete_recipe(_id):
-    mongo.db.userRecipes.remove({'_id': ObjectId(_id)})
+    delete_file =  mongo.db.userRecipes
+    delete_file.delete_one({'_id': ObjectId(_id)})
     return redirect(url_for('get_cuisine'))
     
 
