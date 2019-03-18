@@ -1,33 +1,22 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui container">
+<div class="container">
 
-    <div class="ui card">
+    <ul class="collapsible popout ">
         {% for recipe in recipes %}
-        <div class="content">
-            <div class="header">{{ recipe.dish_name }} - {{ recipe.category }}</div>
-            <div class="meta">{{ recipe.first_name}} {{recipe.last_name }}</div>
-            <div class="meta">{{ recipe.last_modified }}</div>
-            <div class="description">
-                <p>{{ recipe.description }}</p>
-            </div>
-        </div>
-        <div class="extra content">
-            <i class="check icon"></i> 121 Votes
-        </div>
-
-        <div class="extra content">
-            <span class="left floated like"><i class="like icon"></i>
-      Like
-    </span>
-            <span class="right floated star">
-      <i class="star icon"></i>
-      Favorite
-    </span>
-
-        </div>
+        <li class="collection-item avatar"><h4></h4>{{ recipe.recipe_name }} </li>
+        <li class="collection-item avatar"><h4></h4>{{ recipe.category }} </li>
+        <li class="collection-item avatar"><h4></h4>{{ recipe.country }} </li>
+        <li class="collection-item avatar"><h4></h4>{{ recipe.username}} </li>
+        <li class="collection-item avatar"><h4></h4>{{ recipe.description}} </li>
+    
+            <a href="#!" class="secondary-content"><i class="material-icons">local_dining</i></a>
+            
+    
 
         {% endfor %}
+        
+    </ul>
 
 
-    </div>
-    {% endblock %}
+</div>
+{% endblock %}

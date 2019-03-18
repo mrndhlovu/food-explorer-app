@@ -4,27 +4,67 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />-->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
 
 <body>
-    <div class="ui container">
-        <div class="ui menu">
-            <div class="header item"><a href="index" class="brand-logo center">Our Recipe Book</a></div>
-            <div><a class="item" href="index">Login</a></div>
-            <div><a class="item" href="register">Register</a></div>
-            <div><a class="item" href="get_cuisine">Receipes</a></div>
-            <div><a class="item" href="add_recipe">Add Recipe</a></div>
-        </div>
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper green">
+                <a href="index" class="brand-logo">Our Recipe Book</a>
+                <a href="index" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="item" href="index">Login</a></li>
+                    <li><a class="item" href="register">Register</a></li>
+                    <li><a class="item" href="get_cuisine">Recipes</a></li>
+                    <li><a class="item" href="add_recipe">Add Recipe</a></li>
+                </ul>
+            </div>
+        </nav>
 
-        <div class="ui container">
-            {% block content %} {% endblock %}
-        </div>
+        <ul class="sidenav" id="mobile-demo">
+            <li><a class="item" href="index">Login</a></li>
+            <li><a class="item" href="register">Register</a></li>
+            <li><a class="item" href="get_cuisine">Receipes</a></li>
+            <li><a class="item" href="add_recipe">Add Recipe</a></li>
+        </ul>
     </div>
+    <div class="container">
 
 
 
+
+        {% block content %}
+
+
+       
+        {% endblock %} <footer class="page-footer green">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Our Recipe Book</h5>
+                        <p class="grey-text text-lighten-4">Share, Search, Create </p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        
+                        <ul>
+                            <li><a class="item" href="index">Login</a></li>
+                    <li><a class="item text-white" href="register">Register</a></li>
+                  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2019 Copyright
+                    
+                </div>
+            </div>
+        </footer>
+
+    </div>
 
 
 
@@ -43,9 +83,12 @@
             $(document).ready(function() {
                 $('input#input_text, textarea#textarea2').characterCounter();
             });
+            $(document).ready(function() {
+                M.updateTextFields();
+            });
         });
     </script>
-
+    <div></div>
 </body>
 
 </html>

@@ -1,26 +1,40 @@
 {% extends 'base.html' %} {% block content %}
-
-<div class="ui container">
-    <form class="ui form" action="{{ url_for('register') }}" method="POST">
-        <div class="row ui container">
-            <div class="s6">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Username">
+<div class="container">
+    <div class="col s12">
+        <form class="ui form" action="{{ url_for('register') }}" method="POST">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label>Username</label>
+                        <input type="text" name="username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                </div>
             </div>
-            <div class="s6">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Use 123 as Password">
-            </div>
-
-        </div>
-     
-            <button class="btn waves-effect waves-light submit-button" type="submit" name="action">SignUp
-                <i class="material-icons right">signup</i>
+            <div class="row">
+                <button class="btn waves-effect waves-light submit-button green" type="submit" name="action">SignUp
+                <i class="material-icons right">group_add</i>
              </button>
-       
-    </form>
+            </div>
+
+
+        </form>
+
+    </div>
 
 </div>
+
 
 
 

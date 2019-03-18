@@ -1,25 +1,33 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="ui container">
-    <form class="ui form" action="{{ url_for('login') }}" method="POST">
-        <div class="row">
-            <div class="s12">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Username">
-            </div>
-            <div class="s12">
-                <label>Password</label>
-                <input placeholder="Use 123 as Password" name="password" type="password"  >
-            </div>
-        </div>
-        <div class="row">
-            <button class="btn waves-effect waves-light submit-button" type="submit" name="action">Login
-                <i class="material-icons right">login</i>
+<div class="container">
+    <div class="col s12">
+   
+        <form class="ui form " action="{{ url_for('login') }}" method="POST">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="username" name="username"  type="text">
+                        <label placeholder="Username" name="username" class="active" for="surname">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="text">
+                        <label placeholder="Password" name="password" class="active" for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn waves-effect waves-light submit-button green" type="submit" name="action">Login
+                <i class="material-icons right">people</i>
              </button>
-        </div>
+                </div>
+            </div>
+        </form>
+  
+</div>
+    
+</div>
 
-    </form>
 
-
-
-    {% endblock %}
+{% endblock %}
