@@ -54,9 +54,9 @@ def insert_recipe():
 def login():
     users = mongo.db.usersDB
     login_user = users.find_one({'username' : request.form['username']})
+    login_pass = users.find_one({'passcode' : request.form['password']})
     if login_user:
-        login_pass = users.find_one({'passcode' : request.form['password']})
-        if str(login_pass['passcode']) == str(request.form['password']):
+        if login_pass:
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         return ('Invalid password or username')    
