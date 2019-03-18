@@ -23,7 +23,7 @@ SECRET_KEY = 'a random password'
 @app.route('/index')
 def index():
     if 'username' in session:
-        return "You are logged in as " + session ['username']
+        return  "You have logged in"
     return render_template("index.html")
     
     
@@ -35,23 +35,18 @@ def get_cuisine():
 def add_recipe():
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("addrecipe.html", categories = category_found)
-
-
+    if 'username' in session:
+        return render_template("addrecipe.html", categories = category_found)
+    return "You are not logged in."
+    
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
-    
-    if 'username' in session:
-        username  = session['username']
-        userID = [{'_id'}]
-        last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
-        recipe.insert(last_modified)
-        recipe.insert(username)
-        recipe.insert_one(request.form.to_dict().lower())
+    last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
+    recipe.insert_one(request.form.to_dict())
+    return redirect(url_for('get_cuisine'))
         
-        return redirect(url_for('get_cuisine'))
-    return 'You need to register first!'   
+     
     
 
 # check if user is has a username already if true point to add recipe page
@@ -59,27 +54,27 @@ def insert_recipe():
 def login():
     users = mongo.db.usersDB
     login_user = users.find_one({'username' : request.form['username']})
-    login_pass = users.find_one({'passcode' : request.form['password']})
     if login_user:
+        login_pass = users.find_one({'passcode' : request.form['password']})
         if str(login_pass['passcode']) == str(request.form['password']):
             session['username'] = request.form['username']
             return redirect(url_for('index'))
-
-    return 'Invalid password or username'
+        return ('Invalid password or username')    
+    return ('Invalid password or username') 
     
   
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         users = mongo.db.usersDB
-        user_found = users.find_one({'name' : request.form['username']})
+        user_found = users.find_one({'username' : request.form['username']})
        
         if user_found is None:
-            users.insert({'name' : request.form['username'],'email' : request.form['email'], 'passcode' : request.form['password']})
+            users.insert({'username' : request.form['username'],'email' : request.form['email'], 'passcode' : request.form['password']})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         
-        return 'That username taken, try again with a different username'
+        return 'That username has been taken, try again with a different username'
 
     return render_template('register.html')
 
