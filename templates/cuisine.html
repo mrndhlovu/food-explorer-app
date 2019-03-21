@@ -1,17 +1,58 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container recipes-list">
-
-    <ul class="collapsible ">
-        {% for recipe in recipes %}
-        <li>
-            <div class="collapsible-header"><i class="material-icons">local_dining</i>{{recipe.country}}</div>
-            <div class="collapsible-body"><span>{{recipe.description}}</span>
-                <a href="{{url_for('delete_recipe', _id=recipe._id)}}" class="secondary-content"><i class="material-icons">delete</i></a>
-                <a href="{{url_for('edit_recipe', _id=recipe._id)}}" class="secondary-content"><i class="material-icons">edit</i></a>
-                <a href="{{url_for('add_recipe')}}" class="secondary-content"><i class="material-icons">add</i></a>
-        </li>
-        {% endfor %}
-    </ul>
-
+    <div class="image-container">
+        <img class="responsive-img" src="/static/images/waffle-heart-2697904_1280.jpg">
     </div>
-    {% endblock %}
+    <div class="row">
+
+        <div class="col s8 card-container">
+            <div class="row">
+                {% for recipe in recipes %}
+                <div class="col s12 m6">
+                    <div class="card white">
+                        <div class="card-content black-text">
+                            <span class="card-title">{{recipe.country}}</span>
+                            <p>{{recipe.description}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#!" class="secondary-content"><i class="material-icons">arrow_drop_up</i></a>
+                            <br>
+                            <a href="" class="secondary-content">200</a>
+                            <br>
+                            <a href="#!" class="secondary-content"><i class="material-icons">arrow_drop_down</i></a>
+                            </p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="col s4 side-container" action="{{ url_for('insert_recipe') }}" method="POST">
+            <form action="{{ url_for('insert_recipe') }}" method="POST">
+                <div class="row">
+                    <div class="col s12">
+                        <h5>Recent Posts</h5>
+                        <ul class="collection">
+                            {% for cat in categories %}
+                            <li class="collection-item">{{ cat.category_name }}</li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+{% endblock %}

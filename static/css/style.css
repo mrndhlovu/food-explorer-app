@@ -8,3 +8,16 @@ body {}
 .recipes-list{
     height: 80vh;
 }
+.image-container{
+    height: auto;
+}
+
+.card-container{
+    background-color: grey; 
+    height: 100%;
+}
+
+.side-container{
+    background-color: #b0bec5;
+    height: 100vh;
+}

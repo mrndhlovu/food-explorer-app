@@ -1,32 +1,36 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container recipes-list">
+
     <div class="col s12">
-   
-        <form class="ui form " action="{{ url_for('login') }}" method="POST">
-            <div class="row">
+        <div class="col s12">
+
+            <form class="ui form " action="{{ url_for('login') }}" method="POST">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="username" name="username"  type="text">
-                        <label placeholder="Username" name="username" class="active" for="surname">Username</label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text">
+                            <label placeholder="Username" name="username" class="active" for="surname">Username</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="password" name="password" type="text">
-                        <label placeholder="Password" name="password" class="active" for="password">Password</label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="text">
+                            <label placeholder="Password" name="password" class="active" for="password">Password</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <button class="btn waves-effect waves-light submit-button green" type="submit">Login
+                    <div class="row">
+                        <button class="btn waves-effect waves-light submit-button green" type="submit">Login
                 <i class="material-icons right">people</i>
              </button>
+                    </div>
                 </div>
-            </div>
-        </form>
-  
-</div>
-    
+            </form>
+
+        </div>
+    </div>
+
+
 </div>
 
 

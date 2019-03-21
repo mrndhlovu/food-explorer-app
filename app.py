@@ -6,7 +6,6 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
 
-
 app = Flask(__name__)
 
 app.config["MONGO_DNAME"] = 'cuisineAppDB'
