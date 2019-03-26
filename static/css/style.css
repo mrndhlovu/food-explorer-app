@@ -1,4 +1,4 @@
-body {}
+
 
 #submit-button {
     background-color: #dededf !important;
@@ -13,11 +13,23 @@ body {}
 }
 
 .card-container{
-    background-color: grey; 
+    /*background-color: grey; */
     height: 100%;
 }
 
 .side-container{
-    background-color: #b0bec5;
+    /*background-color: #b0bec5;*/
     height: 100vh;
+}
+
+.form-wrapper{
+    padding-top: 2em;
+}
+
+.login-form-wrapper{
+    height: auto !important;
+}
+
+.register-form{
+    height: auto !important;
 }

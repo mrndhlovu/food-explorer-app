@@ -1,51 +1,41 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="container recipes-list">
+<div class="container">
+    <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
 
-    <div class="row">
-        <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-
-                <div class="input-field col s6">
-                    <select>
+        <div class="form-group">
+            <select>
                           <option value="" disabled selected>Choose Category</option>
                           {% for cat in categories %}
-                          <option name="{{ cat.category_name}}">{{ cat.category_name }}</option>
+                          <option name="category">{{ cat.category_name }}</option>
                          {% endfor %}
                         </select>
 
-                </div>
-               <div class="input-field col s6">
-                    <input id="country" name="country" type="text">
-                    <label>Country</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="recipe_name" name="recipe_name " type="text">
-                    <label>Recipe Name</label>
-                </div>
-            </div>
-          
+        </div>
+        <div class="form-group">
+            <input id="country" name="country" type="text">
+            <label>Country</label>
+        </div>
 
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
-                    <label>Instructions and Ingredients</label>
-                </div>
-            </div>
+        <div class="form-group">
+            <input id="recipeName" name="recipeName " type="text">
+            <label>Recipe Name</label>
+        </div>
+        <div class="form-group">
+            <textarea id="textarea1" name="ingredients" class="materialize-textarea"></textarea>
+            <label>Ingredients</label>
+        </div>
+        <div class="form-group">
+            <textarea id="textarea1" name="directions" class="materialize-textarea"></textarea>
+            <label>Directions</label>
+        </div>
+        <div class="form-group">
+            <input id="textarea1" name="allergens" class="materialize-textarea">
+            <label>Allegerns</label>
+        </div>
+        <button class="ui big primary button" type="submit">Add Recipe</button>
+    </form>
 
-
-            <div class="row">
-                <button class="btn waves-effect waves-light submit-button green" type="submit" name="action">Add Recipe
-                <i class="material-icons right">playlist_add</i>
-             </button>
-            </div>
-        </form>
-    </div>
-
-
-{% endblock %}
 </div>
-
-
+{% endblock %}

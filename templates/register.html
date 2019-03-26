@@ -1,41 +1,32 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container recipes-list">
-    <div class="col s12">
-        <form class="ui form" action="{{ url_for('register') }}" method="POST">
-            <div class="row">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label>Username</label>
-                        <input type="text" name="username">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="email">Email</label>
-                        <input name="email" id="email" type="email" class="validate">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label>Password</label>
-                        <input type="password" name="password">
-                    </div>
-                </div>
+<div class="container ">
+    <div class="row">
+        <h3 class="ui header">
+            <i class="id card icon"></i>
+            <div class="content">
+                Sign Up
+                
             </div>
-            <div class="row">
-                <button class="btn waves-effect waves-light submit-button green" type="submit">SignUp
-                <i class="material-icons right">group_add</i>
-             </button>
-            </div>
-
-
-        </form>
-
+        </h3>
     </div>
-
+    <div class="row form-wrapper ui placeholder segment register-form">
+        <div class="col-md-12 middle aligned column">
+            <form class="ui form" action="{{ url_for('register') }}" method="POST">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="text" name="password" placeholder="Use a simple 123 Password">
+                </div>
+                <button class="ui big primary button" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
-
-
-
-
 {% endblock %}

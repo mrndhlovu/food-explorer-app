@@ -3,70 +3,34 @@
 
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <nav>
-                    <div class="nav-wrapper blue-grey darken-1">
-                        <a href="index" class="brand-logo">Our Recipe Book</a>
-                        <a href="index" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                        <ul class="right hide-on-med-and-down">
-                            <li><a class="item" href="index">Login</a></li>
-                            <li><a class="item" href="register">Register</a></li>
-                            <li><a class="item" href="get_cuisine">Recipes</a></li>
-                            <li><a class="item" href="add_recipe">Add Recipe</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <div class="col s12">
-                <nav>
-                    <div class="nav-wrapper blue-grey darken-1">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
+        <div class="ui segment">
+            <div class="ui stackable menu">
+                <div class="item">
+                    <h3>OurRecipeBook</h3>
+                </div>
+                <a class="item" href="index">Login</a>
+                <a class="item" href="register">Register</a>
+                <a class="item" href="get_cuisine">Recipes</a>
+                <a class="item" href="add_recipe">Add Recipe</a>
             </div>
         </div>
-    </div>
-    {% block content %} {% endblock %}
 
+    
+
+    {% block content %} {% endblock %}
+</div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.sidenav').sidenav();
-            $('.datepicker').datepicker();
-            $('select').formSelect();
-            $('select.dropdown')
-                .dropdown();
-            $(document).ready(function() {
-                $('input#input_text, textarea#textarea2').characterCounter();
-            });
-            $(document).ready(function() {
-                M.updateTextFields();
-            });
-            $(document).ready(function() {
-                $('.fixed-action-btn').floatingActionButton();
-            });
-            $(document).ready(function() {
-                $('.collapsible').collapsible();
-            });
-
-        });
-    </script>
+ 
 
 </body>
 

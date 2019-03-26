@@ -1,37 +1,34 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container recipes-list">
-
-    <div class="col s12">
-        <div class="col s12">
-
-            <form class="ui form " action="{{ url_for('login') }}" method="POST">
-                <div class="row">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="username" name="username" type="text">
-                            <label placeholder="Username" name="username" class="active" for="surname">Username</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="password" name="password" type="text">
-                            <label placeholder="Password" name="password" class="active" for="password">Password</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button class="btn waves-effect waves-light submit-button green" type="submit">Login
-                <i class="material-icons right">people</i>
-             </button>
-                    </div>
+<div class="container"></div>
+<div class="ui placeholder segment login-form-wrapper">
+    <div class="ui two column very relaxed stackable grid">
+        <div class="middle aligned column">
+            <form class="ui form" method=POST action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Username">
                 </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="ui big primary button">Log In</button>
             </form>
-
+            <!--<br>-->
+            <!--<div>-->
+            <!--    New to the site <a href="{{ url_for('register') }}">Sign up here</a>.-->
+            <!--</div>-->
+        </div>
+        <div class="middle aligned column">
+            <div class="ui big button primary">
+                <i class="signup icon" href="register"></i> Sign Up
+            </div>
         </div>
     </div>
-
-
+    <div class="ui vertical divider">
+        Or
+    </div>
 </div>
-
 
 {% endblock %}

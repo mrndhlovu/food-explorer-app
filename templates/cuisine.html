@@ -1,58 +1,29 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container recipes-list">
-    <div class="image-container">
-        <img class="responsive-img" src="/static/images/waffle-heart-2697904_1280.jpg">
-    </div>
-    <div class="row">
 
-        <div class="col s8 card-container">
-            <div class="row">
-                {% for recipe in recipes %}
-                <div class="col s12 m6">
-                    <div class="card white">
-                        <div class="card-content black-text">
-                            <span class="card-title">{{recipe.country}}</span>
-                            <p>{{recipe.description}}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#!" class="secondary-content"><i class="material-icons">arrow_drop_up</i></a>
-                            <br>
-                            <a href="" class="secondary-content">200</a>
-                            <br>
-                            <a href="#!" class="secondary-content"><i class="material-icons">arrow_drop_down</i></a>
-                            </p>
-                        </div>
-
-
-
-                    </div>
-                </div>
-                {% endfor %}
+<div class="container">
+    <div class="item">
+        {% for recipe in recipes %}
+        <div class="image">
+            <img src="/images/wireframe/image.png">
+        </div>
+        <div class="content">
+            <a class="header">{{recipe.country}}</a>
+            <div class="meta">
+                <span class="cinema">{{recipe.title}}</span>
             </div>
-
-        </div>
-        <div class="col s4 side-container" action="{{ url_for('insert_recipe') }}" method="POST">
-            <form action="{{ url_for('insert_recipe') }}" method="POST">
-                <div class="row">
-                    <div class="col s12">
-                        <h5>Recent Posts</h5>
-                        <ul class="collection">
-                            {% for cat in categories %}
-                            <li class="collection-item">{{ cat.category_name }}</li>
-                            {% endfor %}
-
-                        </ul>
-                    </div>
+            <div class="description">
+                <p>{{recipe.directions}}</p>
+            </div>
+            <div class="extra">
+                <div class="ui right floated primary button">
+                    Read more
+                    <i class="right chevron icon"></i>
                 </div>
-            </form>
-
-
+            </div>
         </div>
+        {% endfor %}
     </div>
-
-
-
-
-
 </div>
+
+
 {% endblock %}

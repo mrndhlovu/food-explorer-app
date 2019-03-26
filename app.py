@@ -43,7 +43,7 @@ def add_recipe():
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
-    last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
+    # last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
     recipe.insert_one(request.form.to_dict())
     return redirect(url_for('get_cuisine'))
     
@@ -61,10 +61,12 @@ def update_recipe(_id):
     recipe = mongo.db.userRecipes
     recipe.update({'_id': ObjectId(_id)}, 
     { 
-        'category_name' : request.form.get['category_name'], 
+        'category' : request.form.get['category'], 
         'country' : request.form.get['country'],
-        'description':  request.form.get['description'],
-        'recipe_name':request.form.get['recipe_name']
+         'title': request.form.get['title'],
+        'ingredients': request.form.get['ingredients'],
+        'directions': request.form.get['directions'],
+        'allergens': request.form.get['allergens']
         
     })
     return redirect(url_for('get_cuisine'))
@@ -87,8 +89,7 @@ def login():
 
 @app.route('/delete_recipe/<_id>', methods=["POST"])
 def delete_recipe(_id):
-    delete_file =  mongo.db.userRecipes
-    delete_file.delete_one({'_id': ObjectId(_id)})
+    mongo.db.userRecipes.remove({'_id': ObjectId(_id)})
     return redirect(url_for('get_cuisine'))
     
 
@@ -98,14 +99,11 @@ def register():
     if request.method == 'POST':
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
-       
         if user_found is None:
             users.insert({'username' : request.form['username'],'email' : request.form['email'], 'passcode' : request.form['password']})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
-        
         return 'That username has been taken, try again with a different username'
-
     return render_template('register.html')
 
 if __name__  == '__main__':
