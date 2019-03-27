@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="container">
+<div class="container ui  segment ">
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
 
         <div class="form-group">
-            <select>
+            <select class="ui search dropdown">
                           <option value="" disabled selected>Choose Category</option>
                           {% for cat in categories %}
                           <option name="category">{{ cat.category_name }}</option>
@@ -34,7 +34,7 @@
             <input id="textarea1" name="allergens" class="materialize-textarea">
             <label>Allegerns</label>
         </div>
-        <button class="ui big primary button" type="submit">Add Recipe</button>
+        <button class="fluid ui big primary button" type="submit">Add Recipe</button>
     </form>
 
 </div>
