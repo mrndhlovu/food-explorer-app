@@ -12,6 +12,11 @@
 <body>
     <div class="container">
         <div class="ui segment">
+            {% if 'username' in session %}
+            <div class="ui top  attached label">You are logged in as {{session['username']}}</div>
+            {% else %}
+            <div class="ui top  attached label">Login or Signup</div>
+            {% endif %}
             <div class="ui stackable menu">
                 <div class="item">
                     <h3>OurRecipeBook</h3>
@@ -20,18 +25,27 @@
                 <a class="item" href="register">Register</a>
                 <a class="item" href="get_cuisine">Recipes</a>
                 <a class="item" href="add_recipe">Add Recipe</a>
+
             </div>
+
         </div>
 
-    
 
-    {% block content %} {% endblock %}
-</div>
+
+        {% block content %} {% endblock %}
+    </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
- 
+    <script type="text/javascript" src="">
+        $('.ui.dropdown').dropdown('show');
+    </script>
 
 </body>
 
 </html>
+{% if 'username' in session %}
+<div class="ui top  attached label">You are logged in as {{session['username']}}</div>
+{% else %}
+<div class="ui top  attached label">Login or Signup</div>
+{% endif %}

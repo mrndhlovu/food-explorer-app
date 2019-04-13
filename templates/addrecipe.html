@@ -3,7 +3,6 @@
 
 <div class="container ui  segment ">
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-
         <div class="form-group">
             <select class="ui search dropdown">
                           <option value="" disabled selected>Choose Category</option>
@@ -36,6 +35,5 @@
         </div>
         <button class="fluid ui big primary button" type="submit">Add Recipe</button>
     </form>
-
 </div>
 {% endblock %}

@@ -1,10 +1,11 @@
 #  Flask Receipe App
 import os
-#import pymongo
 from flask import Flask, render_template, redirect, request,session,url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
+from bson import ObjectId
+import datetime
 
 app = Flask(__name__)
 
@@ -13,18 +14,18 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@cluster0-j5cta.mongodb.ne
 
 mongo = PyMongo(app)
 
-app.secret_key = 'a random password'
-app.config['SECRET_KEY'] = 'a random password' 
-SECRET_KEY = 'a random password'
-
+app.secret_key = 'some random password'
+app.config['SECRET_KEY'] = 'some random password' 
+SECRET_KEY = 'some random password'
 
 
 @app.route('/index')
 def index():
     if 'username' in session:
-        return  "You have logged in"
+        return  redirect(url_for('get_cuisine'))
     return render_template("index.html")
     
+
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
@@ -37,14 +38,21 @@ def add_recipe():
     category_found = [category for category in categories]
     if 'username' in session:
         return render_template("addrecipe.html", categories = category_found)
-    return "You are not logged in."
+    return redirect(url_for('index'))
 
     
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
-    # last_modified = {'last_modified': datetime.today().strftime('%d, %b %Y')}
-    recipe.insert_one(request.form.to_dict())
+    record = recipe.insert_one(request.form.to_dict())
+    date = ({"date_added": datetime.datetime.now()})
+    id = mongo.db.userRecipes.find_one(record.inserted_id),
+    print(id)
+    recipe.insert({'_id': ObjectId(record.inserted_id)}, 
+    { 
+       date
+        
+    })
     return redirect(url_for('get_cuisine'))
     
 
@@ -54,6 +62,11 @@ def edit_recipe(_id):
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     return render_template("editrecipe.html", recipe=id, categories = category_found)
+    
+    
+# @app.route('/check_login')
+# def check_login():
+    
     
  
 @app.route('/update_recipe/<_id>', methods=['POST'])
@@ -66,10 +79,11 @@ def update_recipe(_id):
          'title': request.form.get['title'],
         'ingredients': request.form.get['ingredients'],
         'directions': request.form.get['directions'],
-        'allergens': request.form.get['allergens']
-        
+        'allergens': request.form.get['allergens'],
+        'date_updated': datetime.datetime.now()
     })
     return redirect(url_for('get_cuisine'))
+    
     
 
 # check if user is has a username already if true point to add recipe page

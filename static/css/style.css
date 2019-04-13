@@ -17,6 +17,8 @@
     height: 100%;
 }
 
+
+.recipe-wrapper
 .side-container{
     /*background-color: #b0bec5;*/
     height: 100vh;
@@ -32,4 +34,8 @@
 
 .register-form{
     height: auto !important;
+}
+
+.register-btn{
+    color: white !important;
 }

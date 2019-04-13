@@ -1,12 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container">
-    <div class="item">
-        {% for recipe in recipes %}
-        <div class="image">
-            <img src="/images/wireframe/image.png">
+<div class="ui segment">
+    <div class="row ui segment">
+        <div>
+            <img class="ui fluid image" src="/static/images/food-2068217_1280.jpg">
         </div>
-        <div class="content">
+    </div>
+    <div class="item ">
+        {% for recipe in recipes %}
+        <div class="image article-image">
+            <img src="/static/images/food-2068217_640.jpg">
+        </div>
+        <div class="content ui segment article-container">
             <a class="header">{{recipe.country}}</a>
             <div class="meta">
                 <span class="cinema">{{recipe.title}}</span>
@@ -14,15 +19,17 @@
             <div class="description">
                 <p>{{recipe.directions}}</p>
             </div>
-            <div class="extra">
-                <div class="ui right floated primary button">
-                    Read more
-                    <i class="right chevron icon"></i>
-                </div>
+
+            <div class="ui right floated primary button">
+                Read more
+                <i class="right chevron icon"></i>
             </div>
+
         </div>
         {% endfor %}
     </div>
+
+
 </div>
 
 
