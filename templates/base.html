@@ -12,15 +12,6 @@
 <body>
 
     <div class="ui container">
-        <!--{% if 'username' in session %}-->
-        <!--<div class="ui basic label">You are logged in as {{session['username']}}</div>-->
-        <!--<div class="ui basic label"> <a class="item" href="logout">Logout</a></div>-->
-        <!--{% else %}-->
-        <!--<div class="ui basic label "><a class="item" href="index">Login</a></div>-->
-        <!--<div class="ui basic label "><a class="item" href="register">SignUp</a> </div>-->
-        <!--{% endif %}-->
-
-
         <div class="ui menu">
             <div class="header item">
                 Our Company
@@ -37,11 +28,16 @@
             </div>
 
         </div>
+        <div>
+            {% if 'username' in session %}
         <a class="ui image label">
- <i class="user"></i>
-<span>You are logged in as {{session['username']}}</span>
-  
-</a> {% block content %} {% endblock %}
+         <i class="user"></i>
+        <span>You are logged in as {{session['username']}}</span>
+          
+        </a> {% else %}
+        
+        
+        {% endif %} {% block content %} {% endblock %}
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
