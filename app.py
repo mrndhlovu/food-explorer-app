@@ -107,6 +107,11 @@ def delete_recipe(_id):
     return redirect(url_for('get_cuisine'))
     
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('get_cuisine'))
+
   
 @app.route('/register', methods=['POST', 'GET'])
 def register():
