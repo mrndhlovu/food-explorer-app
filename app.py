@@ -25,6 +25,10 @@ def index():
         return  redirect(url_for('get_cuisine'))
     return render_template("index.html")
     
+@app.route('/recipe_detail')
+def recipe_detail():
+    return render_template("recipedetail.html")
+    
 
 @app.route('/')    
 @app.route('/get_cuisine')
@@ -44,15 +48,11 @@ def add_recipe():
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
-    record = recipe.insert_one(request.form.to_dict())
-    date = ({"date_added": datetime.datetime.now()})
-    id = mongo.db.userRecipes.find_one(record.inserted_id),
-    print(id)
-    recipe.insert({'_id': ObjectId(record.inserted_id)}, 
-    { 
-       date
-        
-    })
+    userRecipe = { 'uploaded_by': session['username'],
+        'record': request.form.to_dict(),
+        'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
+    }
+    recipe.insert_one(userRecipe)
     return redirect(url_for('get_cuisine'))
     
 
@@ -80,7 +80,6 @@ def update_recipe(_id):
         'ingredients': request.form.get['ingredients'],
         'directions': request.form.get['directions'],
         'allergens': request.form.get['allergens'],
-        'date_updated': datetime.datetime.now()
     })
     return redirect(url_for('get_cuisine'))
     

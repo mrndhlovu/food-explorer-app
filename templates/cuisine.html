@@ -1,36 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="ui segment  recipe-card">
-    
-        <div class="ui card ">
-            {% for recipe in recipes %}
-            <div class="image">
-                <img src="/static/images/food-2068217_1280.jpg">
-            </div>
-            <div class="content">
-                <div class="header">{{recipe.country}}</div>
-                <div class="description">
-                    {{recipe.directions}}
-                </div>
-            </div>
-            <div class="ui two bottom attached buttons">
-                <div class="ui button">
-                    <i class="like icon"></i> Like
-                </div>
-                <div class="ui primary button">
-                    <i class="book icon"></i> Read more
-                </div>
-            </div>
-            {% endfor %}
+   {% for recipe in recipes %}
+    <div class="ui card ">
+        <div class="image">
+            <img src="/static/images/food-2068217_1280.jpg">
         </div>
-        <div class="ui popup">
-            <div class="header">User Rating</div>
-            <div class="ui star rating" data-rating="3"></div>
-
+        <div class="content">
+            <div class="header">{{recipe.record.country}}</div>
+            <div class="description">
+                {{recipe.record.directions}}
+            </div>
         </div>
-   
-
+        <div class="ui two bottom attached buttons">
+            <div class="ui button">
+                <i class="like icon"></i> Like
+            </div>
+            <div class="ui primary button">
+                <i class="book icon"></i> <a class="item blue-btn" href="recipe_detail">Read more</a>
+            </div>
+        </div>
+    </div>
+   {% endfor %}
 </div>
-
-
 {% endblock %}

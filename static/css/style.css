@@ -32,6 +32,7 @@
     height: auto !important;
 }
 
+.blue-btn
 .register-form{
     height: auto !important;
 }
@@ -40,6 +41,8 @@
     color: white !important;
 }
 
-.recipe-card{
- margin-bottom: 2em;
+.recipe-card
+
+.logo{
+    font-weight: 700;
 }

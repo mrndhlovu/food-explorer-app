@@ -14,7 +14,7 @@
     <div class="ui container">
         <div class="ui menu">
             <div class="header item">
-                Our Company
+                <a class="item logo" href="index">Food Explorers</a>
             </div>
             <a class="item" href="get_cuisine">Recipes</a>
             <a class="item" href="add_recipe">Add Recipe</a>
@@ -28,16 +28,16 @@
             </div>
 
         </div>
-        <div>
-            {% if 'username' in session %}
-        <a class="ui image label">
-         <i class="user"></i>
-        <span>You are logged in as {{session['username']}}</span>
-          
-        </a> {% else %}
-        
-        
-        {% endif %} {% block content %} {% endblock %}
+        <div class="right menu">
+            {% if 'username' in session %} Logged in as
+
+            <div class="ui label blue">
+                <a class="item">
+            <i class="icon user"></i> {{session['username']}}
+                  </a> </div>
+
+            {% else %} {% endif %}
+        </div>{% block content %} {% endblock %}
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
