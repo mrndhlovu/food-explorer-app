@@ -1,26 +1,52 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="ui segment  recipe-card">
-   {% for recipe in recipes %}
-    <div class="ui card ">
-        <div class="image">
-            <img src="/static/images/food-2068217_1280.jpg">
-        </div>
-        <div class="content">
-            <div class="header">{{recipe.record.country}}</div>
-            <div class="description">
-                {{recipe.record.directions}}
+
+    {% for recipe in recipes %}
+    <div class="ui two column very relaxed grid">
+        <div class="column">
+            <div class="ui segment">
+                <div class="content">
+                    Uploaded by: {{recipe.uploaded_by}}
+                    <div class="right floated meta">{{recipe.date_updated}}</div>
+
+                </div>
+                <div class="image">
+                    <img class="ui large image" src="/static/images/food-2068217_1280.jpg">
+                </div>
+                <div class="content">
+                    <span class="right floated">
+      <i class="heart outline like icon"></i>
+      17 likes
+      </span>
+                </div>
+                <div class="extra content">
+                    <span class="left floated like">
+      <i class="like icon"></i>
+      Like
+    </span>
+                    <span class="right floated star">
+      <i class="star icon"></i>
+      Favorite
+    </span>
+                </div>
             </div>
         </div>
-        <div class="ui two bottom attached buttons">
-            <div class="ui button">
-                <i class="like icon"></i> Like
-            </div>
-            <div class="ui primary button">
-                <i class="book icon"></i> <a class="item blue-btn" href="recipe_detail">Read more</a>
+
+        <div class="column">
+
+            <h2 class="ui right floated header">{{recipe.record.country}}</h2>
+            <div class="ui hidden divider"></div>
+            <div class="column">
+                <p>
+                    {{recipe.record.directions}}
+                </p>
             </div>
         </div>
+
     </div>
-   {% endfor %}
+    <div class="ui section divider"></div>
+    {% endfor %}
+
 </div>
 {% endblock %}
