@@ -50,6 +50,9 @@ def insert_recipe():
     recipe = mongo.db.userRecipes
     userRecipe = { 'uploaded_by': session['username'],
         'record': request.form.to_dict(),
+        'favorites': 0,
+        'up_votes': 0,
+        'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
     recipe.insert_one(userRecipe)
@@ -62,12 +65,7 @@ def edit_recipe(_id):
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     return render_template("editrecipe.html", recipe=id, categories = category_found)
-    
-    
-# @app.route('/check_login')
-# def check_login():
-    
-    
+ 
  
 @app.route('/update_recipe/<_id>', methods=['POST'])
 def update_recipe(_id): 
@@ -76,7 +74,7 @@ def update_recipe(_id):
     { 
         'category' : request.form.get['category'], 
         'country' : request.form.get['country'],
-         'title': request.form.get['title'],
+         'recipeName': request.form.get['recipeName'],
         'ingredients': request.form.get['ingredients'],
         'directions': request.form.get['directions'],
         'allergens': request.form.get['allergens'],

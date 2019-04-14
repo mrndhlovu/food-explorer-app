@@ -3,50 +3,89 @@
 <div class="ui segment  recipe-card">
 
     {% for recipe in recipes %}
-    <div class="ui two column very relaxed grid">
-        <div class="column">
-            <div class="ui segment">
-                <div class="content">
-                    Uploaded by: {{recipe.uploaded_by}}
-                    <div class="right floated meta">{{recipe.date_updated}}</div>
+    <div class="ui segment">
+        <div class="ui two column very relaxed grid ">
 
-                </div>
-                <div class="image">
-                    <img class="ui large image" src="/static/images/food-2068217_1280.jpg">
-                </div>
-                <div class="content">
-                    <span class="right floated">
-      <i class="heart outline like icon"></i>
-      17 likes
-      </span>
-                </div>
-                <div class="extra content">
-                    <span class="left floated like">
-      <i class="like icon"></i>
-      Like
-    </span>
-                    <span class="right floated star">
-      <i class="star icon"></i>
-      Favorite
-    </span>
-                </div>
-            </div>
-        </div>
 
-        <div class="column">
-
-            <h2 class="ui right floated header">{{recipe.record.country}}</h2>
-            <div class="ui hidden divider"></div>
             <div class="column">
-                <p>
-                    {{recipe.record.directions}}
-                </p>
+
+                Uploaded by: {{recipe.uploaded_by}}
+                <div class="content">
+                    <div class="right floated meta">{{recipe.date_updated}}</div>
+                </div>
+
+                <img class="ui large image" src="/static/images/food-2068217_1280.jpg">
+
+                <div class="ui card fluid">
+
+                    <div class="extra content">
+                        <span class="left floated like">
+                  <i class="like icon"></i>
+                  Like
+                </span>
+                        <span class="right floated star">
+                  <i class="star icon"></i>
+                  Favorite
+                </span>
+                    </div>
+                </div>
+
+
             </div>
+
+            <div class="column ">
+
+                <div class="ui hidden divider"></div>
+                <div class="column">
+                    <h3 class="ui dividing header">
+                        {{recipe.record.title}}
+                    </h3>
+                    <p>
+                        {{recipe.record.directions}}
+                    </p>
+
+                </div>
+                
+                <div class="ui hidden divider"></div>
+
+
+                <div class="ui card fluid">
+                    <span>
+                        <div class="extra content">
+                            <span class="left floated like">
+                                             <div class="ui left labeled button" tabindex="{{recipe.record.up_votes}}">
+                          <a class="ui basic right pointing label red">
+                            {{recipe.up_votes}}
+                          </a>
+                          <div class="ui button">
+                            <i class="heart icon"></i> Likes
+                          </div>
+                        </div>
+                    </span>
+                    
+                    <button class="ui right floated button bottom">Read more</button>
+                    <span class="right floated star">
+                        
+                    <div class="ui left labeled button">
+                        <a class="ui basic right pointing label">
+                        Category 
+                      </a>
+                        <div class="ui button red">
+                            {{recipe.record.category}}
+                        </div>
+                    </div>            
+                      
+                    </span>
+                </div>
+            </div>
+
         </div>
+
 
     </div>
-    <div class="ui section divider"></div>
-    {% endfor %}
+</div>
+{% endfor %}
+
 
 </div>
 {% endblock %}

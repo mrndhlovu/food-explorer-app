@@ -4,8 +4,8 @@
 <div class="container ui  segment ">
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
         <div class="form-group">
-            <select class="ui search dropdown">
-                          <option value="" disabled selected>Choose Category</option>
+            <select   name="category" class="ui search dropdown">
+                          <option name="category" value="" disabled selected>Choose Category</option>
                           {% for cat in categories %}
                           <option name="category">{{ cat.category_name }}</option>
                          {% endfor %}
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-            <input id="recipeName" name="recipeName " type="text">
+            <input id="title" name="title" type="text">
             <label>Recipe Name</label>
         </div>
         <div class="form-group">
