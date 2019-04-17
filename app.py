@@ -24,16 +24,15 @@ def index():
     if 'username' in session:
         return  redirect(url_for('get_cuisine'))
     return render_template("index.html")
-    
-@app.route('/recipe_detail')
-def recipe_detail():
-    return render_template("recipedetail.html")
+
+
     
 
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
+
 
 
 @app.route('/add_recipe')
@@ -44,29 +43,40 @@ def add_recipe():
         return render_template("addrecipe.html", categories = category_found)
     return redirect(url_for('index'))
 
-    
+
+
+# create new recipe record
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
     userRecipe = { 'uploaded_by': session['username'],
         'record': request.form.to_dict(),
-        'favorites': 0,
         'up_votes': 0,
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
     recipe.insert_one(userRecipe)
     return redirect(url_for('get_cuisine'))
-    
+ 
 
+   
+# edit recipe
 @app.route('/edit_recipe/<_id>')
 def edit_recipe(_id): 
     id = mongo.db.userRecipes.find_one({'_id': ObjectId(_id)})
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("editrecipe.html", recipe=id, categories = category_found)
+    return render_template("editrecipe.html", recipe=id, categories = category_found, recipes=mongo.db.userRecipes.find())
+   
+    
+   
+@app.route('/show_detail/<recipe_id>')
+def show_detail(recipe_id):
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}))   
+
  
  
+# update edited recipe 
 @app.route('/update_recipe/<_id>', methods=['POST'])
 def update_recipe(_id): 
     recipe = mongo.db.userRecipes
@@ -74,10 +84,11 @@ def update_recipe(_id):
     { 
         'category' : request.form.get['category'], 
         'country' : request.form.get['country'],
-         'recipeName': request.form.get['recipeName'],
+        'title': request.form.get['title'],
         'ingredients': request.form.get['ingredients'],
         'directions': request.form.get['directions'],
-        'allergens': request.form.get['allergens'],
+        'allergens': [request.form.get['allergens']],
+        'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     })
     return redirect(url_for('get_cuisine'))
     
@@ -96,27 +107,41 @@ def login():
         return ('Invalid password or username')    
     return ('Invalid password or username') 
     
+ 
     
-
+# delete recipe
 @app.route('/delete_recipe/<_id>', methods=["POST"])
 def delete_recipe(_id):
     mongo.db.userRecipes.remove({'_id': ObjectId(_id)})
     return redirect(url_for('get_cuisine'))
+ 
     
 
+@app.route('/add_like')
+def add_like():
+   print("I was clicked")
+ 
+    
+# user logout
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect(url_for('get_cuisine'))
 
-  
+
+
+# register user  
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
-            users.insert({'username' : request.form['username'],'email' : request.form['email'], 'passcode' : request.form['password']})
+            users.insert({'userFavourites': [], 
+            'is_active' : True,
+            'username' : request.form['username'],
+            'email' : request.form['email'], 
+            'passcode' : request.form['password']})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         return 'That username has been taken, try again with a different username'

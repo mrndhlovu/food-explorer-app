@@ -12,21 +12,20 @@
                 Uploaded by: {{recipe.uploaded_by}}
                 <div class="content">
                     <div class="right floated meta">{{recipe.date_updated}}</div>
-                </div>
 
+                </div>
                 <img class="ui large image" src="/static/images/food-2068217_1280.jpg">
 
                 <div class="ui card fluid">
-
+                
                     <div class="extra content">
-                        <span class="left floated like">
-                  <i class="like icon"></i>
-                  Like
-                </span>
-                        <span class="right floated star">
-                  <i class="star icon"></i>
-                  Favorite
-                </span>
+                        <span class="left floated like ">
+                             <a class="ui basic right pointing label red">{{recipe.views}} </a>Views
+                        </span>
+                <span class="right floated star">
+                                  <i class="star icon"></i>
+                                  Favorite
+                                </span>
                     </div>
                 </div>
 
@@ -45,7 +44,7 @@
                     </p>
 
                 </div>
-                
+
                 <div class="ui hidden divider"></div>
 
 
@@ -53,17 +52,17 @@
                     <span>
                         <div class="extra content">
                             <span class="left floated like">
-                                             <div class="ui left labeled button" tabindex="{{recipe.record.up_votes}}">
+                            <div class="ui left labeled button" tabindex="{{recipe.up_votes}}">
                           <a class="ui basic right pointing label red">
                             {{recipe.up_votes}}
                           </a>
-                          <div class="ui button">
-                            <i class="heart icon"></i> Likes
+                          <div class="ui button" onClick{{add_like}}>
+                            <i class="heart icon" type="submit"></i> Like
                           </div>
                         </div>
                     </span>
-                    
-                    <button class="ui right floated button bottom">Read more</button>
+
+
                     <span class="right floated star">
                         
                     <div class="ui left labeled button">
@@ -76,6 +75,7 @@
                     </div>            
                       
                     </span>
+                    <button class="ui button center floated"> <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="item" >Read more</a></button>
                 </div>
             </div>
 
