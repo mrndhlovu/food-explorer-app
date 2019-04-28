@@ -26,14 +26,13 @@
 
         <!--Check if user in session owns the recipe to show edit and delete buttons-->
         {% if recipe.uploaded_by == session.username %}
-        <div>
-            <button class="blue-btn ui primary button"> 
-                        <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item" >Edit</a>
-            </button>
-            <button class="ui button">
-               <a href="{{ url_for('delete_recipe', _id=recipe._id)}}"  methods="GET" class="item" >Delete</a>
-            </button>
+        <div class="ui small basic icon buttons">
+             <button class="ui button" ><i class="add icon"></i><a href="{{ url_for('add_recipe')}}" >Add Recipe</a></button>
+            <button class="ui button"><i class="edit icon"></i> <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item" >Edit</a></button>
+            <button class="ui button"><i class="delete icon"></i> <a href="{{ url_for('delete_recipe', _id=recipe._id)}}"  methods="GET" class="item" >Delete</a></button>
+            
         </div>
+       
         {% else %} {% endif %}
 
     </div>
