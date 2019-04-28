@@ -77,20 +77,22 @@ def show_detail(recipe_id):
 # update edited recipe 
 @app.route('/update_recipe/<_id>', methods=['POST'])
 def update_recipe(_id): 
-    recipe = mongo.db.userRecipes.record
-    recipe.update({'_id': ObjectId(_id)}, 
-    { 
-        'title': request.form.get('title'),
-        'category' : request.form.get('category'), 
-        'country' : request.form.get('country'),
-        'ingredients': request.form.get('ingredients'),
-        'directions': request.form.get('directions'),
-        'allergens': request.form.get('allergens'),
-
+    recipe = mongo.db.userRecipes
+    recipe.update({'_id': ObjectId(_id)},
+    { "$set": 
+        { 
+            "record.title":  request.form.get('title'),
+            "record.category":  request.form.get('category'),
+            "record.country":  request.form.get('country'),
+            "record.ingredients":  request.form.get('ingredients'),
+            "record.directions":  request.form.get('directions'),
+            "record.allergens":  request.form.get('allergens'),
+            "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
+        },
     })
     return redirect(url_for('get_cuisine'))
     
-    
+
 
 # check if user is has a username already if true point to add recipe page
 @app.route('/login', methods=['GET', 'POST'])
