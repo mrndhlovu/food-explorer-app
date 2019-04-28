@@ -21,12 +21,11 @@
             <div class="right menu">
                 <div class="item">
                     {% if 'username' in session %}
-                    <a class="item" href="logout">Logout</a> {% else %}
-                    <a class="item" href="index">Login</a>
-                    <a class="item" href="register">SignUp</a>{% endif %}
+                    <a class="item" href="/logout">Logout</a> {% else %}
+                    <a class="item" href="/index">Login</a>
+                    <a class="item" href="/register">SignUp</a>{% endif %}
                 </div>
             </div>
-
         </div>
         <div class="right menu">
             {% if 'username' in session %} Logged in as

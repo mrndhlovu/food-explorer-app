@@ -1,55 +1,43 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="container recipes-list">
-
-    <div class="row">
-        <div class="col-md-12">
-            <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-            <div class="row">
-                <div class="input-field col s6">
-                    <select name="category">
-                                              <option value="" disabled selected>Choose Category</option>
-                                              {% for cat in categories %}
-                                              {% if cat.category == recipe.catergory_name %}
-                                              <option value="{{cat.category}}" selected>{{ cat.category }}</option>
-                                              {% else %}
-                                               <option value="{{ cat.category}}">{{ cat.category }}</option>
-                                             
-                                              {% endif%}
-                                             {% endfor %}
-                                        </select>
-                </div>
-                <div class="input-field col s6">
-                    <input id="country" name="country" type="text" value="{{recipe.country}}">
-                    <label>Country</label>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="{{recipe.record.title}}" name="title" type="text" value="{{recipe.record.title}}">
-                        <label>Recipe name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="textarea1" name="description" class="materialize-textarea">{{recipe.description}} </textarea>
-                        <label>Instructions and Ingredients</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <button class="btn waves-effect waves-light submit-button green" type="submit">Resubmit
-                <i class="material-icons right">playlist_add</i>
-             </button>
-                </div>
-            </div>
-        </form>
+<div class="container ui segment ">
+    <h3>Edit Recipe</h3>
+    <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
+        <div class="form-group">
+            <input value='{{recipes.record.title}}' id="title" name="title">
+            <label>Title</label>
         </div>
-        
-    </div>
+        <div class="form-group">
+            <select id="category" name="category" class="ui search dropdown">
+                  <option value="" disabled selected>Choose Category</option>
+                  {% for cat in categories %}
+                      {% if cat.category_name == recipes.record.category %}
+                      <option value="{{recipes.record.category}}" selected="{{cat.category_name}}" >{{recipes.record.category}}</option>
+                      {% else %}
+                       <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+        </div>
+
+        <div class="form-group">
+            <input value='{{recipes.record.country}}' id="country" name="country" r>
+            <label>Country</label>
+        </div>
+        <div class="form-group">
+            <textarea id="textarea1" name="ingredients" class="materialize-textarea">{{recipes.record.ingredients}}</textarea>
+            <label>Ingredients</label>
+        </div>
+        <div class="form-group">
+            <textarea id="textarea1" name="directions" class="materialize-textarea">{{recipes.record.directions}}</textarea>
+            <label>Directions</label>
+        </div>
+        <div class="form-group">
+            <input value='{{recipes.record.allergens}}' id="allergens" name="allergens">
+            <label>Allergens</label>
+        </div>
+        <button class="fluid ui big primary button" type="submit">Update Recipe</button>
+    </form>
 </div>
-
-
-
-
 {% endblock %}

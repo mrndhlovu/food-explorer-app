@@ -26,8 +26,6 @@ def index():
     return render_template("index.html")
 
 
-    
-
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
@@ -63,11 +61,12 @@ def insert_recipe():
 # edit recipe
 @app.route('/edit_recipe/<_id>')
 def edit_recipe(_id): 
-    id = mongo.db.userRecipes.find_one({'_id': ObjectId(_id)})
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("editrecipe.html", recipe=id, categories = category_found, recipes=mongo.db.userRecipes.find())
-   
+    print('categories found',category_found)
+    if 'username' in session:
+        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}))
+    return render_template('register.html')
     
    
 @app.route('/show_detail/<recipe_id>')
@@ -75,20 +74,19 @@ def show_detail(recipe_id):
     return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}))   
 
  
- 
 # update edited recipe 
 @app.route('/update_recipe/<_id>', methods=['POST'])
 def update_recipe(_id): 
-    recipe = mongo.db.userRecipes
+    recipe = mongo.db.userRecipes.record
     recipe.update({'_id': ObjectId(_id)}, 
     { 
-        'category' : request.form.get['category'], 
-        'country' : request.form.get['country'],
-        'title': request.form.get['title'],
-        'ingredients': request.form.get['ingredients'],
-        'directions': request.form.get['directions'],
-        'allergens': [request.form.get['allergens']],
-        'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
+        'title': request.form.get('title'),
+        'category' : request.form.get('category'), 
+        'country' : request.form.get('country'),
+        'ingredients': request.form.get('ingredients'),
+        'directions': request.form.get('directions'),
+        'allergens': request.form.get('allergens'),
+
     })
     return redirect(url_for('get_cuisine'))
     

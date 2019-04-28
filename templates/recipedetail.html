@@ -1,29 +1,38 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="ui segment  recipe-card">
-{% for recipe in recipe %}
- <div class="ui card fluid">
-  <div class="content">
-    <i class="right floated like icon"></i>
-    <i class="right floated star icon"></i>
-    <div class="header">{{recipe.record.title}}</div>
-    <div class="description">
-      <p>
-         {{recipe.record.directions}} 
-      </p>
-    </div>
-  </div>
-  <div class="extra content">
-    <span class="left floated like">
+    {% for recipe in recipe %}
+    <div class="ui card fluid">
+        <div class="content">
+            <i class="right floated like icon"></i>
+            <i class="right floated star icon"></i>
+            <div class="header">{{recipe.record.title}}</div>
+            <div class="description">
+                <p>
+                    {{recipe.record.directions}}
+                </p>
+            </div>
+        </div>
+        <div class="extra content">
+            <span class="left floated like">
       <i class="like icon"></i>
       Like
     </span>
-    <span class="right floated star">
+            <span class="right floated star">
       <i class="star icon"></i>
       Favorite
     </span>
-  </div>
-</div>
-{% endfor %}
+        </div>
+
+        <div>
+
+            <button class="blue-btn ui primary button"> <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item" >Edit</a>
+</button>
+            <button class="ui button">
+   <a href="{{ url_for('delete_recipe', _id=recipe._id)}}" class="item" >Delete</a>
+</button>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
