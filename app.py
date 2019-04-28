@@ -110,11 +110,15 @@ def login():
  
     
 # delete recipe
-@app.route('/delete_recipe/<_id>', methods=["POST"])
+@app.route('/delete_recipe/<_id>', methods=["GET"])
 def delete_recipe(_id):
-    mongo.db.userRecipes.remove({'_id': ObjectId(_id)})
-    return redirect(url_for('get_cuisine'))
- 
+    recipe = mongo.db.userRecipes
+    if 'username' in session:
+        uploader = recipe.uploaded_by
+        if uploader == 'username':
+            recipe.remove({'_id': ObjectId(_id)})
+            return redirect(url_for('get_cuisine'))
+    return ('Invalid password or username') 
     
 
 @app.route('/add_like')

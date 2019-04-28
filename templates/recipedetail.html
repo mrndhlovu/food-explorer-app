@@ -15,23 +15,27 @@
         </div>
         <div class="extra content">
             <span class="left floated like">
-      <i class="like icon"></i>
-      Like
-    </span>
+              <i class="like icon"></i>
+              Like
+            </span>
             <span class="right floated star">
-      <i class="star icon"></i>
-      Favorite
-    </span>
+              <i class="star icon"></i>
+              Favorite
+            </span>
         </div>
 
+        <!--Check if user in session owns the recipe to show edit and delete buttons-->
+        {% if recipe.uploaded_by == session.username %}
         <div>
-
-            <button class="blue-btn ui primary button"> <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item" >Edit</a>
-</button>
+            <button class="blue-btn ui primary button"> 
+                        <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item" >Edit</a>
+            </button>
             <button class="ui button">
-   <a href="{{ url_for('delete_recipe', _id=recipe._id)}}" class="item" >Delete</a>
-</button>
+               <a href="{{ url_for('delete_recipe', _id=recipe._id)}}"  methods="GET" class="item" >Delete</a>
+            </button>
         </div>
+        {% else %} {% endif %}
+
     </div>
     {% endfor %}
 </div>
