@@ -49,7 +49,7 @@ def insert_recipe():
     recipe = mongo.db.userRecipes
     userRecipe = { 'uploaded_by': session['username'],
         'record': request.form.to_dict(),
-        'up_votes': 0,
+        'up_votes': [0],
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
@@ -121,9 +121,22 @@ def delete_recipe(_id):
     return ('Invalid password or username') 
     
 
-@app.route('/add_like')
-def add_like():
-   print("I was clicked")
+@app.route('/get_like/<_id>')
+def get_like(_id):
+    return redirect(url_for('add_like', _id=_id))
+
+
+@app.route('/add_like/<_id>', methods=['GET'])
+def add_like(_id):
+    recipe = mongo.db.userRecipes
+    new = recipe.up_votes.append(_id)
+    recipe.update({'_id': ObjectId(_id)},
+    { "$set": 
+        { 
+             "up_votes": new
+        },
+    })
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
  
     
 # user logout

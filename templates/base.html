@@ -13,16 +13,16 @@
     <div class="ui container">
         <div class="ui menu">
             <div class="header item">
-                <a class="item logo" href="index">Food Explorers</a>
+                <a class="item logo" href="{{ url_for('index')}}">Food Explorers</a>
             </div>
-            <a class="item" href="get_cuisine">Recipes</a>
-            <a class="item" href="add_recipe">Add Recipe</a>
+            <a class="item" href="{{ url_for('get_cuisine')}}">Recipes</a>
+            <a class="item" href="{{ url_for('add_recipe')}}">Add Recipe</a>
             <div class="right menu">
                 <div class="item">
                     {% if 'username' in session %}
-                    <a class="item" href="/logout">Logout</a> {% else %}
-                    <a class="item" href="/index">Login</a>
-                    <a class="item" href="/register">SignUp</a>{% endif %}
+                    <a class="item" href="{{ url_for('logout')}}">Logout</a> {% else %}
+                    <a class="item" href="{{ url_for('index')}}">Login</a>
+                    <a class="item" href="{{ url_for('register')}}">SignUp</a>{% endif %}
                 </div>
             </div>
         </div>

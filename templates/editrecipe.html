@@ -3,7 +3,7 @@
 
 <div class="container ui segment ">
     <h3>Edit Recipe</h3>
-    <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
+    <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" methods="POST" class="col s12">
         <div class="form-group">
             <input value='{{recipes.record.title}}' id="title" name="title">
             <label>Title</label>
