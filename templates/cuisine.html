@@ -3,88 +3,35 @@
 <div class="ui segment  recipe-card">
 
     {% for recipe in recipes %}
-    <div class="ui segment">
-        <div class="ui two column very relaxed grid ">
-
-
-            <div class="column">
-
-                Uploaded by: {{recipe.uploaded_by}}
-                <div class="content">
-                    <div class="right floated meta">{{recipe.date_updated}}</div>
-
-                </div>
-                <img class="ui large image" src="/static/images/food-2068217_1280.jpg">
-
-                <div class="ui card fluid">
-                
-                    <div class="extra content">
-                        <span class="left floated like ">
-                             <a class="ui basic right pointing label red">{{recipe.views}} </a>Views
-                        </span>
-                <span class="right floated star">
-                                  <i class="star icon"></i>
-                                  Favorite
-                                </span>
-                    </div>
-                </div>
-
-
+    <div class="ui card">
+        <div class="item">
+            <div class=""> <a class="ui fluid  label meduim">
+                       
+                      {{recipe.record.title.upper()}}</div></a>
+            <div class="ui image">
+                <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}">
+                    <img class="ui  image huge"  src="/static/images/food-2068217_640.jpg" >
+                    </a>
             </div>
+            <div class="content">
 
-            <div class="column ">
-
-                <div class="ui hidden divider"></div>
-                <div class="column">
-                    <h3 class="ui dividing header">
-                        {{recipe.record.title}}
-                    </h3>
-                    <p>
-                        {{recipe.record.directions}}
-                    </p>
+                <div class="meta">
+                    <span class="ui mini label">By: {{recipe.uploaded_by.upper()}}</span>
 
                 </div>
-
-                <div class="ui hidden divider"></div>
-
-
-                <div class="ui card fluid">
-                    <span>
-                        <div class="extra content">
-                            <span class="left floated like">
-                            <div class="ui left labeled button" tabindex="{{recipe.up_votes}}">
-                          <a class="ui basic right pointing label red">
-                            {{recipe.up_votes}}
-                          </a>
-                          <div class="ui button" >
-                            <i class="heart icon" type="button"></i> Like
-                          </div>
+                <div class="">
+                    <p></p>
+                </div>
+                <div class="extra content ">
+                    <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}">
+                        <div class="ui basic up pointing  mini label right floated blue "> Read more
                         </div>
-                    </span>
-
-
-                    <span class="right floated star">
-                        
-                    <div class="ui left labeled button">
-                        <a class="ui basic right pointing label">
-                        Category 
-                      </a>
-                        <div class="ui button red">
-                            {{recipe.record.category}}
-                        </div>
-                    </div>            
-                      
-                    </span>
-                    <button class="ui button center floated"> <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="item" >Read more</a></button>
+                    </a>
                 </div>
             </div>
-
         </div>
-
-
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
 
 
 </div>

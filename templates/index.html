@@ -11,14 +11,16 @@
                     <label>Password</label>
                     <input type="password" name="password" placeholder="Password">
                 </div>
-                <button type="submit" class="ui big primary button">Log In</button>
+                <button type="submit" class="ui tiny primary button">Log In</button>
             </form>
-         
+
         </div>
         <div class="middle aligned column">
-            <div class="ui big button primary">
-                <i class="signup icon" href="register"></i><a class="item register-btn" href="register">SignUp</a>
-            </div>
+            <a class="item register-btn" href="{{ url_for('register')}}">
+                <div class="ui small button primary">
+                    <i class="signup icon"></i>SignUp
+                </div>
+            </a>
         </div>
     </div>
     <div class="ui vertical divider">

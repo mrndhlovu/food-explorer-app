@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="container ui segment ">
+<div class="container">
     <h3>Edit Recipe</h3>
     <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" methods="POST" class="col s12">
         <div class="form-group">
@@ -37,7 +37,7 @@
             <input value='{{recipes.record.allergens}}' id="allergens" name="allergens">
             <label>Allergens</label>
         </div>
-        <button class="fluid ui big primary button" type="submit">Update Recipe</button>
+        <button class="fluid ui meduim primary button" type="submit">Update Recipe</button>
     </form>
 </div>
 {% endblock %}

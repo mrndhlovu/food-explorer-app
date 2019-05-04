@@ -27,16 +27,19 @@
             </div>
         </div>
         <div class="right menu">
-            {% if 'username' in session %} Logged in as
+            {% if 'username' in session %} 
 
-            <div class="ui label blue">
+            <div class="ui tiny label ">Logged in as: 
                 <a class="item">
-            <i class="icon user"></i> {{session['username']}}
+            <i class="icon user"></i>  {{session['username']}}
                   </a> </div>
 
             {% else %} {% endif %}
         </div>
-    </div>{% block content %} {% endblock %}
+    </div>
+    <div class="ui segment"> {% block content %} {% endblock %}</div>
+   
+    <script type="text/javascript" src="/static/js/index.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 

@@ -129,11 +129,11 @@ def get_like(_id):
 @app.route('/add_like/<_id>', methods=['GET'])
 def add_like(_id):
     recipe = mongo.db.userRecipes
-    new = recipe.up_votes.append(_id)
+    votes = recipe.up_votes
     recipe.update({'_id': ObjectId(_id)},
     { "$set": 
         { 
-             "up_votes": new
+             "up_votes": votes
         },
     })
     return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
@@ -163,6 +163,7 @@ def register():
             return redirect(url_for('index'))
         return 'That username has been taken, try again with a different username'
     return render_template('register.html')
+    
 
 if __name__  == '__main__':
     app.secret_key = '123'
