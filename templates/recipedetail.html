@@ -2,21 +2,20 @@
 
 <div class="recipe-card">
     {% for recipe in recipe %}
-    <div class="ui card fluid">
+    <div class="ui card fluid  id" id="{{recipe._id}}">
         <div class="content">
-            <i class="right floated like icon"></i>
+            <a class="like icon" onclick="add_like()"><i class="right floated like icon" ></i></a>
             <i class="right floated star icon"></i>
-            <div class="header">{{recipe.record.title.upper()}}</div>
+            <div class="header" id="title">{{ recipe.record.title.upper() }}</div>
             <div class="description">
                 <p>
                     {{recipe.record.directions}}
                 </p>
             </div>
         </div>
-        <div class="extra content"> <a class="like icon" href="{{ url_for('get_like', _id=recipe._id)}}">
+        <div class="extra content"> <a class="like icon">
             <span class="left floated like">
-            <i class=" like icon"></i>
-              
+            Likes
             </span></a>
             <span class="right floated star">
               <i class="star icon"></i>
@@ -30,7 +29,6 @@
             <a href="{{ url_for('add_recipe')}}"><button class="ui button" ><i class="add icon"></i>Add Recipe</button></a>
             <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item"><button class="ui button"><i class="edit icon"></i> Edit</button></a>
             <a href="{{ url_for('delete_recipe', _id=recipe._id)}}" methods="GET" class="item "><button class="ui button"><i class="delete icon"></i> Delete</button></a>
-
         </div>
 
         {% else %} {% endif %}
@@ -39,3 +37,4 @@
     {% endfor %}
 </div>
 {% endblock %}
+<!--href="{{ url_for('update_likes', _id=recipe._id)}}-->

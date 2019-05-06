@@ -29,7 +29,9 @@ def index():
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find())
+    categories = mongo.db.categories.find()
+    category_found = [category for category in categories]
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found)
 
 
 
@@ -49,7 +51,7 @@ def insert_recipe():
     recipe = mongo.db.userRecipes
     userRecipe = { 'uploaded_by': session['username'],
         'record': request.form.to_dict(),
-        'up_votes': [0],
+        'up_votes': 0,
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
@@ -121,22 +123,22 @@ def delete_recipe(_id):
     return ('Invalid password or username') 
     
 
-@app.route('/get_like/<_id>')
-def get_like(_id):
-    return redirect(url_for('add_like', _id=_id))
+# @app.route('/get_like/<_id>')
+# def get_like(_id):
+#     return redirect(url_for('add_like', _id=_id))
 
 
-@app.route('/add_like/<_id>', methods=['GET'])
-def add_like(_id):
-    recipe = mongo.db.userRecipes
-    votes = recipe.up_votes
-    recipe.update({'_id': ObjectId(_id)},
-    { "$set": 
-        { 
-             "up_votes": votes
-        },
-    })
-    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
+# @app.route('/add_like/<_id>', methods=['GET'])
+# def update_like(_id):
+#     recipe = mongo.db.userRecipes
+#     votes = recipe.up_votes
+#     recipe.update({'_id': ObjectId(_id)},
+#     { "$set": 
+#         { 
+#              "up_votes": votes
+#         },
+#     })
+#     return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
  
     
 # user logout
@@ -145,6 +147,13 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('get_cuisine'))
 
+
+@app.route('/get_category/<category_id>')
+def get_category(category_id):
+    categories = mongo.db.userRecipes.record.category.find()
+    category_found = [category for category in categories]
+    return render_template("categorylist.html", recipes=mongo.db.userRecipes.find(), categories = category_found)
+    
 
 
 # register user  

@@ -20,13 +20,13 @@
             <div class="right menu">
                 <div class="item">
                     {% if 'username' in session %}
-                    <a class="item" href="{{ url_for('logout')}}">Logout</a> {% else %}
+                    <a class="item" href="{{ url_for('logout')}}" onclick="logout()">Logout</a> {% else %}
                     <a class="item" href="{{ url_for('index')}}">Login</a>
                     <a class="item" href="{{ url_for('register')}}">SignUp</a>{% endif %}
                 </div>
             </div>
         </div>
-        <div class="right menu">
+        <div class="right menu" id='user'>
             {% if 'username' in session %} 
 
             <div class="ui tiny label ">Logged in as: 
