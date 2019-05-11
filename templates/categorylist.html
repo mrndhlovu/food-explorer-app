@@ -1,13 +1,14 @@
 {% extends 'base.html' %} {% block content %}
+
 <div class="ui container">
-  
-     <h5>Category View</h5>
+   
+    <h5>Category View</h5>
 
     <div class="ui column grid">
-       
+
         <div class="twelve wide column">
             {% for recipe in recipe %} {% if recipe.record.category == category %}
-            
+
             <div class="ui segment  recipe-card">
                 <div class="ui card fluid">
                     <div class="item">
@@ -45,7 +46,7 @@
                     <div class="item">
 
                         <div class="content">
-                            <a class="header"  href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
+                            <a class="header" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
                         </div>
 
                     </div>
