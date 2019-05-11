@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
 from bson import ObjectId
+import statistics
 import datetime
 
 app = Flask(__name__)
@@ -150,9 +151,12 @@ def logout():
 
 @app.route('/get_category/<category_id>')
 def get_category(category_id):
-    categories = mongo.db.userRecipes.record.category.find()
+    users = mongo.db.usersDB.record
+    recipe = mongo.db.userRecipes.find()
+    categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("categorylist.html", recipes=mongo.db.userRecipes.find(), categories = category_found)
+    return render_template("categorylist.html", recipe=recipe, category=category_id, categories=category_found)
+     
     
 
 

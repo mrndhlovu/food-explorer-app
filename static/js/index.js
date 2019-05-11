@@ -24,13 +24,11 @@ let handleLikeState = (id, currentLikes, title, likeState) => {
                 currentLikes.userLikes.push(id);
                 console.log('Will update likes because i have a new id: ', currentLikes);
                 localStorage.setItem('activeUser', JSON.stringify(currentLikes))
-                for (let i = 0; i < currentLikes.userLikes.length; i++){
-                     if (currentLikes.userLikes[i].id == id){
-                         console.log('Updating: ', currentLikes);
-                     }
+                for (let i = 0; i < currentLikes.userLikes.length; i++) {
+                    if (currentLikes.userLikes[i].id == id) {
+                        console.log('Updating: ', currentLikes);
+                    }
                 }
-                // 
-
             }
         }
     }
@@ -64,3 +62,5 @@ const add_like = () => {
         handleLikeState(id, signedIn, title, isLiked)
     };
 };
+
+

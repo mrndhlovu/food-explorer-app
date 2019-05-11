@@ -1,24 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 <div class="ui container">
-    <div class="ui column grid">
+  
+     <h5>Category View</h5>
 
+    <div class="ui column grid">
+       
         <div class="twelve wide column">
-            {% for recipe in recipes %}
+            {% for recipe in recipe %} {% if recipe.record.category == category %}
+            
             <div class="ui segment  recipe-card">
                 <div class="ui card fluid">
                     <div class="item">
                         <div class=""> <a class="ui fluid  label meduim">
-                      {{recipe.record.title.upper()}}</div></a>
+                      {{recipe.record.title}}</div></a>
                             <div class="ui image">
                                 <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
                     <img class="ui  image huge"  src="/static/images/food-2068217_640.jpg" >
                     </a>
                             </div>
                             <div class="content">
-
                                 <div class="meta">
-                                    <span class="ui mini label">By: {{recipe.uploaded_by.upper()}}</span>
-
+                                    <span class="ui mini label">By: {{recipe.uploaded_by}}</span>
                                 </div>
                                 <div class="">
                                     <p></p>
@@ -33,17 +35,17 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {% else %} {% endif %} {% endfor %}
             </div>
 
             <div class="four wide column">
                 <div class="ui middle aligned divided list">
-                    <H5>Categories</H5>
+                    <h5>Categories</h5>
                     {% for cat in categories %}
                     <div class="item">
 
                         <div class="content">
-                            <a class="header">{{ cat.category_name }}</a>
+                            <a class="header"  href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
                         </div>
 
                     </div>
@@ -51,17 +53,17 @@
                 </div>
 
                 <H5>Recent Posts</H5>
-                 {% for recipe in recipes %}
+                {% for recipe in recipe %}
                 <div class="ui list">
-                   
+
                     <div class="item">
                         <div class="content">
-                            <a class="header">{{recipe.record.title.upper()}}</a>
-                            <div class="description">{{recipe.uploaded_by.upper()}}</div>
+                            <a class="header">{{recipe.title}}</a>
+                            <div class="description">{{recipe.uploaded_by}}</div>
                         </div>
-                   
+
                     </div>
-                     {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
 
