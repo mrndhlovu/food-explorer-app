@@ -40,33 +40,37 @@
             </div>
 
             <div class="four wide column">
-                <div class="ui middle aligned divided list">
-                    <h5>Categories</h5>
-                    {% for cat in categories %}
-                    <div class="item">
-
-                        <div class="content">
-                            <a class="header" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
+                <div class="card item">
+                    <div class="ui middle aligned divided list">
+                        <div class="ui top attached label  center aligned header light yellow">Categories</div>
+                        {% for cat in categories %}
+                        <div class="item ">
+                            <a class="text " href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
+                                <div class="ui segment ">
+                                   <h4 class="ui black inverted header center aligned"> {{ cat.category_name }}</h4>
+                                </div>
+                            </a>
                         </div>
-
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
 
-                <H5>Recent Posts</H5>
-                {% for recipe in recipe %}
-                <div class="ui list">
-
-                    <div class="item">
-                        <div class="content">
-                            <a class="header">{{recipe.title}}</a>
-                            <div class="description">{{recipe.uploaded_by}}</div>
+                 <div class="card item">
+                    <div class="ui middle aligned divided list">
+                        <div class="ui top attached label  center aligned header light yellow">Most Recent</div>
+                        {% for cat in recipes %}
+                        <div class="item ">
+                            <a class="text " href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
+                                <div class="ui segment ">
+                                   <h4 class="ui black inverted header center aligned"> {{ cat.record.country }}</h4>
+                                </div>
+                            </a>
                         </div>
-
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
             </div>
+
 
         </div>
     </div>

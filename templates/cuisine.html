@@ -8,7 +8,7 @@
             <div class="ui segment  recipe-card">
                 <div class="ui card fluid">
                     <div class="item">
-                        <div class=""> <a class="ui fluid  label meduim">
+                        <div class=""> <a class="ui fluid label meduim">
                       {{recipe.record.title.upper()}}</div></a>
                             <div class="ui image">
                                 <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="extra content ">
                                     <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}">
-                                        <div class="ui basic up pointing  mini label right floated blue "> Read more
+                                        <div class="ui basic up pointing  mini label right floated yellow "> Read more
                                         </div>
                                     </a>
                                 </div>
@@ -38,33 +38,37 @@
             </div>
 
             <div class="four wide column">
-                <div class="ui middle aligned divided list">
-                    <h6>Categories</h6>
-                    {% for cat in categories %}
-                    <div class="item">
-
-                        <div class="content">
-                            <a class="header"  href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
+                <div class="card item">
+                    <div class="ui middle aligned divided list">
+                        <div class="ui top attached label  center aligned header light yellow">Categories</div>
+                        {% for cat in categories %}
+                        <div class="item ">
+                            <a class="text" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
+                                <div class="ui segment">
+                                   <h4 class="ui black inverted header center aligned"> {{ cat.category_name }}</h4>
+                                </div>
+                            </a>
                         </div>
-
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
 
-                <H5>Recent Posts</H5>
-                 {% for recipe in recipes %}
-                <div class="ui list">
-                   
-                    <div class="item">
-                        <div class="content">
-                            <a class="header">{{recipe.record.title.upper()}}</a>
-                            <div class="description">{{recipe.uploaded_by.upper()}}</div>
+                 <div class="card item">
+                    <div class="ui middle aligned divided list">
+                        <div class="ui top attached label  center aligned header light yellow">Most Recent</div>
+                        {% for cat in recipes %}
+                        <div class="item ">
+                            <a class="text " href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
+                                <div class="ui segment ">
+                                   <h4 class="ui black inverted header center aligned"> {{ cat.record.country }}</h4>
+                                </div>
+                            </a>
                         </div>
-                   
+                        {% endfor %}
                     </div>
-                     {% endfor %}
                 </div>
             </div>
+
 
         </div>
     </div>

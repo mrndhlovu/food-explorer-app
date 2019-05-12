@@ -26,11 +26,10 @@
                         <i class="dropdown icon"></i>
                         <span class="text">Categories</span>
                         <div class="menu">
-                             <div class="item">
-                            {% for cat in categories %}
-                           
-                                    <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
-                                     {% endfor %}
+                            <div class="item">
+                                {% for cat in categories %}
+
+                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -38,11 +37,10 @@
                         <i class="dropdown icon"></i>
                         <span class="text">Ingredients</span>
                         <div class="menu">
-                             <div class="item">
-                            {% for cat in categories %}
-                           
-                                    <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
-                                     {% endfor %}
+                            <div class="item">
+                                {% for cat in categories %}
+
+                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -50,11 +48,10 @@
                         <i class="dropdown icon"></i>
                         <span class="text">Country</span>
                         <div class="menu">
-                             <div class="item">
-                            {% for cat in categories %}
-                           
-                                    <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
-                                     {% endfor %}
+                            <div class="item">
+                                {% for cat in categories %}
+
+                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -62,11 +59,10 @@
                         <i class="dropdown icon"></i>
                         <span class="text">Allergens</span>
                         <div class="menu">
-                             <div class="item">
-                            {% for cat in categories %}
-                           
-                                    <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a>
-                                     {% endfor %}
+                            <div class="item">
+                                {% for cat in categories %}
+
+                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -80,14 +76,14 @@
                 {% if 'username' in session %}
                 <a class="item" href="{{ url_for('logout')}}" onclick="logout()">Logout</a> {% else %}
                 <a class="item" href="{{ url_for('index')}}">Login</a>
-                <a class="item" href="{{ url_for('register')}}">SignUp</a>{% endif %}
+                <a class="item" href="{{ url_for('register')}}">Register</a>{% endif %}
             </div>
 
         </div>
         <div class="right menu" id='user'>
             {% if 'username' in session %}
 
-            <div class="ui tiny label ">Logged in as:
+            <div class="ui tiny label yellow ">Logged in as:
                 <a class="item">
             <i class="icon user"></i>  {{session['username']}}
                   </a> </div>
@@ -96,8 +92,10 @@
         </div>
 
     </div>
-    </div>
-    <div class="ui segment"> {% block content %} {% endblock %}</div>
+
+    <div class="ui segment"> 
+    
+    {% block content %} {% endblock %}</div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/static/js/index.js"></script>
 
