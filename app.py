@@ -32,9 +32,7 @@ def index():
 def get_cuisine():
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found)
-
-
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found,  favourites=mongo.db.usersDB.userFavourites.find())
 
 @app.route('/add_recipe')
 def add_recipe():
@@ -51,22 +49,28 @@ def add_recipe():
 def insert_recipe():
     recipe = mongo.db.userRecipes
     userRecipe = { 'uploaded_by': session['username'],
-        'record': request.form.to_dict(),
+        'record': {
+            "title":   request.form['title'],
+            "category":  request.form['category'],
+            "country":  request.form['country'],
+            "ingredients": [ request.form.getlist('ingredient')],
+            "directions":  request.form['directions'],
+            "allergens":  request.form['allergens']
+        },
+            
         'up_votes': 0,
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
     recipe.insert_one(userRecipe)
     return redirect(url_for('get_cuisine'))
+    
  
-
-   
 # edit recipe
 @app.route('/edit_recipe/<_id>')
 def edit_recipe(_id): 
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    print('categories found',category_found)
     if 'username' in session:
         return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}))
     return render_template('register.html')
@@ -122,26 +126,60 @@ def delete_recipe(_id):
             recipe.remove({'_id': ObjectId(_id)})
             return redirect(url_for('get_cuisine'))
     return ('Invalid password or username') 
+
+
+# Recipe views
+@app.route('/recipe_views/<_id>', methods=['GET', 'POST'])
+def recipe_views(_id):
+    recipe = mongo.db.userRecipes
+    recipe.update({'_id': ObjectId(_id)},  { "$inc": { "views": 1 },})
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
     
-
-# @app.route('/get_like/<_id>')
-# def get_like(_id):
-#     return redirect(url_for('add_like', _id=_id))
-
-
-# @app.route('/add_like/<_id>', methods=['GET'])
-# def update_like(_id):
-#     recipe = mongo.db.userRecipes
-#     votes = recipe.up_votes
-#     recipe.update({'_id': ObjectId(_id)},
-#     { "$set": 
-#         { 
-#              "up_votes": votes
-#         },
-#     })
-#     return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
- 
+# Recipe up_votes
+@app.route('/up_votes/<_id>', methods=['GET', 'POST'])
+def up_votes(_id):
+    # add to userLikes
+    if 'username' in session:
+        username = mongo.db.usersDB.find_one({'username' :session['username']})
+        user = mongo.db.usersDB
+        user.update({'_id': ObjectId(username['_id'])},
+        { "$push": { "userLikes": _id }})
     
+        #  update record likes total
+        recipe = mongo.db.userRecipes
+        recipe.update({'_id': ObjectId(_id)},
+        { "$inc": { "up_votes": 1 },})
+        
+        return redirect(url_for('get_cuisine'))
+    return render_template('index.html')   
+    
+    
+# favourites
+@app.route('/favourites/<_id>', methods=['GET', 'POST'])
+def favourites(_id):
+    # Track user favourites
+    if 'username' in session:
+        username = mongo.db.usersDB.find_one({'username' :session['username']})
+        user = mongo.db.usersDB
+        user.update({'_id': ObjectId(username['_id'])},
+        { "$push": { "userFavourites": _id }})
+        
+      
+        
+        return redirect(url_for('get_cuisine', ))
+    return render_template('index.html')       
+        
+
+# render_favourites  
+@app.route('/render_favourites/', methods=['GET'])
+def render_favourites():
+    if 'username' in session:
+        favourites=mongo.db.usersDB.userFavourites.find()
+        for userFavourites in favourites:
+            print('loop:  ===>', userFavourites )
+        return redirect(url_for('get_cuisine', ))
+
+   
 # user logout
 @app.route('/logout')
 def logout():
@@ -167,7 +205,9 @@ def register():
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
-            users.insert({'userFavourites': [], 
+            users.insert({
+            'userFavourites': [], 
+            'userLikes':[],
             'is_active' : True,
             'username' : request.form['username'],
             'email' : request.form['email'], 

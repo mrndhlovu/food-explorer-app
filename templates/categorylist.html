@@ -1,40 +1,69 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="ui container">
-   
-    <h5>Category View</h5>
+
+ 
 
     <div class="ui column grid">
+ <div class="four wide column">
 
-        <div class="twelve wide column">
+            <div class="ui middle aligned divided list">
+                <div class="ui card">
+                    <div class="extra content yellow">
+                        Favorites
+                    </div>
+                </div>
+                {% for fav in favourites %}
+                <div class="ui card">
+
+                    <div class="extra content">
+                        <div class="center left author">
+                            <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> {{fav.0}}
+                        </div>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+     <div class="eight wide column">
+            <h5>Category View</h5>
             {% for recipe in recipe %} {% if recipe.record.category == category %}
 
-            <div class="ui segment  recipe-card">
-                <div class="ui card fluid">
-                    <div class="item">
-                        <div class=""> <a class="ui fluid  label meduim">
-                      {{recipe.record.title}}</div></a>
-                            <div class="ui image">
-                                <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
+            
+                <div class="ui one cards">
+
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="right floated meta">{{recipe.record.title.upper()}}</div>
+                            <img class="ui avatar image" src="/static/images/woodbud-vii-1632173-639x426.jpg">by: {{recipe.uploaded_by.upper()}}
+                        </div>
+                        <div class="image">
+                            <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
                     <img class="ui  image huge"  src="/static/images/food-2068217_640.jpg" >
                     </a>
+                        </div>
+                        <div class="content">
+                            <span class="right floated">
+                          
+       <a href="{{ url_for('up_votes', _id=recipe._id)}}"><i class="thumbs up icon"></i></a>
+       <i class="users icon"></i> {{recipe.up_votes}}
+    </span>
+                            <i class="calendar icon"></i> {{recipe.date_updated}}
+                        </div>
+                        <div class="extra content">
+                            <div class="ui large transparent left icon input">
+                                <a href="{{ url_for('favourites', _id=recipe._id)}}"> <i class="heart outline icon"></i></a>
                             </div>
-                            <div class="content">
-                                <div class="meta">
-                                    <span class="ui mini label">By: {{recipe.uploaded_by}}</span>
-                                </div>
-                                <div class="">
-                                    <p></p>
-                                </div>
-                                <div class="extra content ">
-                                    <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}">
-                                        <div class="ui basic up pointing  mini label right floated blue "> Read more
-                                        </div>
-                                    </a>
-                                </div>
+                            <div class="ui large transparent left icon red">
+                                <a href="{{ url_for('render_favourites')}}"> <i class="heart outline icon"></i></a>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
                 {% else %} {% endif %} {% endfor %}
             </div>
@@ -47,7 +76,7 @@
                         <div class="item ">
                             <a class="text " href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
                                 <div class="ui segment ">
-                                   <h4 class="ui black inverted header center aligned"> {{ cat.category_name }}</h4>
+                                    <h4 class="ui black inverted header center aligned"> {{ cat.category_name }}</h4>
                                 </div>
                             </a>
                         </div>
@@ -55,14 +84,14 @@
                     </div>
                 </div>
 
-                 <div class="card item">
+                <div class="card item">
                     <div class="ui middle aligned divided list">
                         <div class="ui top attached label  center aligned header light yellow">Most Recent</div>
                         {% for cat in recipes %}
                         <div class="item ">
                             <a class="text " href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
                                 <div class="ui segment ">
-                                   <h4 class="ui black inverted header center aligned"> {{ cat.record.country }}</h4>
+                                    <h4 class="ui black inverted header center aligned"> {{ cat.record.country }}</h4>
                                 </div>
                             </a>
                         </div>

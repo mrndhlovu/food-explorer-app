@@ -4,8 +4,7 @@
         {% for recipe in recipe %}
         <div class="ui card fluid  id" id="{{recipe._id}}">
             <div class="content">
-                <a class="like icon" onclick="add_like()"><i class="right floated like icon" ></i></a>
-                <i class="right floated star icon"></i>
+                <i href="{{ url_for('recipe_views', _id=recipe._id )}}" class="right floated  eye icon" methods="POST"> {{recipe.views}}</i>
                 <div class="header" id="title">{{ recipe.record.title.upper() }}</div>
                 <div class="description">
                     <p>
@@ -13,11 +12,12 @@
                     </p>
                 </div>
             </div>
-            <div class="extra content"> <a class="like icon">
-            <span class="left floated like">
-            Likes
-            </span></a>
-                <span class="right floated star">
+            <div class="extra content">
+                {{recipe.up_votes}}
+                <span class="left floated thumbs up outline">
+              <i class="thumbs up icon"></i>
+            </span> 
+                <span class="right floated star" href="{{ url_for('favourites', _id=recipe._id )}}">
               <i class="star icon"></i>
               Favorite
             </span>

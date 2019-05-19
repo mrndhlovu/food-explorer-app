@@ -33,39 +33,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        <span class="text">Ingredients</span>
-                        <div class="menu">
-                            <div class="item">
-                                {% for cat in categories %}
-
-                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        <span class="text">Country</span>
-                        <div class="menu">
-                            <div class="item">
-                                {% for cat in categories %}
-
-                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        <span class="text">Allergens</span>
-                        <div class="menu">
-                            <div class="item">
-                                {% for cat in categories %}
-
-                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
-                            </div>
-                        </div>
-                    </div>
                     <div class="divider"></div>
                     <div class="header">Other</div>
                     <div class="item">Most Votes</div>
