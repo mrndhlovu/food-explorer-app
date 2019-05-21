@@ -3,23 +3,64 @@
     <div class="recipe-card">
         {% for recipe in recipe %}
         <div class="ui card fluid  id" id="{{recipe._id}}">
-            <div class="content">
-                <i href="{{ url_for('recipe_views', _id=recipe._id )}}" class="right floated  eye icon" methods="POST"> {{recipe.views}}</i>
-                <div class="header" id="title">{{ recipe.record.title.upper() }}</div>
-                <div class="description">
-                    <p>
-                        {{recipe.record.directions}}
-                    </p>
+            <div class="ui container">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="content">
+                                    <i href="{{ url_for('recipe_views', _id=recipe._id )}}" class="left floated  eye icon" methods="POST"> {{recipe.views}}</i>
+                                    <div class="header" id="title"></div>
+                                </div>
+                                <h2 class="ui right floated header">{{ recipes.record.title.upper() }}</h2>
+                                <div class="ui clearing divider"></div>
+                                <div class="ingredients">
+                                    <H2>Ingredients</H2>
+                                    <p>
+                                        {{recipe.record.ingredients}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="ui container">
+                            <div class="image">
+                                <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
+                                             <img class="ui right floated  large image" src="/static/images/food-2068217_640.jpg" >
+                                            </a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+            <div class=" ui container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <H3>Directions</H3>
+                        <p>
+                            {{recipe.record.directions}}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <H3>Country of Origin</H3>
+                        <p>
+                            {{recipe.record.country}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="extra content">
                 {{recipe.up_votes}}
                 <span class="left floated thumbs up outline">
               <i class="thumbs up icon"></i>
-            </span> 
-                <span class="right floated star" href="{{ url_for('favourites', _id=recipe._id )}}">
-              <i class="star icon"></i>
-              Favorite
+            </span>
+                <span class="right floated tag" href="{{ url_for('favourites', _id=recipe._id )}}">
+              <i class=" red tag icon"></i>
+              ALLERGENS: {{recipe.record.allergens.upper()}}
             </span>
             </div>
 

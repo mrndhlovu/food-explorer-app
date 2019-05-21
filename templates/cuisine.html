@@ -12,12 +12,11 @@
                 </div>
                 {% for fav in favourites %}
                 <div class="ui card">
-
                     <div class="extra content">
                         <div class="center left author">
                             <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> {{fav.0}}
                         </div>
-                        
+
                     </div>
                 </div>
                 {% endfor %}
@@ -27,6 +26,7 @@
         </div>
 
         <div class="eight wide column">
+
             <div class="ui one cards">
                 {% for recipe in recipes %}
                 <div class="ui card">
@@ -51,7 +51,7 @@
                         <div class="ui large transparent left icon input">
                             <a href="{{ url_for('favourites', _id=recipe._id)}}"> <i class="heart outline icon"></i></a>
                         </div>
-                         <div class="ui large transparent left icon red">
+                        <div class="ui large transparent left icon red">
                             <a href="{{ url_for('render_favourites')}}"> <i class="heart outline icon"></i></a>
                         </div>
                     </div>
@@ -63,6 +63,52 @@
         <div class="four wide column">
 
             <div class="ui middle aligned divided list">
+                <div class="ui labeled icon top right pointing dropdown button">
+                    <i class="filter icon"></i>
+                    <span class="text">Filter Recipes</span>
+                    <div class="menu">
+                        <div class="ui search icon input">
+                            <i class="search icon"></i>
+                            <input type="text" name="search" placeholder="Search issues...">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="header">
+                            <i class="tags icon"></i> Filter by tag
+                        </div>
+                        <a class="item" href="{{ url_for('browse_filter', query='up_votes', sort='descending')}}" id="up_votes">
+                            <div class="item">
+                                <div class="ui red empty circular label"></div>
+                                Most Votes Descending
+                            </div>
+                        </a>
+                        <a class="item" href="{{ url_for('browse_filter', query='up_votes', sort='ascending')}}" id="up_votes">
+                            <div class="item">
+                                <div class="ui red empty circular label"></div>
+                                Most Votes Ascending
+                            </div>
+                        </a>
+                        <a class="item" href="{{ url_for('browse_filter', query='country', sort='Ireland')}}" id="country">
+                            <div class="item">
+                                <div class="ui black empty circular label"></div>
+                                Country
+                            </div>
+                        </a>
+                        <div class="divider"></div>
+                        <div class="header">
+                            <i class="calendar icon"></i> Filter by date
+                        </div>
+                        <div class="item">
+                            <i class="olive circle icon"></i> This Week
+                        </div>
+                        <div class="item">
+                            <i class="violet circle icon"></i> This Month
+                        </div>
+                        <div class="item">
+                            <i class="orange circle icon"></i> This Year
+                        </div>
+                    </div>
+                </div>
+
                 <div class="ui card">
                     <div class="extra content yellow">
                         <div class="center aligned author "> Categories</div>
@@ -70,7 +116,7 @@
                 </div>
                 {% for cat in categories %}
 
-                <a class="text" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">
+                <a class="text" href="{{ url_for('browse_filter', sort=cat.category_name, query='category' ) }}" id="category">
                     <div class="ui card">
 
                         <div class="extra content">
