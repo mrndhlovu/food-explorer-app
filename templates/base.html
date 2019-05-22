@@ -17,28 +17,7 @@
             </div>
             <a class="item" href="{{ url_for('get_cuisine')}}">Recipes</a>
             <a class="item" href="{{ url_for('add_recipe')}}">Add Recipe</a>
-            <div class="ui pointing dropdown link item">
-                <span class="text">Browse</span>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="header">View By</div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        <span class="text">Categories</span>
-                        <div class="menu">
-                            <div class="item">
-                                {% for cat in categories %}
-
-                                <a class="item" href="{{ url_for('get_category', category_id=cat.category_name ) }}" id="category">{{ cat.category_name }}</a> {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="header">Other</div>
-                
-                     
-                </div>
-            </div>
+           
             <div class="right menu">
                 {% if 'username' in session %}
                 <a class="item" href="{{ url_for('logout')}}" onclick="logout()">Logout</a> {% else %}
@@ -50,9 +29,9 @@
         <div class="right menu" id='user'>
             {% if 'username' in session %}
 
-            <div class="ui tiny label yellow ">Logged in as:
+            <div class="ui tiny label red ">Logged in as: {{session['username']}}
                 <a class="item">
-            <i class="icon user"></i>  {{session['username']}}
+            <i class="icon user black"></i>
                   </a> </div>
 
             {% else %} {% endif %}

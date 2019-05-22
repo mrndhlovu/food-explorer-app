@@ -1,7 +1,7 @@
 #  Flask Receipe App
 import os
 from flask import Flask, render_template, redirect, request,session,url_for
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
 from bson import ObjectId
@@ -195,6 +195,8 @@ def get_category(category_id):
     
 @app.route('/browse_filter/<query>/<sort>')
 def browse_filter(query,sort):
+    
+    recipe = mongo.db.userRecipes.find()
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if sort == 'descending':
@@ -207,10 +209,11 @@ def browse_filter(query,sort):
         categories_found =   mongo.db.userRecipes.find({query: sort})
         return render_template("cuisine.html", recipes=categories_found, categories=category_found, )   
     if query == 'country':
-        countries_found =   mongo.db.userRecipes.find({query: sort})
-        for doc in countries_found:
-            print(doc)
-        return render_template("cuisine.html", recipes=countries_found, categories=category_found, )      
+        
+        countries_found =   mongo.db.userRecipes.db.find()
+        
+        print('contries', countries_found)
+        return render_template("cuisine.html",  categories=category_found,recipes=countries_found )      
     return "Nothing else"    
 
 
