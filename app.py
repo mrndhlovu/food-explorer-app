@@ -56,7 +56,7 @@ def insert_recipe():
             "country":  request.form['country'],
             "ingredients":  request.form.getlist('ingredient'),
             "directions":  request.form['directions'],
-            "allergens":  request.form['allergens']
+            "allergens":  request.form.getlist('allergens')
         },
             
         'up_votes': 0,

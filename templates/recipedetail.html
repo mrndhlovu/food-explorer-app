@@ -1,83 +1,71 @@
-{% extends 'base.html' %} {% block content %}
-<div class="ui container">
-
-
-    {% for recipe in recipe %}
-
-    <div class="ten wide column">
-        <div class="ui container">
-
-            <div class="ui card left fluid floated">
-                <div class="content fluid">
-                    <div class="ui large image center floated">
-                        <div class="ui  ribbon label red">
-                            <i class="spoon icon"></i> {{recipe.record.category}}
-                        </div>
-                        <img class="centered small image" src="/static/images/food-2068217_640.jpg">
-                        <div class="ui bottom right attached label red">Country of Origin: {{recipe.record.country}}</div>
-                    </div>
-                    <div class="ui top attached label ">{{ recipe.record.title.upper() }}</div>
-                    <div class="meta">
-                        <span>Last Modified:</span>
-                        <a>{{ recipe.date_updated}}</a>
-                    </div>
-                        <a class="ui label red right floated">
-                          <i class="thumbs up icon "></i>
-                          {{recipe.up_votes}}
-                        </a>
-                    <h3 class="ui attached header">
-                        Ingredients
-                    </h3>
-                    <div class="ingredients">
-
-                        <p>
-                            {{recipe.record.ingredients}}
-                        </p>
-                    </div>
-
-                    <h3 class="ui attached header">
-                        Directions
-                    </h3>
-
-                    <p>
-                        {{recipe.record.directions}}
-                    </p>
-
-                    <div class="ui bottom attached label"><i class=" red tag icon"></i> ALLERGENS: {{recipe.record.allergens.upper()}}</div>
-
+{% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
+<div class=" ui padded  segment  ">
+    <div class="container">
+        <div class="row ui card padded segment fluid ">
+            <div class="ui top attached red label ">
+                {{ recipe.record.title.upper() }}
+                <div class="meta right floated ">
+                    <span class=" ">Last Modified:</span>
+                    <a>{{ recipe.date_updated}}</a>
                 </div>
             </div>
+            <div class="col-md-4 ui center aligned padded container">
 
+                <div class="ui image center aligned bordered">
+                    <div class="ui  ribbon label red">
+                        <i class="spoon icon"></i> {{recipe.record.category}}
+                    </div>
+                    <a class="ui right corner label">
+        <i class="heart red icon"></i>
+      </a>
+                    <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
+                    <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
 
+                </div>
+              
 
+                <div class="col-md-4  ui padded segment text container">
+                    <h3 class="ui top attached label">
+                        Ingredients
+                    </h3>
+                    <div class="ingredients ui container justified container">
+                        {% for ingredients in recipe.record.ingredients %}
+                        <ol class="ui list">
+                            <li value="*">{{ingredients}}</li>
+                        </ol>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row ui padded segment">
+                    <div class="col-md-6 ui segment text container">
+                        <h3 class="  ui top attached label">
+                            Directions
+                        </h3>
+                        <div class="ui justified container">
+                            <p>{{recipe.record.directions}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ui bottom attached label">
 
+                    <div class="col-md-6  right floated">
+                        <div class="extra content">
+                            <span class="right aligned">Allergens : 
+                            {% for allergen in recipe.record.allergens %}
+                               <a class=""> {{allergen}}  <i class="red tag icon xs"></i></a> {% endfor %}
+                          </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" mini ui three buttons">
+                {% if recipe.uploaded_by == session.username %}
+                <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item"><button class=" ui button ">Edit</button></a>
+                <div class="or"></div>
+                <a href="{{ url_for('delete_recipe', _id=recipe._id)}}" methods="GET" class="item "><button class=" ui  button "> Delete</button></a>
+                <a href="{{ url_for('add_recipe')}}" class="item "><button class=" ui button red"> Add Recipe</button></a> {% else %} {% endif %}
+            </div>
+            {% endfor %}
         </div>
-
     </div>
-
-
-
-</div>
-
-<!--Check if user in session owns the recipe to show edit and delete buttons-->
-{% if recipe.uploaded_by == session.username %}
-
-<div class="ui mini basic icon buttons ">
-    <a href="{{ url_for('add_recipe')}}"><button class="ui button" ><i class="add icon"></i>Add Recipe</button></a>
-    <a href="{{ url_for('edit_recipe', _id=recipe._id)}}" class="item"><button class="ui button"><i class="edit icon"></i> Edit</button></a>
-    <a href="{{ url_for('delete_recipe', _id=recipe._id)}}" methods="GET" class="item "><button class="ui button"><i class="delete icon"></i> Delete</button></a>
-
-</div>
-
-{% else %} {% endif %}
-
-
-
-
-</div>
-
-
-{% endfor %}
-</div>
-{% endblock %}
-<!--href="{{ url_for('update_likes', _id=recipe._id)}}-->
+    {% endblock %}

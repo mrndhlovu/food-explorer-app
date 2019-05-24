@@ -41,10 +41,10 @@
                     </div>
                     <div class="content">
                         <span class="right floated">
-                          
-       <a href="{{ url_for('up_votes', _id=recipe._id)}}"><i class="thumbs up icon red"></i></a>
-       <i class="users icon red"></i> {{recipe.up_votes}}
-    </span>
+                                                  
+                               <a href="{{ url_for('up_votes', _id=recipe._id)}}"><i class="thumbs up icon red"></i></a>
+                               </i> {{recipe.up_votes}}
+                            </span>
                         <i class="calendar icon red"></i> {{recipe.date_updated}}
                     </div>
                     <div class="extra content">
@@ -52,7 +52,7 @@
                             <a href="{{ url_for('favourites', _id=recipe._id)}}"> <i class="heart outline icon"></i></a>
                         </div>
                         <div class="right floated">
-                             <i class="eye icon"></i>Views: {{recipe.views}}
+                            <i class="eye icon"></i>Views: {{recipe.views}}
                         </div>
                     </div>
                 </div>
@@ -108,9 +108,9 @@
                                 <i class="eye icon"></i> Views Ascending
                             </div>
                         </a>
-                         <a class="item" href="{{ url_for('browse_filter', query='views', sort='descending')}}" id="country">
+                        <a class="item" href="{{ url_for('browse_filter', query='views', sort='descending')}}" id="country">
                             <div class="item">
-                                <i class="eye icon"></i> Views Descending 
+                                <i class="eye icon"></i> Views Descending
                             </div>
                         </a>
                         <div class="divider"></div>
