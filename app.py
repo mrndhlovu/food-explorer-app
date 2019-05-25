@@ -195,9 +195,10 @@ def get_category(category_id):
     
 @app.route('/browse_filter/<query>/<sort>')
 def browse_filter(query,sort):
-    
     recipe = mongo.db.userRecipes.find()
     categories = mongo.db.categories.find()
+    query_field = 'record.' + query
+    query_found = mongo.db.userRecipes.find({query_field: sort})
     category_found = [category for category in categories]
     if sort == 'descending':
         browse_descending = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, -1)])
@@ -205,16 +206,9 @@ def browse_filter(query,sort):
     if sort == 'ascending':
         browse_ascending = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, 1)])
         return render_template("cuisine.html", recipes=browse_ascending, categories=category_found)
-    if query == 'category':
-        categories_found =   mongo.db.userRecipes.find({query: sort})
-        return render_template("cuisine.html", recipes=categories_found, categories=category_found, )   
-    if query == 'country':
-        
-        countries_found =   mongo.db.userRecipes.db.find()
-        
-        print('contries', countries_found)
-        return render_template("cuisine.html",  categories=category_found,recipes=countries_found )      
-    return "Nothing else"    
+    return render_template("cuisine.html", recipes=query_found, categories=category_found, )   
+   
+   
 
 
 

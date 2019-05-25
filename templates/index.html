@@ -12,13 +12,13 @@
                         <label>Password</label>
                         <input type="password" name="password" placeholder="Password">
                     </div>
-                    <button type="submit" class="ui tiny yellow button" onclick="login()" )>Log In</button>
+                    <button type="submit" class="ui tiny red button" onclick="{{ url_for('login')}}" )>Log In</button>
                 </form>
             </div>
             <div class="middle aligned column">
                 <a class="item register-btn" href="{{ url_for('register')}}">
-                    <div class="ui small button yellow">
-                        <i class="signup icon"></i>SignUp
+                    <div class="ui small button red">
+                        </i>SignUp
                     </div>
                 </a>
             </div>

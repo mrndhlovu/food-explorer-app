@@ -20,7 +20,7 @@
            
             <div class="right menu">
                 {% if 'username' in session %}
-                <a class="item" href="{{ url_for('logout')}}" onclick="logout()">Logout</a> {% else %}
+                <a class="item" href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a> {% else %}
                 <a class="item" href="{{ url_for('index')}}">Login</a>
                 <a class="item" href="{{ url_for('register')}}">Register</a>{% endif %}
             </div>
@@ -38,9 +38,6 @@
         </div>
 
     </div>
-
- 
-    
     {% block content %} {% endblock %}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/static/js/index.js"></script>
