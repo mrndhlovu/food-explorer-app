@@ -4,9 +4,11 @@ from flask import Flask, render_template, redirect, request,session,url_for
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
+from operator import attrgetter
 from bson import ObjectId
 import statistics
 import datetime
+import datetime as DT
 
 app = Flask(__name__)
 
@@ -32,7 +34,11 @@ def index():
 def get_cuisine():
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found)
+    today = today = DT.date.today()
+    week_ago = today - DT.timedelta(days=14)
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }})
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found, most_recent=most_recent)
 
 
 @app.route('/add_recipe')
@@ -70,16 +76,25 @@ def insert_recipe():
 # edit recipe
 @app.route('/edit_recipe/<_id>')
 def edit_recipe(_id): 
+    today = DT.date.today()
+    week_ago = today - DT.timedelta(days=30)
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': current_date, '$gt': week_ago.strftime('%Y-%m-%d') }}).limit(5)
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
-        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}))
+        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent)
     return render_template('register.html')
     
    
 @app.route('/show_detail/<recipe_id>')
 def show_detail(recipe_id):
-    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}))   
+    categories = mongo.db.categories.find()
+    category_found = [category for category in categories]
+    today = today = DT.date.today()
+    week_ago = today - DT.timedelta(days=14)
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d'), '$gte': week_ago.strftime('%Y-%m-%d') }}).limit(5)
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent)   
 
  
 # update edited recipe 
@@ -92,9 +107,9 @@ def update_recipe(_id):
             "record.title":  request.form.get('title'),
             "record.category":  request.form.get('category'),
             "record.country":  request.form.get('country'),
-            "record.ingredients":  request.form.get('ingredients'),
+            "record.ingredients":  request.form.getlist('ingredients'),
             "record.directions":  request.form.get('directions'),
-            "record.allergens":  request.form.get('allergens'),
+            "record.allergens":  request.form.getlist('allergens'),
             "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
         },
     })
@@ -195,21 +210,61 @@ def get_category(category_id):
     
 @app.route('/browse_filter/<query>/<sort>')
 def browse_filter(query,sort):
-    recipe = mongo.db.userRecipes.find()
     categories = mongo.db.categories.find()
+    category_found = [category for category in categories]
+    
     query_field = 'record.' + query
     query_found = mongo.db.userRecipes.find({query_field: sort})
-    category_found = [category for category in categories]
+   
+    
+    today = today = DT.date.today()
+    week_ago = today - DT.timedelta(days=14)
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
+    
+    render_results = render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
+    
     if sort == 'descending':
-        browse_descending = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, -1)])
-        return render_template("cuisine.html",recipes=browse_descending, categories=category_found)
-    if sort == 'ascending':
-        browse_ascending = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, 1)])
-        return render_template("cuisine.html", recipes=browse_ascending, categories=category_found)
-    return render_template("cuisine.html", recipes=query_found, categories=category_found, )   
-   
-   
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': today.strftime('%Y-%m-%d') }}).limit(5)
+        query_found = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, -1)])
+        return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
+    elif sort == 'ascending':
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': today.strftime('%Y-%m-%d') }}).limit(5)
+        query_found = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, 1)])
+        return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
+    elif query == 'allergen':
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': today.strftime('%Y-%m-%d')}}).limit(5)
+        query_found =  mongo.db.userRecipes.find( { 'record.allergens' : sort } )
+        return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
+    elif query == 'author':
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': today.strftime('%Y-%m-%d')}}).limit(5)
+        query_found =  mongo.db.userRecipes.find( { 'uploaded_by' : sort } )
+        return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
+    elif query == 'recent':
+        most_recent = mongo.db.userRecipes.find()
+        return  render_template("cuisine.html", recipes=most_recent, categories=category_found, most_recent=most_recent) 
+    # elif query == 'search':
+    #     most_recent = mongo.db.userRecipes.find()
+    #     query_found =  mongo.db.userRecipes.find( { 'uploaded_by' : sort } ) 
+    #     return  render_template("cuisine.html", recipes=most_recent, categories=category_found, most_recent=most_recent) 
+    else:
+        return  render_results   
+    
 
+# def insert_image(request):
+#   with open(request.GET["image_name"], "rb") as image_file:
+#       encoded_string = base64.b64encode(image_file.read())
+#   print encoded_string
+#   abc=db.database_name.insert({"image":encoded_string})
+#   return HttpResponse("inserted")
+
+# def retrieve_image(request):
+#   data = db.database_name.find()
+#   data1 = json.loads(dumps(data))
+#   img = data1[0]
+#   img1 = img['image']
+#   decode=img1.decode()
+#   img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
+#   return HttpResponse(img_tag)
 
 
 # register user  

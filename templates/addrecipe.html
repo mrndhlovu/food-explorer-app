@@ -3,60 +3,41 @@
 
 <div class="container">
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-
         <div class="form-group">
             <input id="title" name="title" type="text" placeholder="Name">
-
         </div>
-
         <div class="form-group">
             <select name="category" class="ui fluid search dropdown">
                           <option name="category" value="">Choose Category</option>
                           {% for cat in categories %}
                           <option name="category">{{ cat.category_name }}</option>
                          {% endfor %}
-                        </select>
-
+            </select>
         </div>
-
         <div class="form-group">
             <input id="country" name="country" type="text" placeholder="Country">
         </div>
-
-        <div class="form-group">
-            <input id="allergens" name="allergens" type="text" placeholder="Allergens">
-        </div>
-        <div class="form-group">
-            <input id="allergens" name="allergens" type="text" placeholder="Allergens">
-        </div>
-        <div class="form-group">
-            <input id="allergens" name="allergens" type="text" placeholder="Allergens">
-        </div>
-        <div class="form-group">
-            <input id="allergens" name="allergens" type="text" placeholder="Allergens">
+        <div class="form-group ui segment" id="addAllergen">
+            <button class="circular ui icon button mini red right floated padded" type="button" onclick="addAllergen()">  
+              <i class="icon plus"></i>
+            </button>
+            <div class="ui input focus" id="inputContainer">
+                <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
+            </div>
         </div>
 
-        <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" placeholder="ingredient"></input>
-        </div>
-        <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" placeholder="ingredient"></input>
-        </div>
-         <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" placeholder="ingredient"></input>
-        </div>
-        <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" placeholder="ingredient"></input>
-        </div>
-        <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" placeholder="Ingredient"></input>
+        <div class="form-group ui segment" id="addIngredient">
+            <div class="ui input focus" id="inputContainer">
+                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
+            </div>
+            <button class="circular ui icon button mini red right floated padded" type="button" onclick="addIngredient()">
+          <i class="icon plus"></i>
+        </button>
         </div>
         <div class="form-group">
             <textarea id="textarea1" name="directions" class="materialize-textarea" placeholder="Directions"></textarea>
         </div>
-
-        <button class="fluid ui meduim yellow button" type="submit">Add Recipe</button>
-
+        <button class="fluid ui meduim red button" type="submit">Add Recipe</button>
     </form>
 </div>
 {% endblock %}

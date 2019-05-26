@@ -2,12 +2,13 @@
 <div class="container">
     <h3>Edit Recipe</h3>
     <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" methods="POST" class="col s12">
+
         <div class="form-group">
             <input value='{{recipes.record.title}}' id="title" name="title">
-            <label>Title</label>
         </div>
+
         <div class="form-group">
-            <select id="category" name="category" class="ui search dropdown">
+            <select id="category" name="category" class="ui search dropdown fluid">
                   <option value="" disabled selected>Choose Category</option>
                   {% for cat in categories %}
                       {% if cat.category_name == recipes.record.category %}
@@ -18,23 +19,23 @@
                   {% endfor %}
                 </select>
         </div>
+
         <div class="form-group">
-            <input value='{{recipes.record.country}}' id="country" name="country">
-            <label>Country</label>
+            <input id="country" name="country" value='{{recipes.record.country}}' placeholder="Country">
+        </div>
+
+        <div class="form-group">
+            <input id="allergens" name="allergens" value='{{recipes.record.allergens}}'>
         </div>
         <div class="form-group">
-            <textarea id="textarea1" name="ingredients" class="materialize-textarea">{{recipes.record.ingredients}}</textarea>
-            <label>Ingredients</label>
+            <input id="textarea1" name="ingredient" class="materialize-textarea" value='{{recipes.record.ingredients}}'></input>
         </div>
         <div class="form-group">
-            <textarea id="textarea1" name="directions" class="materialize-textarea">{{recipes.record.directions}}</textarea>
-            <label>Directions</label>
+            <textarea id="textarea1" name="directions" class="materialize-textarea" value='{{recipes.record.directions}}'>{{recipes.record.directions}}</textarea>
         </div>
-        <div class="form-group">
-            <input value='{{recipes.record.allergens}}' id="allergens" name="allergens">
-            <label>Allergens</label>
-        </div>
-        <button class="fluid ui meduim primary button" type="submit">Update Recipe</button>
+
+        <button class="fluid ui meduim red button" type="submit">Update Recipe</button>
+
     </form>
 </div>
 {% endblock %}
