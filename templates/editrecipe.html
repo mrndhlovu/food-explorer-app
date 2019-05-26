@@ -1,14 +1,19 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
-    <h3>Edit Recipe</h3>
-    <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" methods="POST" class="col s12">
+<form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
+    <div class="ui segment">
+        <div class="ui top attached label red">Edit Recipe</div>
 
-        <div class="form-group">
-            <input value='{{recipes.record.title}}' id="title" name="title">
+
+        <div class="ui segment">
+            <div class="ui top attached label">Title</div>
+            <div class="form-group">
+                <input value='{{recipes.record.title}}' id="title" name="title">
+            </div>
         </div>
-
-        <div class="form-group">
-            <select id="category" name="category" class="ui search dropdown fluid">
+        <div class="ui segment">
+            <div class="ui top attached label">Category</div>
+            <div class="form-group">
+                <select id="category" name="category" class="ui search dropdown fluid">
                   <option value="" disabled selected>Choose Category</option>
                   {% for cat in categories %}
                       {% if cat.category_name == recipes.record.category %}
@@ -18,24 +23,48 @@
                     {% endif %}
                   {% endfor %}
                 </select>
+            </div>
         </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Country</div>
+            <div class="form-group">
+                <input id="country" name="country" value='{{recipes.record.country}}' placeholder="Country">
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Allergens</div>
+            <div class="form-group" id="addAllergen">
+                <button class="circular ui icon button mini red right floated padded" type="button" onclick="addAllergen()">
+                      <i class="icon plus"></i>
+                    </button> {% for allergens in recipes.record.allergens %}
+                <div class="ui input focus" id="inputContainer">
+                    <input id="allergens" name="allergens" value='{{allergens}}'>
+                </div><i class='icon delete label' onclick='removeInputField()'></i> {% endfor %}
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Ingredients</div>
+            <div class="form-group" id="addIngredient">
+                <button class="circular ui icon button mini red right floated padded" type="button" onclick="addIngredient()">
+                      <i class="icon plus"></i>
+                    </button> {% for ingredients in recipes.record.ingredients %}
+                <div class="ui input focus" id="IngredientsContainer">
+                    <input id="ingredients" name="ingredient" value='{{ingredients}}'><i class='icon delete label' onclick='removeInputField()'></i></div> {% endfor %}
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Directions</div>
+            <div class="form-group">
+                <div class="ui form">
+                    <div class="field" name="directions">
+                        <textarea name="directions">{{recipes.record.directions}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="ui bottom attached label red" type="submit">Done</button>
+    </div>
+</form>
 
-        <div class="form-group">
-            <input id="country" name="country" value='{{recipes.record.country}}' placeholder="Country">
-        </div>
 
-        <div class="form-group">
-            <input id="allergens" name="allergens" value='{{recipes.record.allergens}}'>
-        </div>
-        <div class="form-group">
-            <input id="textarea1" name="ingredient" class="materialize-textarea" value='{{recipes.record.ingredients}}'></input>
-        </div>
-        <div class="form-group">
-            <textarea id="textarea1" name="directions" class="materialize-textarea" value='{{recipes.record.directions}}'>{{recipes.record.directions}}</textarea>
-        </div>
-
-        <button class="fluid ui meduim red button" type="submit">Update Recipe</button>
-
-    </form>
-</div>
 {% endblock %}

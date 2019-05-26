@@ -27,7 +27,7 @@ const addAllergen = () => {
     let closeIcon = document.createElement('i')
 
     closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeAllergen()')
+    closeIcon.setAttribute('onclick', 'removeInputField()')
 
     inputField.setAttribute('id', 'allergens');
     inputField.setAttribute('type', 'text');
@@ -50,7 +50,7 @@ const addIngredient = () => {
     let closeIcon = document.createElement('i')
 
     closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeIngredient()')
+    closeIcon.setAttribute('onclick', 'removeInputField()')
     
     inputField.setAttribute('id', 'ingredient');
     inputField.setAttribute('type', 'text');
@@ -64,6 +64,15 @@ const addIngredient = () => {
 
     inputSegment.appendChild(inputContainer);
 };
+
+const removeInputField = () => {
+    const deleteField = document.getElementById("addIngredient");
+    const inputField = document.getElementById("IngredientsContainer");
+    while (deleteField) {
+       deleteField.parentNode.removeChild(inputField);
+    }
+};
+
 
 
 const removeAllergen = () => {

@@ -36,17 +36,19 @@ def get_cuisine():
     category_found = [category for category in categories]
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }})
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found, most_recent=most_recent)
 
 
 @app.route('/add_recipe')
 def add_recipe():
+    today = today = DT.date.today()
+    week_ago = today - DT.timedelta(days=14)
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
-        return render_template("addrecipe.html", categories = category_found)
+        return render_template("addrecipe.html", categories = category_found, most_recent= most_recent)
     return redirect(url_for('index'))
 
 
@@ -107,7 +109,7 @@ def update_recipe(_id):
             "record.title":  request.form.get('title'),
             "record.category":  request.form.get('category'),
             "record.country":  request.form.get('country'),
-            "record.ingredients":  request.form.getlist('ingredients'),
+            "record.ingredients":  request.form.getlist('ingredient'),
             "record.directions":  request.form.get('directions'),
             "record.allergens":  request.form.getlist('allergens'),
             "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
@@ -137,10 +139,8 @@ def login():
 def delete_recipe(_id):
     recipe = mongo.db.userRecipes
     if 'username' in session:
-        uploader = recipe.uploaded_by
-        if uploader == 'username':
-            recipe.remove({'_id': ObjectId(_id)})
-            return redirect(url_for('get_cuisine'))
+        recipe.remove({'_id': ObjectId(_id)})
+        return redirect(url_for('get_cuisine'))
     return ('Invalid password or username') 
 
 
@@ -240,7 +240,7 @@ def browse_filter(query,sort):
         query_found =  mongo.db.userRecipes.find( { 'uploaded_by' : sort } )
         return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
     elif query == 'recent':
-        most_recent = mongo.db.userRecipes.find()
+        most_recent = mongo.db.userRecipes.find().reverse()
         return  render_template("cuisine.html", recipes=most_recent, categories=category_found, most_recent=most_recent) 
     # elif query == 'search':
     #     most_recent = mongo.db.userRecipes.find()

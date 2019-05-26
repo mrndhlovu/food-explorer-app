@@ -1,8 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="container">
+<div class="ui segment">
+    <div class="ui top attached label red">Add Recipe</div>
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
+
         <div class="form-group">
             <input id="title" name="title" type="text" placeholder="Name">
         </div>
@@ -37,7 +39,7 @@
         <div class="form-group">
             <textarea id="textarea1" name="directions" class="materialize-textarea" placeholder="Directions"></textarea>
         </div>
-        <button class="fluid ui meduim red button" type="submit">Add Recipe</button>
     </form>
+    <button class="ui bottom attached label red" type="submit">Add Recipe</button>
 </div>
 {% endblock %}
