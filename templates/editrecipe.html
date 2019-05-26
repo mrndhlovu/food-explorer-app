@@ -37,9 +37,10 @@
                 <button class="circular ui icon button mini red right floated padded" type="button" onclick="addAllergen()">
                       <i class="icon plus"></i>
                     </button> {% for allergens in recipes.record.allergens %}
-                <div class="ui input focus" id="inputContainer">
+                <div class="ui input focus" id="inputContainer{{ loop.index0 }}">
                     <input id="allergens" name="allergens" value='{{allergens}}'>
-                </div><i class='icon delete label' onclick='removeInputField()'></i> {% endfor %}
+                    <i class='icon delete label' onclick='removeAllergen({{ loop.index0 }})'></i>
+                </div> {% endfor %}
             </div>
         </div>
         <div class="ui segment">
@@ -48,8 +49,8 @@
                 <button class="circular ui icon button mini red right floated padded" type="button" onclick="addIngredient()">
                       <i class="icon plus"></i>
                     </button> {% for ingredients in recipes.record.ingredients %}
-                <div class="ui input focus" id="IngredientsContainer">
-                    <input id="ingredients" name="ingredient" value='{{ingredients}}'><i class='icon delete label' onclick='removeInputField()'></i></div> {% endfor %}
+                <div class="ui input focus" id="ingredientsContainer{{ loop.index0 }}">
+                    <input id="ingredients{{ loop.index0 }}" name="ingredient" value='{{ingredients}}'><i class='icon delete label' onclick='removeIngredient({{ loop.index0 }})'></i></div> {% endfor %}
             </div>
         </div>
         <div class="ui segment">
@@ -57,7 +58,7 @@
             <div class="form-group">
                 <div class="ui form">
                     <div class="field" name="directions">
-                        <textarea name="directions">{{recipes.record.directions}}</textarea>
+                        <textarea name="directions" >{{recipes.record.directions}}</textarea>
                     </div>
                 </div>
             </div>

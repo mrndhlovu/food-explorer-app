@@ -1,5 +1,3 @@
-// intitialise global variables
-
 $(document).ready(function() {
 
     $('.activating.element')
@@ -27,7 +25,7 @@ const addAllergen = () => {
     let closeIcon = document.createElement('i')
 
     closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeInputField()')
+    closeIcon.setAttribute('onclick', 'removeAllergen({{ loop.index0 }})')
 
     inputField.setAttribute('id', 'allergens');
     inputField.setAttribute('type', 'text');
@@ -50,8 +48,8 @@ const addIngredient = () => {
     let closeIcon = document.createElement('i')
 
     closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeInputField()')
-    
+    closeIcon.setAttribute('onclick', 'removeIngredient({{ loop.index0 }})')
+
     inputField.setAttribute('id', 'ingredient');
     inputField.setAttribute('type', 'text');
     inputField.setAttribute('name', 'ingredient');
@@ -65,28 +63,17 @@ const addIngredient = () => {
     inputSegment.appendChild(inputContainer);
 };
 
-const removeInputField = () => {
-    const deleteField = document.getElementById("addIngredient");
-    const inputField = document.getElementById("IngredientsContainer");
-    while (deleteField) {
-       deleteField.parentNode.removeChild(inputField);
-    }
+const inputContainer = document.getElementById("addAllergen");
+const ingredientContainer = document.getElementById("addIngredient");
+
+const removeIngredient = id => {
+    const removeItem = document.getElementById(`ingredientsContainer${id}`);
+    ingredientContainer.removeChild(removeItem)
 };
 
 
 
-const removeAllergen = () => {
-    const deleteField = document.getElementById("addAllergen");
-    const deleteInput = deleteField.lastElementChild
-    while (deleteField) {
-        deleteField.removeChild(deleteInput);
-    }
-};
-
-const removeIngredient = () => {
-    const deleteField = document.getElementById("addIngredient");
-    const deleteInput = deleteField.lastElementChild
-    while (deleteField) {
-        deleteField.removeChild(deleteInput);
-    }
+const removeAllergen = id => {
+  const removeItem = document.getElementById(`inputContainer${id}`);
+    inputContainer.removeChild(removeItem)
 };

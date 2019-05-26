@@ -115,7 +115,7 @@ def update_recipe(_id):
             "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
         },
     })
-    return redirect(url_for('get_cuisine'))
+    return redirect(url_for('show_detail', recipe_id=_id))
     
 
 
