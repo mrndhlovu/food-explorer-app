@@ -91,12 +91,13 @@ def edit_recipe(_id):
    
 @app.route('/show_detail/<recipe_id>')
 def show_detail(recipe_id):
+    favourites =  mongo.db.usersDB.find( { 'username' : session['username'] } )
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d'), '$gte': week_ago.strftime('%Y-%m-%d') }}).limit(5)
-    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent)   
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent, favourites=favourites )   
 
  
 # update edited recipe 
@@ -179,18 +180,19 @@ def favourites(_id):
         user = mongo.db.usersDB
         user.update({'_id': ObjectId(username['_id'])},
         { "$push": { "userFavourites": _id }})
-        return redirect(url_for('get_cuisine', ))
+        return redirect(url_for('show_detail', recipe_id=_id))
     return render_template('index.html')       
         
 
 # render_favourites  
-@app.route('/render_favourites/', methods=['GET'])
-def render_favourites():
+@app.route('/render_favourites/<user>', methods=['GET'])
+def render_favourites(user):
+    print('User: ',user)
     if 'username' in session:
-        favourites=mongo.db.usersDB.userFavourites.find()
-        for userFavourites in favourites:
+        user_found =  mongo.db.userRecipes.find( { 'uploaded_by' : user } )
+        for userFavourites in user_found.userFavourites:
             print('loop:  ===>', userFavourites )
-        return redirect(url_for('get_cuisine', ))
+        return redirect(url_for('get_cuisine',favourites=user_found ))
 
    
 # user logout

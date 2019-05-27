@@ -11,9 +11,8 @@
                 <div class="ui  ribbon label red">
                     <i class="spoon icon"></i> {{recipe.record.category}}
                 </div>
-                <a class="ui right corner label">
-                    <i class="heart red icon"></i>
-                  </a>
+                <a onclick="{{ url_for('favourites', _id=recipe._id) }}" id="favItem{{ loop.index0 }}" class="ui right corner label">
+                  <i class="heart red icon"></i></a>
                 <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
                 <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
             </div>
@@ -55,7 +54,6 @@
             <a href="{{ url_for('add_recipe')}}" class="item "><button class=" ui button red"> Add Recipe</button></a>
         </div>
     </div>
-    {% else %} {% endif %}
-{% endfor %}
+    {% else %} {% endif %} {% endfor %}
 </div>
 {% endblock %}

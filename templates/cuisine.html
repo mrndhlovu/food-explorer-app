@@ -23,10 +23,10 @@
                 </div>
                 <div class="extra content">
                     <div class="ui large transparent left icon input">
-                        <a href="{{ url_for('favourites', _id=recipe._id)}}"> <i class="heart outline icon"></i></a>
+                     <a onclick="favourites({{ loop.index0 }})" id="favItem{{ loop.index0 }}" ><i class="icon heart label"  ></i></a>
                     </div>
                     <div class="right floated">
-                        <i class="eye icon"></i>Views: {{recipe.views}}
+                       <i class="eye icon"></i>Views: {{recipe.views}}
                     </div>
                 </div>
             </div>

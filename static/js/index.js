@@ -17,7 +17,7 @@ $(document).ready(function() {
         });
 });
 
-
+// add allergen input field
 const addAllergen = () => {
     const inputSegment = document.getElementById('addAllergen');
     let inputContainer = document.createElement("div");
@@ -41,6 +41,8 @@ const addAllergen = () => {
     inputSegment.appendChild(inputContainer);
 };
 
+// addIngredient input field
+
 const addIngredient = () => {
     const inputSegment = document.getElementById('addIngredient');
     let inputContainer = document.createElement("div");
@@ -63,6 +65,8 @@ const addIngredient = () => {
     inputSegment.appendChild(inputContainer);
 };
 
+
+// Delete allergen or ingredient input fields
 const inputContainer = document.getElementById("addAllergen");
 const ingredientContainer = document.getElementById("addIngredient");
 
@@ -71,9 +75,23 @@ const removeIngredient = id => {
     ingredientContainer.removeChild(removeItem)
 };
 
-
-
 const removeAllergen = id => {
   const removeItem = document.getElementById(`inputContainer${id}`);
     inputContainer.removeChild(removeItem)
 };
+
+// Track favorites
+const userFavourites = [];
+
+
+const fav = document.getElementById('favourites')
+
+const favourites  = id => {
+    const item = document.getElementById(`favItem${id}`)
+    console.log('Like this ', id);
+    localStorage.setItem('favourites', JSON.stringify( userFavourites))
+    console.log('id: ', localStorage.getItem('favourites'));
+}
+
+
+
