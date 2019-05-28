@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
-<div class="container">
+<div class="container" id="recipeLoad">
     <div class=" ui segment ">
         <div class="ui top attached red label ">
             {{ recipe.record.title.upper() }}
@@ -28,11 +28,9 @@
             </div>
             <div class="ui segment">
                 <div class="ui top attached label">Directions</div>
-                <div class="col-md-6 ui container fluid">
-                    <div class="ui justified container">
-                        <p>{{recipe.record.directions}}</p>
+                    <div class="ui container">
+                   {{recipe.record.directions}}
                     </div>
-                </div>
             </div>
             <div class="ui bottom attached label">
                 <span>

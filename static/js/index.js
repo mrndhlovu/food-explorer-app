@@ -1,84 +1,86 @@
-$(document).ready(function() {
+$('.activating.element')
+    .popup();
 
-    $('.activating.element')
-        .popup();
+$('.ui.dropdown')
+    .dropdown();
+$('.example .menu .browse')
+    .popup({
+        inline: true,
+        hoverable: true,
+        position: 'bottom left',
+        delay: {
+            show: 300,
+            hide: 800
+        }
+    });
 
-    $('.ui.dropdown')
-        .dropdown();
-    $('.example .menu .browse')
-        .popup({
-            inline: true,
-            hoverable: true,
-            position: 'bottom left',
-            delay: {
-                show: 300,
-                hide: 800
-            }
-        });
-});
 
-// add allergen input field
-const addAllergen = () => {
-    const inputSegment = document.getElementById('addAllergen');
+//  add ingredient or allergen input field
+const addField = e => {
+    let fieldId = '';
+    let field = '';
+    if (e.target.classList.contains('addAllergen')) {
+        fieldId = 'addAllergen';
+        field = 'allergens'
+    }
+    else {
+        fieldId = 'addIngredient'
+        field = 'ingredient'
+    }
+    const inputSegment = document.getElementById(fieldId);
     let inputContainer = document.createElement("div");
     let inputField = document.createElement("input");
     let closeIcon = document.createElement('i')
 
-    closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeAllergen({{ loop.index0 }})')
+    closeIcon.className = `icon delete label deleteIcon ${field}`;
+    closeIcon.setAttribute('id', 'deleteIcon')
 
-    inputField.setAttribute('id', 'allergens');
+    inputField.setAttribute('id', `${field}`);
     inputField.setAttribute('type', 'text');
-    inputField.setAttribute('name', 'allergens');
-    inputField.setAttribute('placeholder', 'Allergen')
+    inputField.setAttribute('name', `${field}`);
+    inputField.setAttribute('placeholder', `${field}`)
 
     inputContainer.className = "ui input focus";
     inputContainer.setAttribute('id', 'inputContainer')
     inputContainer.appendChild(inputField);
     inputContainer.append(closeIcon)
 
-
     inputSegment.appendChild(inputContainer);
+    document.getElementById('deleteIcon').addEventListener('click', removeField)
+
 };
 
-// addIngredient input field
-
-const addIngredient = () => {
-    const inputSegment = document.getElementById('addIngredient');
-    let inputContainer = document.createElement("div");
-    let inputField = document.createElement("input");
-    let closeIcon = document.createElement('i')
-
-    closeIcon.className = 'icon delete label';
-    closeIcon.setAttribute('onclick', 'removeIngredient({{ loop.index0 }})')
-
-    inputField.setAttribute('id', 'ingredient');
-    inputField.setAttribute('type', 'text');
-    inputField.setAttribute('name', 'ingredient');
-    inputField.setAttribute('placeholder', 'Ingredient');
-
-    inputContainer.className = "ui input focus";
-    inputContainer.appendChild(inputField);
-    inputContainer.setAttribute('id', 'inputContainer')
-    inputContainer.append(closeIcon)
-
-    inputSegment.appendChild(inputContainer);
-};
 
 
 // Delete allergen or ingredient input fields
-const inputContainer = document.getElementById("addAllergen");
-const ingredientContainer = document.getElementById("addIngredient");
+const removeField = e => {
+    const allergenContainer = document.getElementById("addAllergen");
+    const ingredientContainer = document.getElementById("addIngredient");
 
-const removeIngredient = id => {
-    const removeItem = document.getElementById(`ingredientsContainer${id}`);
-    ingredientContainer.removeChild(removeItem)
+    if (e.target.classList.contains('ingredient')) {
+        const field = e.target.parentElement
+        ingredientContainer.removeChild(field)
+    }
+    else  {
+        const field = e.target.parentElement
+        allergenContainer.removeChild(field)
+    }
 };
 
-const removeAllergen = id => {
-  const removeItem = document.getElementById(`inputContainer${id}`);
-    inputContainer.removeChild(removeItem)
+
+window.onload=function(){
+    document.getElementById('addAllergenButton').addEventListener('click', addField)
+    document.getElementById('addIngredientButton').addEventListener('click', addField)
+    $("#plusIcon").attr('disabled','disabled');
+    $("#plusIcon2").attr('disabled','disabled');
+    
 };
+
+
+
+
+
+
 
 // Track favorites
 const userFavourites = [];
@@ -86,12 +88,9 @@ const userFavourites = [];
 
 const fav = document.getElementById('favourites')
 
-const favourites  = id => {
+const favourites = id => {
     const item = document.getElementById(`favItem${id}`)
     console.log('Like this ', id);
-    localStorage.setItem('favourites', JSON.stringify( userFavourites))
+    localStorage.setItem('favourites', JSON.stringify(userFavourites))
     console.log('id: ', localStorage.getItem('favourites'));
 }
-
-
-

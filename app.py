@@ -88,9 +88,14 @@ def edit_recipe(_id):
         return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent)
     return render_template('register.html')
     
-   
+# Render recipe detail and track number of views
 @app.route('/show_detail/<recipe_id>')
 def show_detail(recipe_id):
+    
+    count = mongo.db.userRecipes
+    count.update({'_id': ObjectId(recipe_id)},
+    { "$inc": { "views": 1 },})
+    
     favourites =  mongo.db.usersDB.find( { 'username' : session['username'] } )
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
@@ -119,7 +124,6 @@ def update_recipe(_id):
     return redirect(url_for('show_detail', recipe_id=_id))
     
 
-
 # check if user is has a username already if true point to add recipe page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -144,13 +148,6 @@ def delete_recipe(_id):
         return redirect(url_for('get_cuisine'))
     return ('Invalid password or username') 
 
-
-# Track recipe views
-@app.route('/recipe_views/<_id>', methods=['GET', 'POST'])
-def recipe_views(_id):
-    recipe = mongo.db.userRecipes
-    recipe.update({'_id': ObjectId(_id)},  { "$inc": { "views": 1 },})
-    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(_id)}))
     
 # Track Recipe up_votes
 @app.route('/up_votes/<_id>', methods=['GET', 'POST'])

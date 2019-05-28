@@ -16,24 +16,24 @@
                          {% endfor %}
             </select>
         </div>
+
         <div class="form-group">
             <input id="country" name="country" type="text" placeholder="Country">
         </div>
         <div class="form-group ui segment" id="addAllergen">
-            <button class="circular ui icon button mini red right floated padded" type="button" onclick="addAllergen()">  
-              <i class="icon plus"></i>
+            <button class="addAllergen circular ui icon button mini red right floated " type="button" id="addAllergenButton">  
+              <i class="icon plus" id="plusIcon"></i>
             </button>
             <div class="ui input focus" id="inputContainer">
                 <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
             </div>
         </div>
-
         <div class="form-group ui segment" id="addIngredient">
             <div class="ui input focus" id="inputContainer">
                 <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
             </div>
-            <button class="circular ui icon button mini red right floated padded" type="button" onclick="addIngredient()">
-          <i class="icon plus"></i>
+            <button class="circular ui icon button mini red right floated padded" type="button" id="addIngredientButton">
+          <i class="icon plus"id="plusIcon2"></i>
         </button>
         </div>
         <div class="form-group">
