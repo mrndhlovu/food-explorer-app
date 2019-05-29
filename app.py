@@ -68,6 +68,7 @@ def insert_recipe():
         },
             
         'up_votes': 0,
+         'down_votes': 0,
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
     }
@@ -96,7 +97,6 @@ def show_detail(recipe_id):
     count.update({'_id': ObjectId(recipe_id)},
     { "$inc": { "views": 1 },})
     
-    favourites =  mongo.db.usersDB.find( { 'username' : session['username'] } )
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     today = today = DT.date.today()
@@ -166,6 +166,21 @@ def up_votes(_id):
         
         return redirect(url_for('get_cuisine'))
     return render_template('index.html')   
+    
+    
+# Track Recipe down_votes
+@app.route('/down_votes/<_id>', methods=['GET', 'POST'])
+def down_votes(_id):
+   
+    if 'username' in session:
+    
+        #  update record down votes total
+        recipe = mongo.db.userRecipes
+        recipe.update({'_id': ObjectId(_id)},
+        { "$inc": { "down_votes": 1 },})
+        
+        return redirect(url_for('get_cuisine'))
+    return render_template('index.html') 
     
     
 # Track user favourites

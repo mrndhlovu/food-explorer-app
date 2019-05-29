@@ -61,36 +61,20 @@ const removeField = e => {
         const field = e.target.parentElement
         ingredientContainer.removeChild(field)
     }
-    else  {
+    else {
         const field = e.target.parentElement
         allergenContainer.removeChild(field)
     }
 };
 
 
-window.onload=function(){
+window.onload = function() {
     document.getElementById('addAllergenButton').addEventListener('click', addField)
     document.getElementById('addIngredientButton').addEventListener('click', addField)
-    $("#plusIcon").attr('disabled','disabled');
-    $("#plusIcon2").attr('disabled','disabled');
-    
+    $("#plusIcon").attr('disabled', 'disabled');
+    $("#plusIcon2").attr('disabled', 'disabled');
+
 };
 
 
 
-
-
-
-
-// Track favorites
-const userFavourites = [];
-
-
-const fav = document.getElementById('favourites')
-
-const favourites = id => {
-    const item = document.getElementById(`favItem${id}`)
-    console.log('Like this ', id);
-    localStorage.setItem('favourites', JSON.stringify(userFavourites))
-    console.log('id: ', localStorage.getItem('favourites'));
-}

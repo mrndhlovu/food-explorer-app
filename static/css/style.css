@@ -65,3 +65,12 @@ a:hover{
     text-decoration: none;
    
 }
+
+.recipeCardText{
+    font-size: 0.8rem!important;
+    color: #000;
+}
+.recipeCardHeading{
+     font-size: 1.0rem!important;
+      color: #000;
+}

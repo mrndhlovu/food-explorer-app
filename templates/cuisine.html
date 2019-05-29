@@ -4,9 +4,9 @@
         <div class="ui one cards">
             {% for recipe in recipes %}
             <div class="ui card">
-                <div class="content">
-                    <div class="right floated meta tiny">{{recipe.record.title.upper()}}</div>
-                    <a href="{{ url_for('browse_filter', query='author', sort=recipe.uploaded_by ) }}"><img class="ui avatar image" src="/static/images/woodbud-vii-1632173-639x426.jpg"></a>by: {{recipe.uploaded_by.upper()}}
+                <div class="content mini">
+                    <div class="right floated meta mini"><span class="recipeCardHeading">{{recipe.record.title.upper()}}</span></div>
+                    <a href="{{ url_for('browse_filter', query='author', sort=recipe.uploaded_by ) }}"><img class="ui avatar image" src="/static/images/woodbud-vii-1632173-639x426.jpg"></a> <span class="recipeCardText">BY: {{recipe.uploaded_by.upper()}}</span>
                 </div>
                 <div class="image">
                     <a href="{{ url_for('show_detail', recipe_id=recipe._id)}}" class="id" id="{{recipe._id}}">
@@ -16,18 +16,19 @@
                 <div class="content">
                     <span class="right floated">
                                                   
-                               <a href="{{ url_for('up_votes', _id=recipe._id)}}"><i class="thumbs up icon red"></i></a>
-                               </i> {{recipe.up_votes}}
+                               <a href="{{ url_for('up_votes', _id=recipe._id)}}"><i class="up arrow  icon red"></i></a>
+                               </i> <span class="recipeCardText">{{recipe.up_votes}}</span>
                             </span>
-                    <i class="calendar icon red"></i> {{recipe.date_updated}}
+                    <i class="calendar icon red recipeCardText"></i> <span class="recipeCardText">{{recipe.date_updated}}</span>
                 </div>
                 <div class="extra content">
-                    <div class="ui large transparent left icon input">
-                     <a onclick="favourites({{ loop.index0 }})" id="favItem{{ loop.index0 }}" ><i class="icon heart label"  ></i></a>
+                     <div class="left floated">
+                       <i class="eye blue recipeCardText icon"></i> <span class="recipeCardText">{{recipe.views}}<span>
                     </div>
-                    <div class="right floated">
-                       <i class="eye icon"></i> {{recipe.views}}
+                    <div class="ui large transparent left icon input right floated">
+                        <a href="{{ url_for('down_votes', _id=recipe._id)}}"><i class="down arrow  icon red"></i></a><span class="recipeCardText">{{recipe.down_votes}}</span>
                     </div>
+                   
                 </div>
             </div>
             {% endfor %}
