@@ -135,32 +135,34 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% if 'username' in session  %}
                     <div class="ui segment">
-                        <div class="ui list" >
+                        <div class="ui list">
                             <div class="ui top attached label light red">Favorites</div>
-                            {% for fav in recipe %}
-                            <div class="ui card">
+                            {% for fav in favourites.userFavourites.recipe_name %}
+                            <div class="ui card" id="favouritesIds">
                                 <div class="extra content">
                                     <div class=" author">
-                                        <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> {{ fav.userFavourites[ loop.index0 ] }}
+                                        <a href="{{ url_for('show_detail', recipe_id=favourites.userFavourites.recipe_id[ loop.index0 ] ) }}"> <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> </a>{{ fav }}
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
+                    {% else %} {% endif %}
                 </div>
             </div>
 
         </div>
     </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script type="text/javascript" src="/static/js/index.js"></script>
 
-    
+
 
 </body>
 

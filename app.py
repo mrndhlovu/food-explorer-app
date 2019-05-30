@@ -32,23 +32,31 @@ def index():
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
+    if 'username' in session:
+        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+    else:
+        favourites = ''
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find(), categories = category_found, most_recent=most_recent)
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated'), categories = category_found, most_recent=most_recent.sort('date_updated'), favourites=favourites)
 
 
 @app.route('/add_recipe')
 def add_recipe():
+    if 'username' in session:
+        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+    else:
+        favourites = ''
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
-        return render_template("addrecipe.html", categories = category_found, most_recent= most_recent)
+        return render_template("addrecipe.html", categories = category_found, most_recent= most_recent, favourites=favourites)
     return redirect(url_for('index'))
 
 
@@ -79,6 +87,10 @@ def insert_recipe():
 # edit recipe
 @app.route('/edit_recipe/<_id>')
 def edit_recipe(_id): 
+    if 'username' in session:
+        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+    else:
+        favourites = ''
     today = DT.date.today()
     week_ago = today - DT.timedelta(days=30)
     current_date = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -86,13 +98,16 @@ def edit_recipe(_id):
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
-        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent)
+        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent, favourites=favourites)
     return render_template('register.html')
     
 # Render recipe detail and track number of views
 @app.route('/show_detail/<recipe_id>')
 def show_detail(recipe_id):
-    
+    if 'username' in session:
+        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+    else:
+        favourites = ''
     count = mongo.db.userRecipes
     count.update({'_id': ObjectId(recipe_id)},
     { "$inc": { "views": 1 },})
@@ -184,27 +199,22 @@ def down_votes(_id):
     
     
 # Track user favourites
-@app.route('/favourites/<_id>', methods=['GET', 'POST'])
-def favourites(_id):
+@app.route('/favourites/<_id>/<name>', methods=['GET', 'POST'])
+def favourites(_id,name):
     # Track user favourites
+    print('click', _id, name)
     if 'username' in session:
         username = mongo.db.usersDB.find_one({'username' :session['username']})
         user = mongo.db.usersDB
         user.update({'_id': ObjectId(username['_id'])},
-        { "$push": { "userFavourites": _id }})
-        return redirect(url_for('show_detail', recipe_id=_id))
-    return render_template('index.html')       
-        
+        { "$push": 
+            { 
+            "userFavourites.recipe_id":   _id ,
+            "userFavourites.recipe_name": name ,
+            }
+        })
+    return redirect(url_for('show_detail', recipe_id=_id))
 
-# render_favourites  
-@app.route('/render_favourites/<user>', methods=['GET'])
-def render_favourites(user):
-    print('User: ',user)
-    if 'username' in session:
-        user_found =  mongo.db.userRecipes.find( { 'uploaded_by' : user } )
-        for userFavourites in user_found.userFavourites:
-            print('loop:  ===>', userFavourites )
-        return redirect(url_for('get_cuisine',favourites=user_found ))
 
    
 # user logout
@@ -254,8 +264,9 @@ def browse_filter(query,sort):
         query_found =  mongo.db.userRecipes.find( { 'uploaded_by' : sort } )
         return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
     elif query == 'recent':
-        most_recent = mongo.db.userRecipes.find().reverse()
-        return  render_template("cuisine.html", recipes=most_recent, categories=category_found, most_recent=most_recent) 
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': today.strftime('%Y-%m-%d')}}).limit(5)
+        query_found =  mongo.db.userRecipes.find().sort('date_updated')
+        return  render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent) 
     # elif query == 'search':
     #     most_recent = mongo.db.userRecipes.find()
     #     query_found =  mongo.db.userRecipes.find( { 'uploaded_by' : sort } ) 
@@ -289,8 +300,10 @@ def register():
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
             users.insert({
-            'userFavourites': [], 
-            'userLikes':[],
+            'userFavourites': {
+                'recipe_name': [],
+                'recipe_id': [],
+            }, 
             'is_active' : True,
             'username' : request.form['username'],
             'email' : request.form['email'], 

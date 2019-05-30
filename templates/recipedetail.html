@@ -11,7 +11,7 @@
                 <div class="ui  ribbon label red">
                     <i class="spoon icon"></i> {{recipe.record.category}}
                 </div>
-                <a   id="recipeFav"  class="ui right corner label">
+                <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner label">
                   <i class="heart red icon"></i></a>
                 <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
                 <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
