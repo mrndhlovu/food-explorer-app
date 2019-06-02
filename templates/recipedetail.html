@@ -2,8 +2,8 @@
 <div class="container" id="recipeLoad">
     <div class=" ui segment ">
         <div class="ui top attached red label ">
-            {{ recipe.record.title.upper() }}
-            <span class=" meta right floated ">Last Modified: {{ recipe.date_updated}}</span><a></a>
+           <span class=" meta left floated ">  {{ recipe.record.title.upper() }}</span>
+            <span class=" meta right floated ">Last Modified: {{ recipe.date_updated}}</span>
         </div>
         <div class="ui container">
 
@@ -12,8 +12,8 @@
                     <i class="spoon icon"></i> {{recipe.record.category}}
                 </div>
                 <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner label">
-                  <i class="heart red icon"></i></a>
-                <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
+                  <i class="heart massive red icon"></i></a>
+                <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg"> 
                 <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
             </div>
             <div class="ui segment">

@@ -139,18 +139,18 @@
                     <div class="ui segment">
                         <div class="ui list">
                             <div class="ui top attached label light red">Favorites</div>
-                            {% for fav in favourites.userFavourites.recipe_name %}
+                            {% for favourite in favourites['userFavourites'] %}
                             <div class="ui card" id="favouritesIds">
                                 <div class="extra content">
-                                    <div class=" author">
-                                        <a href="{{ url_for('show_detail', recipe_id=favourites.userFavourites.recipe_id[ loop.index0 ] ) }}"> <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> </a>{{ fav }}
+                                    <div class="author">
+                                        <a href="{{ url_for('show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }}"> <img class="ui avatar image" src="/static/images/waffle-heart-2697904_1280.jpg"> </a>{{ favourite.name }}
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
-                    {% else %} {% endif %}
+                  {% endif %}
                 </div>
             </div>
 

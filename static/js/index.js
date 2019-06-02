@@ -17,6 +17,7 @@ $('.example .menu .browse')
 
 //  add ingredient or allergen input field
 const addField = e => {
+    e.preventDefault();
     let fieldId = '';
     let field = '';
     if (e.target.classList.contains('addAllergen')) {
@@ -54,6 +55,7 @@ const addField = e => {
 
 // Delete allergen or ingredient input fields
 const removeField = e => {
+    e.stopPropagation();
     const allergenContainer = document.getElementById("addAllergen");
     const ingredientContainer = document.getElementById("addIngredient");
 
@@ -75,6 +77,3 @@ window.onload = function() {
     $("#plusIcon2").attr('disabled', 'disabled');
 
 };
-
-
-

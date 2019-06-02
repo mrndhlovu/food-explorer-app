@@ -60,17 +60,25 @@ def add_recipe():
         return render_template("addrecipe.html", categories = category_found, most_recent= most_recent, favourites=favourites)
     return redirect(url_for('index'))
 
-#  Remove favourite record from favourites list
 @app.route('/remove_favourites/<_id>')
 def remove_favourites(_id):
     print(type(_id), _id)
-    recipe = mongo.db.usersDB
     favourites = mongo.db.usersDB.find({'username': session['username']})
-    for index, like in enumerate( favourites): 
-        for index,record in enumerate(like['userFavourites']):
-            if _id == record['id']:
-                remove_id = record['id']
-                recipe.update({'username': session['username']},{"$pull": {"userFavourites":{ "id": remove_id }}})
+    for index,fav in enumerate(favourites):
+        liked_recipes =  fav['userFavourites']
+        for fav in liked_recipes:
+            if _id  ==  fav['id']:
+                del fav
+                favourites.updateMany({}, {'$unset':{"passwrod":1}})
+                db.getCollection('Devices').update(
+    {"FieldsCollection.Fields.FieldName":"ABC"},
+    {$unset: {"FieldsCollection.$[].Fields.$[f].Fields":1}, 
+     $set:{"FieldsCollection.$[].Fields.$[f].item1":"value1",
+           "FieldsCollection.$[].Fields.$[f].item2":"value2"}
+    },  
+    {arrayFilters: [{ "f.FieldName":"ABC"} ],multi:true }
+)
+    # remove_like.remove({'_id': ObjectId(_id)})
     return redirect(url_for('get_cuisine'))
 
 # create new recipe record
