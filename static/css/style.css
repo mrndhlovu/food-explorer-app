@@ -57,7 +57,6 @@ body {
 
 a{
    color: #db2828; 
-   font-style: italic;
 }
 
 a:hover{
@@ -73,4 +72,39 @@ a:hover{
 .recipeCardHeading{
      font-size: 1.0rem!important;
       color: #000;
+}
+
+.recentTime{
+      font-size: 0.7rem!important;
+}
+
+.sortDropdown{
+    margin: 0.8rem;
+}
+
+.sortDropText{
+   font-size: 0.8rem!important;
+}
+
+.favText{
+    font-size: 0.8rem;
+    color: black;
+}
+
+.searchBox{
+    margin: 0.5rem;
+}
+
+.login{
+    font-size: 0.6rem;
+    color: black;
+    text-transform: uppercase;
+}
+
+.searchButton{
+    border-radius: 0 !important
+}
+
+.card{
+    border-radius: 0 !important
 }

@@ -11,8 +11,8 @@
                 <div class="ui  ribbon label red">
                     <i class="spoon icon"></i> {{recipe.record.category}}
                 </div>
-                <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner label">
-                  <i class="heart massive red icon"></i></a>
+                <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner massive label">
+                  <i class="heart  red icon"></i></a>
                 <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg"> 
                 <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
             </div>
@@ -35,7 +35,7 @@
             <div class="ui bottom attached label">
                 <span>
                     Allergens: {% for allergen in recipe.record.allergens %}
-                     <a href="{{ url_for('browse_filter', query='allergen', sort=allergen ) }}" > {{allergen.upper()}}</a><i   class="red tag icon xs"></i> 
+                     <a href="{{ url_for('browse_filter', query='allergen', sort_order=allergen ) }}" > {{allergen.upper()}}</a><i   class="red tag icon xs"></i> 
                      {% endfor %}
                       </span>
             </div>
