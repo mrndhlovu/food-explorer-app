@@ -60,18 +60,19 @@ def add_recipe():
         return render_template("addrecipe.html", categories = category_found, most_recent= most_recent, favourites=favourites)
     return redirect(url_for('index'))
 
+
 #  Remove favourite record from favourites list
 @app.route('/remove_favourites/<_id>')
 def remove_favourites(_id):
-    print(type(_id), _id)
-    recipe = mongo.db.usersDB
-    favourites = mongo.db.usersDB.find({'username': session['username']})
-    for index, like in enumerate( favourites): 
-        for index,record in enumerate(like['userFavourites']):
-            if _id == record['id']:
-                remove_id = record['id']
-                recipe.update({'username': session['username']},{"$pull": {"userFavourites":{ "id": remove_id }}})
+    users = mongo.db.usersDB
+    user_record = mongo.db.usersDB.find({'username': session['username']})
+    for favourites in user_record: 
+        for favourite in favourites['userFavourites']:
+            if _id == favourite['id']:
+                remove_id = favourite['id']
+                users.update({'username': session['username']},{"$pull": {"userFavourites":{ "id": remove_id }}})
     return redirect(url_for('get_cuisine'))
+    
 
 # create new recipe record
 @app.route('/insert_recipe', methods=['POST'])
