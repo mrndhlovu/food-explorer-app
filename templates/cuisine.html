@@ -1,13 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="ui container">
-
-    <div class="ui dropdown right aligned sortDropdown">
-        <div class="text sortDropText">Sort By</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <div class="item" data-text="this week"> <a class="sortDropText" href="{{ url_for('browse_filter', query='most_views', sort_order='views' ) }}">Most Views</a></div>
-            <div class="item" data-text="this month"><a class="sortDropText" href="{{ url_for('browse_filter', query='most_votes', sort_order='views' ) }}">Most Votes </a></div>
-        </div>
+    <div id="sortDetails" class="ui dropdown right aligned sortDropdown fluid resultBar">
+        <div class="ui top attached label">Found Matches:  {{ recipes.count() }}</div> 
     </div>
 
     <div class="eight wide column">
@@ -33,7 +27,7 @@
                         <i class="calendar icon grey recipeCardText center aligned"></i> <span class="recentTime ">{{recipe.date_updated}}</span>
                     </div>
                     <div class="ui medium transparent left icon input right floated">
-                         <span class="recipeCardText voteText">{{recipe.up_votes}}</span>
+                        <span class="recipeCardText voteText">{{recipe.up_votes}}</span>
                         <a href="{{ url_for('up_votes', _id=recipe._id)}}">
                             <button class="circular ui icon button voteButton">
                                 <i class="up arrow  icon black"></i>
@@ -53,7 +47,7 @@
                              <i class="down arrow  icon black "></i>
                             </button>
                             </a>
-                            
+
                     </div>
                 </div>
             </div>

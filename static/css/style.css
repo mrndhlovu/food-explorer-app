@@ -128,3 +128,8 @@ a:hover {
 #addInstructionButton{
     font-size: 0.6rem!important;
 }
+
+.resultBar{
+    padding-top: 1.9rem!important;
+    margin-left: -0.1rem
+}

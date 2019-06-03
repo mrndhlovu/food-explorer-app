@@ -72,7 +72,7 @@ const removeField = e => {
         const field = e.target.parentElement
         ingredientContainer.removeChild(field)
     }
-    if(e.target.classList.contains('directions'))  {
+    if (e.target.classList.contains('directions')) {
         const field = e.target.parentElement
         instructionsContainer.removeChild(field)
     }
@@ -83,7 +83,14 @@ window.onload = function() {
     document.getElementById('addAllergenButton').addEventListener('click', addField)
     document.getElementById('addIngredientButton').addEventListener('click', addField)
     document.getElementById('addInstructionButton').addEventListener('click', addField)
-    $("#plusIcon").attr('disabled', 'disabled');
-    $("#plusIcon2").attr('disabled', 'disabled');
-
 };
+
+$(document).ready(function() {
+    const summaryContainer = document.getElementById('sortDetails')
+    if (window.location.href.indexOf("browse_filter") > 1) {
+        $("#sortDetails").show();
+    }
+    else {
+         $("#sortDetails").hide();
+    }
+});
