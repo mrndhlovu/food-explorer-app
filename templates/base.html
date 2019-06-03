@@ -17,14 +17,12 @@
             </div>
             <a class="item" href="{{ url_for('get_cuisine')}}">Recipes</a>
             <a class="item" href="{{ url_for('add_recipe')}}">Add Recipe</a>
-
             <div class="right menu">
                 {% if 'username' in session %}
                 <a class="item" href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a> {% else %}
                 <a class="item" href="{{ url_for('index')}}">Login</a>
                 <a class="item" href="{{ url_for('register')}}">Register</a>{% endif %}
             </div>
-
         </div>
         <div class="right menu" id='user'>
             {% if 'username' in session %}
@@ -33,7 +31,6 @@
                 <a class="item">
             <i class="icon user black"></i>
                   </a> </div>
-
             {% else %} {% endif %}
         </div>
         <div class="container-fluid">

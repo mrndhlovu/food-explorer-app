@@ -273,9 +273,9 @@ def browse_filter(query,sort_order):
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
         return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
     elif query == 'search':
-        sort_order = request.form.get('search')
+        search_query = request.args.get('search').lower()
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
-        found =  mongo.db.userRecipes.find( { 'record.directions' : sort_order } ) 
+        found =  mongo.db.userRecipes.find({'record.directions': {'$regex': search_query}})
         return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
     else:
         return  render_results   
