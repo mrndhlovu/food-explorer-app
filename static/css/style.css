@@ -108,3 +108,11 @@ a:hover{
 .card{
     border-radius: 0 !important
 }
+
+.voteText{
+    padding: 0.5rem 0.5rem 0 0;
+}
+
+.voteButton{
+    font-size: 0.8rem!important;
+}
