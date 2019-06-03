@@ -17,12 +17,16 @@ $('.example .menu .browse')
 
 //  add ingredient or allergen input field
 const addField = e => {
-    e.preventDefault();
+    e.stopImmediatePropagation();
     let fieldId = '';
     let field = '';
     if (e.target.classList.contains('addAllergen')) {
         fieldId = 'addAllergen';
         field = 'allergens'
+    }
+    else if (e.target.classList.contains('addInstruction')) {
+        fieldId = 'addInstruction';
+        field = 'directions'
     }
     else {
         fieldId = 'addIngredient'
@@ -40,11 +44,12 @@ const addField = e => {
     inputField.setAttribute('type', 'text');
     inputField.setAttribute('name', `${field}`);
     inputField.setAttribute('placeholder', `${field}`)
+    inputField.setAttribute('className', "focus")
 
-    inputContainer.className = "ui input focus";
+    inputContainer.className = 'ui input focus inputField fluid ';
     inputContainer.setAttribute('id', 'inputContainer')
     inputContainer.appendChild(inputField);
-    inputContainer.append(closeIcon)
+    inputContainer.appendChild(closeIcon)
 
     inputSegment.appendChild(inputContainer);
     document.getElementById('deleteIcon').addEventListener('click', removeField)
@@ -52,20 +57,24 @@ const addField = e => {
 };
 
 
-
 // Delete allergen or ingredient input fields
 const removeField = e => {
     e.stopPropagation();
     const allergenContainer = document.getElementById("addAllergen");
     const ingredientContainer = document.getElementById("addIngredient");
+    const instructionsContainer = document.getElementById("addInstruction");
 
+    if (e.target.classList.contains('allergens')) {
+        const field = e.target.parentElement
+        allergenContainer.removeChild(field)
+    }
     if (e.target.classList.contains('ingredient')) {
         const field = e.target.parentElement
         ingredientContainer.removeChild(field)
     }
-    else {
+    if(e.target.classList.contains('directions'))  {
         const field = e.target.parentElement
-        allergenContainer.removeChild(field)
+        instructionsContainer.removeChild(field)
     }
 };
 
@@ -73,6 +82,7 @@ const removeField = e => {
 window.onload = function() {
     document.getElementById('addAllergenButton').addEventListener('click', addField)
     document.getElementById('addIngredientButton').addEventListener('click', addField)
+    document.getElementById('addInstructionButton').addEventListener('click', addField)
     $("#plusIcon").attr('disabled', 'disabled');
     $("#plusIcon2").attr('disabled', 'disabled');
 

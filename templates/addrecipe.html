@@ -20,34 +20,40 @@
         <div class="form-group">
             <input id="country" name="country" type="text" placeholder="Country">
         </div>
-        <div class="form-group ui segment" id="addAllergen">
-            <button class="addAllergen circular ui icon button mini red right floated " type="button" id="addAllergenButton">  
-              <i class="icon plus" id="plusIcon"></i>
+        <div class="form-group ui segment " id="addAllergen">
+            <div class="ui top attached label ">
+                <button class="addAllergen circular ui icon button mini red right floated" type="button" id="addAllergenButton">  
+              <i class="icon plus " id="plusIcon"></i>
             </button>
-            <div class="ui input focus" id="inputContainer">
+            </div>
+            <div class="ui input focus fluid" id="inputContainer">
                 <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
             </div>
         </div>
-        <div class="form-group ui segment" id="addIngredient">
-            <div class="ui input focus" id="inputContainer">
-                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
-            </div>
-            <button class="circular ui icon button mini red right floated padded" type="button" id="addIngredientButton">
+        <div class="form-group ui segment ingredient" id="addIngredient">
+            <div class="ui top attached label ">
+                <button class="circular ui icon button mini red right floated padded addIngredient" type="button" id="addIngredientButton">
           <i class="icon plus"id="plusIcon2"></i>
         </button>
-        </div>
-        <div class="form-group ui segment" id="addIngredient">
+            </div>
             <div class="ui input focus fluid" id="inputContainer">
-                <input id="textarea1" name="directions" type="text" placeholder="Directions">
-                <button class="circular ui icon button mini red right floated padded" type="button" id="addStep">
-                          <i class="icon plus"id="plusIcon3"></i>
-                </button>
+                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
             </div>
 
         </div>
+        <div class="form-group ui segment" id="addInstruction">
+            <div class="ui top attached label ">
+                <button class="circular ui icon button mini red right floated padded addInstruction" type="button" id="addInstructionButton">
+                <i class="icon plus"id="plusIcon3"></i>
+            </button>
+            </div>
+            <div class="ui input focus fluid" id="inputContainer">
+                <input id="textarea1" name="directions" type="text" placeholder="Directions">
+            </div>
+
+        </div>
+        <button class="fluid ui button red submitButton" type="submit">Add Recipe</button>
     </form>
 
-    <button class="ui bottom attached label red" type="submit">Add Recipe</button>
 </div>
-
 {% endblock %}

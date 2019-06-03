@@ -1,118 +1,130 @@
-
 body {
 
-    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 1.4285em;
-    color: rgba(0,0,0,.87);
-    
+    color: rgba(0, 0, 0, .87);
+
 
 }
+
 #submit-button {
     background-color: #dededf !important;
     color: #4083c4 !important;
 }
 
-.recipes-list{
+.recipes-list {
     height: 80vh;
 }
-.image-container{
+
+.image-container {
     height: auto;
 }
 
-.card-container{
-    background-color: grey; 
+.card-container {
+    background-color: grey;
     height: 100%;
 }
 
 
-.recipe-wrapper
-.side-container{
+.recipe-wrapper .side-container {
     background-color: #b0bec5;
     height: 100vh;
 }
 
-.form-wrapper{
+.form-wrapper {
     padding-top: 2em;
 }
 
-.login-form-wrapper{
+.login-form-wrapper {
     height: auto !important;
 }
 
-.blue-btn
-.register-form{
+.blue-btn .register-form {
     height: auto !important;
 }
 
-.register-btn{
+.register-btn {
     color: white !important;
 }
 
-.recipe-card
-
-.logo{
+.recipe-card .logo {
     font-weight: 700;
 }
 
-a{
-   color: #db2828; 
+a {
+    color: #db2828;
 }
 
-a:hover{
-    color: #212529; 
+a:hover {
+    color: #212529;
     text-decoration: none;
-   
+
 }
 
-.recipeCardText{
+.recipeCardText {
     font-size: 0.8rem!important;
     color: #000;
 }
-.recipeCardHeading{
-     font-size: 1.0rem!important;
-      color: #000;
+
+.recipeCardHeading {
+    font-size: 1.0rem!important;
+    color: #000;
 }
 
-.recentTime{
-      font-size: 0.7rem!important;
+.recentTime {
+    font-size: 0.7rem!important;
 }
 
-.sortDropdown{
+.sortDropdown {
     margin: 0.8rem;
 }
 
-.sortDropText{
-   font-size: 0.8rem!important;
+.sortDropText {
+    font-size: 0.8rem!important;
 }
 
-.favText{
+.favText {
     font-size: 0.8rem;
     color: black;
 }
 
-.searchBox{
+.searchBox {
     margin: 0.5rem;
 }
 
-.login{
+.login {
     font-size: 0.6rem;
     color: black;
     text-transform: uppercase;
 }
 
-.searchButton{
+.submitButton,
+.searchButton {
     border-radius: 0 !important
 }
 
-.card{
+.card {
     border-radius: 0 !important
 }
 
-.voteText{
-    padding: 0.5rem 0.5rem 0 0;
+.voteText {
+    padding: 0.4rem 0.5rem 0 0;
 }
 
-.voteButton{
-    font-size: 0.8rem!important;
+.voteButton {
+    font-size: 0.7rem!important;
+}
+
+.directionsContainer {
+    padding-bottom: 2rem
+}
+
+.inputField{
+    padding-right: 0.7rem!important
+}
+#addAllergenButton,
+#addIngredientButton,
+#addInstructionButton{
+    font-size: 0.6rem!important;
 }

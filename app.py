@@ -88,7 +88,7 @@ def insert_recipe():
             "category":  request.form['category'],
             "country":  request.form['country'],
             "ingredients":  request.form.getlist('ingredient'),
-            "directions":  request.form['directions'],
+            "directions":  request.form.getlist('directions'),
             "allergens":  request.form.getlist('allergens')
         },
             
@@ -149,7 +149,7 @@ def update_recipe(_id):
             "record.category":  request.form.get('category'),
             "record.country":  request.form.get('country'),
             "record.ingredients":  request.form.getlist('ingredient'),
-            "record.directions":  request.form.get('directions'),
+            "record.directions":  request.form.getlist('directions'),
             "record.allergens":  request.form.getlist('allergens'),
             "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
         },
@@ -273,9 +273,9 @@ def browse_filter(query,sort_order):
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
         return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
     elif query == 'search':
-        sort_order = request.form.get('search'),
+        sort_order = request.form.get('search')
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
-        found =  mongo.db.userRecipes.find( { 'directions' : sort_order } ) 
+        found =  mongo.db.userRecipes.find( { 'record.directions' : sort_order } ) 
         return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
     else:
         return  render_results   
