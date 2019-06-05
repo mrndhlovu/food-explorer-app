@@ -4,8 +4,6 @@ body {
     font-size: 14px;
     line-height: 1.4285em;
     color: rgba(0, 0, 0, .87);
-
-
 }
 
 #submit-button {
@@ -90,7 +88,8 @@ a:hover {
 }
 
 .searchBox {
-    margin: 0.5rem;
+    margin: 1.2rem;
+
 }
 
 .login {
@@ -99,6 +98,7 @@ a:hover {
     text-transform: uppercase;
 }
 
+.flatButton,
 .submitButton,
 .searchButton {
     border-radius: 0 !important
@@ -112,6 +112,7 @@ a:hover {
     padding: 0.4rem 0.5rem 0 0;
 }
 
+
 .voteButton {
     font-size: 0.7rem!important;
 }
@@ -120,16 +121,32 @@ a:hover {
     padding-bottom: 2rem
 }
 
-.inputField{
+.inputField {
     padding-right: 0.7rem!important
 }
+
 #addAllergenButton,
 #addIngredientButton,
-#addInstructionButton{
+#addInstructionButton {
     font-size: 0.6rem!important;
 }
 
-.resultBar{
+.resultBar {
     padding-top: 1.9rem!important;
     margin-left: -0.1rem
+}
+
+.filterWrapper {
+    margin-top: -5px;
+}
+
+.favourites,
+.mostRecent {
+    margin: 1rem auto !important;
+    margin-bottom: 1rem!important;
+    width: auto!important;
+}
+
+.sideBarWrapper {
+    margin-top: 1rem!important
 }

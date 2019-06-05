@@ -8,7 +8,11 @@ from operator import attrgetter
 from bson import ObjectId
 import statistics
 import datetime
+import base64
 import datetime as DT
+
+import json
+
 
 app = Flask(__name__)
 
@@ -36,18 +40,21 @@ def e_sort(recipe):
 def get_cuisine():
     if 'username' in session:
         favourites = mongo.db.usersDB.find_one({'username': session['username']})
-        favourites_found = favourites['userFavourites']
     else:
         favourites = ''
+        
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
+    user = mongo.db.usersDB.find()
     today = today = DT.date.today()
+    recipe = mongo.db.userRecipes.find()
+    countries = [country for country in recipe ]
     week_ago = today - DT.timedelta(days=30)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     srted = most_recent.sort('date_updated',  pymongo.DESCENDING)
     direction = lambda  most_recent: most_recent[1]
     print('most_recent: ', most_recent)
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=srted, favourites=favourites)
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=srted, favourites=favourites , countries=countries, user=user)
 
 
 @app.route('/add_recipe')
@@ -82,6 +89,8 @@ def remove_favourites(_id):
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
+    recipe_image = request.files['recipe_image']
+    mongo.save_file(recipe_image.filename, recipe_image)
     userRecipe = { 'uploaded_by': session['username'],
         'record': {
             "title":   request.form['title'],
@@ -95,7 +104,8 @@ def insert_recipe():
         'up_votes': 0,
          'down_votes': 0,
         'views': 0,
-        'date_updated': datetime.datetime.now().strftime('%Y-%m-%d')
+        'date_updated': datetime.datetime.now().strftime('%Y-%m-%d'),
+        'recipe_image_name': recipe_image.filename
     }
     recipe.insert_one(userRecipe)
     return redirect(url_for('get_cuisine'))
@@ -157,21 +167,6 @@ def update_recipe(_id):
     return redirect(url_for('show_detail', recipe_id=_id))
     
 
-# check if user is has a username already if true point to add recipe page
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    users = mongo.db.usersDB
-    login_user = users.find_one({'username' : request.form['username']})
-    login_pass = users.find_one({'passcode' : request.form['password']})
-    if login_user:
-        if login_pass:
-            session['username'] = request.form['username']
-            return redirect(url_for('index'))
-        return ('Invalid password or username')    
-    return ('Invalid password or username') 
-    
- 
-    
 # delete recipe
 @app.route('/delete_recipe/<_id>', methods=["GET"])
 def delete_recipe(_id):
@@ -179,7 +174,6 @@ def delete_recipe(_id):
     if 'username' in session:
         recipe.remove({'_id': ObjectId(_id)})
         return redirect(url_for('get_cuisine'))
-    return ('Invalid password or username') 
 
     
 # Track Recipe up_votes
@@ -229,14 +223,6 @@ def favourites(_id,name):
     return redirect(url_for('show_detail', recipe_id=_id))
 
 
-   
-# user logout
-@app.route('/logout')
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('get_cuisine'))
-
-
 @app.route('/get_category/<category_id>')
 def get_category(category_id):
     recipe = mongo.db.userRecipes.find()
@@ -262,58 +248,80 @@ def browse_filter(query,sort_order):
     
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING )
     
-    render_results = render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries ) 
+    render_results = render_template("cuisine.html", recipes=query_found, categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries ) 
     
     if sort_order == 'descending':
         found = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, -1)])
-        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
-        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites ,country=countries) 
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING )
+        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites ,countries=countries) 
     elif sort_order == 'ascending':
         found = mongo.db.userRecipes.find({query: {"$gt": 0}}).sort([(query, 1)])
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
-        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
+        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries) 
     elif query == 'search':
         search_query = request.args.get('search').lower()
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
         found =  mongo.db.userRecipes.find({'record.directions': {'$regex': search_query}})
-        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, country=countries) 
+        return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries) 
     else:
         return  render_results   
-    
+ 
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
 
-# def insert_image(request):
-#   with open(request.GET["image_name"], "rb") as image_file:
-#       encoded_string = base64.b64encode(image_file.read())
-#   print encoded_string
-#   abc=db.database_name.insert({"image":encoded_string})
-#   return HttpResponse("inserted")
+@app.route('/retrieve_image')
+def retrieve_image():
+    data = mongo.db.userRecipes.find()
+    data1 = json.dumps(data)
+    print('Data: ', data1)
+    img = data1[0]
+    img1 = img['recipe_image_name']
+    decode=img1.decode()
+    img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
+    return img_tag
 
-# def retrieve_image(request):
-#   data = db.database_name.find()
-#   data1 = json.loads(dumps(data))
-#   img = data1[0]
-#   img1 = img['image']
-#   decode=img1.decode()
-#   img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
-#   return HttpResponse(img_tag)
 
+
+# check if user is has a username already if true point to add recipe page
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    users = mongo.db.usersDB
+    login_user = users.find_one({'username' : request.form['username']})
+    login_pass = users.find_one({'passcode' : request.form['password']})
+    if login_user:
+        if login_pass:
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+    return render_template('index.html') 
+
+   
+# user logout
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('get_cuisine'))
 
 # register user  
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
+        profile_image = request.files['profile_image']
+        mongo.save_file(profile_image.filename, profile_image)
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
             users.insert({
-            'userFavourites': [], 
-            'is_active' : True,
+            'userFavourites': [],
             'username' : request.form['username'],
             'email' : request.form['email'], 
-            'passcode' : request.form['password']})
-            session['username'] = request.form['username']
+            'passcode' : request.form['password'],
+            'profile_image': profile_image.filename
+            })
+            session['username'] = request.form['username'],
+           
             return redirect(url_for('index'))
-        return 'That username has been taken, try again with a different username'
+        return 'That username has been taken, try again with a different username. Please refresh the page.'
     return render_template('register.html')
     
 

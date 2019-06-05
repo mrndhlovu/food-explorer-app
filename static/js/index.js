@@ -14,17 +14,29 @@ $('.example .menu .browse')
         }
     });
 
+$('.ui.modal')
+    .modal('show');
+
 
 //  add ingredient or allergen input field
 const addField = e => {
     e.stopImmediatePropagation();
     let fieldId = '';
     let field = '';
-    if (e.target.classList.contains('addAllergen')) {
+
+    var targetElement = e.target;
+    if (targetElement.type !== 'button') {
+        if (targetElement.parentElement.type !== 'button') {
+            return false;
+        }
+        targetElement = targetElement.parentElement;
+    }
+
+    if (targetElement.classList.contains('addAllergen')) {
         fieldId = 'addAllergen';
         field = 'allergens'
     }
-    else if (e.target.classList.contains('addInstruction')) {
+    else if (targetElement.classList.contains('addInstruction')) {
         fieldId = 'addInstruction';
         field = 'directions'
     }
@@ -79,18 +91,27 @@ const removeField = e => {
 };
 
 
-window.onload = function() {
-    document.getElementById('addAllergenButton').addEventListener('click', addField)
-    document.getElementById('addIngredientButton').addEventListener('click', addField)
-    document.getElementById('addInstructionButton').addEventListener('click', addField)
+window.onload = function () {
+    const addAllergenButton = document.getElementById('addAllergenButton');
+    if (addAllergenButton) {
+        addAllergenButton.addEventListener('click', addField);
+    }
+    const addIngredientButton = document.getElementById('addIngredientButton');
+    if (addIngredientButton) {
+        addIngredientButton.addEventListener('click', addField);
+    }
+    const addInstructionButton = document.getElementById('addInstructionButton');
+    if (addInstructionButton) {
+        addInstructionButton.addEventListener('click', addField);
+    }
 };
 
-$(document).ready(function() {
-    const summaryContainer = document.getElementById('sortDetails')
+$(document).ready(function () {
     if (window.location.href.indexOf("browse_filter") > 1) {
         $("#sortDetails").show();
     }
     else {
-         $("#sortDetails").hide();
+        $("#sortDetails").hide();
     }
+
 });

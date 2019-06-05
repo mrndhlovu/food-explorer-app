@@ -1,9 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui container">
+<div class="ui container fluid">
     <div id="sortDetails" class="ui dropdown right aligned sortDropdown fluid resultBar">
-        <div class="ui top attached label">Found Matches:  {{ recipes.count() }}</div> 
+        <div class="ui top attached label">Found Matches: {{ recipes.count() }}</div>
     </div>
-
     <div class="eight wide column">
         <div class="ui one cards" id="cards">
             {% for recipe in recipes %}
@@ -32,7 +31,6 @@
                             <button class="circular ui icon button voteButton">
                                 <i class="up arrow  icon black"></i>
                             </button>
-                           
                         </a>
                     </div>
                 </div>
@@ -47,7 +45,6 @@
                              <i class="down arrow  icon black "></i>
                             </button>
                             </a>
-
                     </div>
                 </div>
             </div>

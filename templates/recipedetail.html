@@ -1,54 +1,52 @@
 {% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
-<div class="container" id="recipeLoad">
+<div class="ui container fluid" id="recipeLoad">
     <div class=" ui segment ">
         <div class="ui top attached red label ">
             <span class=" meta left floated ">  {{ recipe.record.title.upper() }}</span>
             <span class=" meta right floated ">Last Modified: {{ recipe.date_updated}}</span>
         </div>
-        <div class="ui container">
 
-            <div class="ui image center aligned bordered">
-                <div class="ui  ribbon label red">
-                    <i class="spoon icon"></i> {{recipe.record.category}}
-                </div>
-                <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner massive label">
+
+        <div class="ui image center aligned bordered">
+            <div class="ui  ribbon label red">
+                <i class="spoon icon"></i> {{recipe.record.category}}
+            </div>
+            <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner massive label">
                   <i class="heart  red icon"></i></a>
-                <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
-                <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
+            <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
+            <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
+        </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Ingredients</div>
+            <div class="ingredients ui left aligned">
+                {% for ingredients in recipe.record.ingredients %}
+                <ol class="ui list">
+                    <li value="*">{{ingredients}}</li>
+                </ol>
+                {% endfor %}
             </div>
-            <div class="ui segment">
-                <div class="ui top attached label">Ingredients</div>
-                <div class="ingredients ui left aligned">
-                    {% for ingredients in recipe.record.ingredients %}
-                    <ol class="ui list">
-                        <li value="*">{{ingredients}}</li>
-                    </ol>
+        </div>
+        <div class="ui segment">
+            <div class="ui top attached label">Directions</div>
+            <table class="ui small table">
+                <tbody>
+                    {% for step in recipe.record.directions %}
+                    <tr>
+                        <td>{{ loop.index0 + 1 }}</td>
+                        <td>{{ step.upper() }}</td>
+                    </tr>
                     {% endfor %}
-                </div>
-            </div>
-            <div class="ui segment">
-                <div class="ui top attached label">Directions</div>
-                <table class="ui small table">
-                    <tbody>
-                        {% for step in recipe.record.directions %}
-                        <tr>
-                            <td>{{ loop.index0 + 1 }}</td>
-                            <td>{{ step.upper() }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="ui bottom attached label">
-                <span>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui bottom attached label">
+            <span>
                     Allergens: {% for allergen in recipe.record.allergens %}
                      <a href="{{ url_for('browse_filter', query='allergen', sort_order=allergen ) }}" > {{allergen.upper()}}</a><i   class="red tag icon xs"></i> 
                      {% endfor %}
                       </span>
-            </div>
-
         </div>
+
     </div>
     {% if recipe.uploaded_by == session.username %}
     <div class="ui segment">

@@ -3,8 +3,7 @@
 
 <div class="ui segment">
     <div class="ui top attached label red">Add Recipe</div>
-    <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
-
+    <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <input id="title" name="title" type="text" placeholder="Name">
         </div>
@@ -51,6 +50,10 @@
                 <input id="textarea1" name="directions" type="text" placeholder="Directions">
             </div>
 
+        </div>
+        <div class="form-group">
+            <i class="icon upload" id="plusIcon3"></i>
+            <input id="title" name="recipe_image" type="file">
         </div>
         <button class="fluid ui button red submitButton" type="submit">Add Recipe</button>
     </form>
