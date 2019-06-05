@@ -306,8 +306,14 @@ def logout():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
+        
         profile_image = request.files['profile_image']
         mongo.save_file(profile_image.filename, profile_image)
+        
+        if 'profile_image' in profile_image.filename:
+            image = profile_image.filename
+        else:
+            image = 'null'
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
@@ -316,7 +322,7 @@ def register():
             'username' : request.form['username'],
             'email' : request.form['email'], 
             'passcode' : request.form['password'],
-            'profile_image': profile_image.filename
+            'profile_image': image
             })
             session['username'] = request.form['username'],
            
