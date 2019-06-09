@@ -15,6 +15,11 @@ body {
     color: #4083c4 !important;
 }
 
+.allergenTagText {
+    font-size: 0.7rem!important;
+    text-transform: uppercase;
+}
+
 .searchBarContainer {
     padding-bottom: 0px!important
 }
@@ -22,7 +27,6 @@ body {
 .filterRecipeDropdownText {
     font-size: 0.7rem;
     text-transform: uppercase;
-    padding-left: 1.5rem;
 }
 
 .recipes-list {
@@ -116,6 +120,8 @@ a:hover {
     text-transform: uppercase;
 }
 
+input,
+.loginWrapper,
 .flatButton,
 .submitButton,
 .searchButton {

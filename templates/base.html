@@ -37,13 +37,13 @@
                     </div>
                 </div>
                 <div class="ui grid">
-                    <div class="sixteen wide  tablet eight wide computer column searchBarContainer ">
+                    <div class="sixteen wide mobile twleve wide tablet twleve wide computer column searchBarContainer ">
                         <form class="ui action input fluid " action="{{ url_for( 'browse_filter', query='search' , sort_order=" " ) }} ">
                             <input type="text " name="search " placeholder="Search... ">
                             <button class="ui button searchButton " type="submit "><span class="ui black small "><span class="searchButtonText ">Search</span></span></button>
                         </form>
                     </div>
-                    <div class="sixteen wide tablet eight wide computer column ">
+                    <div class="eight wide mobile  six wide tablet six wide computer column ">
                         <div class="ui left aligned divided list segment filterWrapper ">
                             <div class="ui dropdown right aligned sortDropdown ">
                                 <div class="text sortDropText "><span class="filterRecipeDropdownText ">Filter Recipes</span></div>
@@ -84,13 +84,13 @@
                                     </div>
                                     <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
                                         <div class="item ">
-                                            <div class="ui red empty circular label "></div>
+                                            <div class="ui yellow empty circular label "></div>
                                             <span class="sortDropText "> Most Votes Descending</span>
                                         </div>
                                     </a>
                                     <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="up_votes ">
                                         <div class="item ">
-                                            <div class="ui red empty circular label "></div>
+                                            <div class="ui yellow empty circular label "></div>
                                             <span class="sortDropText ">Most Votes Ascending</span>
                                         </div>
                                     </a>
@@ -117,7 +117,7 @@
                 <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
                     <div class="ui segment">
                         <div class="ui divided list ">
-                            <div class="ui top attached label center aligned light red ">Most Recent</div>
+                            <div class="ui top attached label center aligned light yellow ">Most Recent</div>
                             {% for recent in most_recent %}
                             <div class="ui card mostRecent ">
                                 <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
@@ -139,7 +139,7 @@
                     {% if 'username' in session %}
                     <div class="ui segment ">
                         <div class="ui list ">
-                            <div class="ui top attached label light red ">Favorites</div>
+                            <div class="ui top attached label light yellow ">Favorites</div>
                             {% for favourite in favourites['userFavourites'] %}
                             <div class="ui card favourites " id="favouritesIds ">
                                 <div class="extra content ">

@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}{% with messages = get_flashed_messages() %} {% if messages %}
+
+<div class="ui success mini message">
+    <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
+
+</div>
+{% endif %} {% endwith %}
 
 <div id="sortDetails" class="ui dropdown right aligned sortDropdown fluid resultBar">
     <div class="ui top attached label">Found Matches: {{ recipes.count() }}</div>

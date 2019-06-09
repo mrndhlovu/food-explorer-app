@@ -2,7 +2,7 @@
 
 
 <div class="ui segment">
-    <div class="ui top attached label red">Add Recipe</div>
+    <div class="ui top attached label yellow">Add Recipe</div>
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <input id="title" name="title" type="text" placeholder="Name">
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group ui segment " id="addAllergen">
             <div class="ui top attached label ">
-                <button class="addAllergen circular ui icon button mini red right floated" type="button" id="addAllergenButton">  
+                <button class="addAllergen circular ui icon button mini yellow right floated" type="button" id="addAllergenButton">  
               <i class="icon plus " id="plusIcon"></i>
             </button>
             </div>
@@ -29,20 +29,20 @@
                 <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
             </div>
         </div>
-        <div class="form-group ui segment ingredient" id="addIngredient">
+        <div class="form-group ui segment ingyellowient" id="addIngyellowient">
             <div class="ui top attached label ">
-                <button class="circular ui icon button mini red right floated padded addIngredient" type="button" id="addIngredientButton">
+                <button class="circular ui icon button mini yellow right floated padded addIngyellowient" type="button" id="addIngyellowientButton">
           <i class="icon plus"id="plusIcon2"></i>
         </button>
             </div>
             <div class="ui input focus fluid" id="inputContainer">
-                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
+                <input id="textarea1" name="ingyellowient" type="text" placeholder="Ingyellowient"></input>
             </div>
 
         </div>
         <div class="form-group ui segment" id="addInstruction">
             <div class="ui top attached label ">
-                <button class="circular ui icon button mini red right floated padded addInstruction" type="button" id="addInstructionButton">
+                <button class="circular ui icon button mini yellow right floated padded addInstruction" type="button" id="addInstructionButton">
                 <i class="icon plus"id="plusIcon3"></i>
             </button>
             </div>
@@ -52,7 +52,7 @@
 
         </div>
 
-        <button class="fluid ui button red submitButton" type="submit">Add Recipe</button>
+        <button class="fluid ui button yellow submitButton" type="submit">Add Recipe</button>
     </form>
 
 </div>

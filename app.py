@@ -33,8 +33,6 @@ def index():
         return  redirect(url_for('get_cuisine'))
     return render_template("index.html")
 
-def e_sort(recipe):
-    return recipe.date_updated
 
 @app.route('/')    
 @app.route('/get_cuisine')
@@ -54,7 +52,6 @@ def get_cuisine():
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     srted = most_recent.sort('date_updated',  pymongo.DESCENDING)
     direction = lambda  most_recent: most_recent[1]
-    print('most_recent: ', most_recent)
     return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=srted, favourites=favourites , countries=countries, user=user)
 
 
@@ -69,8 +66,11 @@ def add_recipe():
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
+        flash('Recipe added!')
         return render_template("addrecipe.html", categories = category_found, most_recent= most_recent, favourites=favourites)
-    return redirect(url_for('index'))
+    else:    
+        flash('You have to login or signup first!') 
+        return redirect(url_for('index'))
 
 
 #  Remove favourite record from favourites list
@@ -83,6 +83,7 @@ def remove_favourites(_id):
             if _id == favourite['id']:
                 remove_id = favourite['id']
                 users.update({'username': session['username']},{"$pull": {"userFavourites":{ "id": remove_id }}})
+    flash('Removed')            
     return redirect(url_for('get_cuisine'))
     
 
@@ -106,6 +107,7 @@ def insert_recipe():
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d'),
     }
     recipe.insert_one(userRecipe)
+    flash('Recipe added!')
     return redirect(url_for('get_cuisine'))
     
  
@@ -123,7 +125,10 @@ def edit_recipe(_id):
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     if 'username' in session:
+        flash('Click the plus( + ) icon to add new column!')
+        flash('Click the close( x ) icon to delete column!')
         return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent, favourites=favourites)
+    flash('You have to login first!')    
     return render_template('register.html')
     
     
@@ -143,6 +148,7 @@ def show_detail(recipe_id):
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d'), '$gte': week_ago.strftime('%Y-%m-%d') }}).limit(5)
+    flash('Click the heart icon to save to Favourites!')
     return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent, favourites=favourites )   
 
  
@@ -171,6 +177,7 @@ def delete_recipe(_id):
     recipe = mongo.db.userRecipes
     if 'username' in session:
         recipe.remove({'_id': ObjectId(_id)})
+        flash('Recipe deleted!')
         return redirect(url_for('get_cuisine'))
 
     
@@ -220,14 +227,6 @@ def favourites(_id,name):
         })
     return redirect(url_for('show_detail', recipe_id=_id))
 
-
-@app.route('/get_category/<category_id>')
-def get_category(category_id):
-    recipe = mongo.db.userRecipes.find()
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
-    return render_template("categorylist.html", recipe=recipe, category=category_id, categories=category_found )
-     
     
 @app.route('/browse_filter/<query>/<sort_order>')
 def browse_filter(query,sort_order):
@@ -290,7 +289,9 @@ def login():
     if login_user:
         if login_pass:
             session['username'] = request.form['username']
+            flash('Logged in successfully!')
             return redirect(url_for('index'))
+    flash('Please enter the correct username or password!')        
     return render_template('index.html') 
 
    
@@ -298,6 +299,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
+    flash('You are have logged out sucessfully!')
     return redirect(url_for('get_cuisine'))
 
 # register user  
@@ -314,11 +316,10 @@ def register():
             'email' : request.form['email'], 
             'passcode' : request.form['password'],
             })
-            session['username'] = request.form['username'],
-           
+            session['username'] = request.form['username']
+            flash('Registered successfully!')
             return redirect(url_for('index'))
-            
-        return flash('That username has been taken, try again with a different username. Please refresh the page.')
+        flash('That username has been taken, try again with a different username.')
     return render_template('register.html')
     
 

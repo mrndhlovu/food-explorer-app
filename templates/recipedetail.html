@@ -1,21 +1,42 @@
-{% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
+{% extends 'base.html' %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
+
+<div class="ui mini message">
+    <i class="close icon"></i> {% for message in messages %} {{ message }}{% endfor %}
+</div>
+{% endif %} {% endwith %} {% for recipe in recipe %}
+
 <div class="ui container fluid" id="recipeLoad">
     <div class=" ui segment ">
-        <div class="ui top attached red label ">
-            <span class=" meta left floated ">  {{ recipe.record.title.upper() }}</span>
+        <div class="ui top attached label">
+            <span class=" meta left floated "> {{ recipe.record.title.upper() }}</span>
             <span class=" meta right floated ">Last Modified: {{ recipe.date_updated}}</span>
         </div>
 
 
         <div class="ui image center aligned bordered">
-            <div class="ui  ribbon label red">
+            <div class="ui mini  ribbon label red">
                 <i class="spoon icon"></i> {{recipe.record.category}}
             </div>
+
             <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner massive label">
                   <i class="heart  red icon"></i></a>
+
+            <!-- If recipe has been saved and heart icon is clicked again: recipe is removed from favourites list-->
+            {% for favourite in favourites['userFavourites'] %} {% if 'username' in session and recipe._id|string == favourite.id %}
+            <a href="{{ url_for( 'remove_favourites', _id=recipe._id ) }}" class="ui right corner massive label">
+                  <i class="heart  red icon"></i></a> {% else %}{% endif %}{% endfor %}
+
             <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
-            <div class="ui bottom right attached label red">Country of Origin : {{recipe.record.country}}</div>
+            <div class="ui bottom right attached label red mini">Country of Origin : {{recipe.record.country}}</div>
         </div>
+
+        <!-- Indicate a recipe has been save in favourites-->
+        {% for favourite in favourites['userFavourites'] %} {% if 'username' in session and recipe._id|string == favourite.id %}
+        <div class="ui success mini message">
+            <i class="close icon"></i>
+            <span>This recipe is saved in your favourites!</span>
+        </div>{% else %}{% endif %}{% endfor %}
+
         <div class="ui segment">
             <div class="ui top attached label">Ingredients</div>
             <div class="ingredients ui left aligned">
@@ -40,7 +61,7 @@
             </table>
         </div>
         <div class="ui bottom attached label">
-            <span>
+            <span class="allergenTagText">
                     Allergens: {% for allergen in recipe.record.allergens %}
                      <a href="{{ url_for('browse_filter', query='allergen', sort_order=allergen ) }}" > {{allergen.upper()}}</a><i   class="red tag icon xs"></i> 
                      {% endfor %}

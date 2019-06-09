@@ -4,16 +4,8 @@ $('.activating.element')
 
 $('.ui.dropdown')
     .dropdown();
-$('.example .menu .browse')
-    .popup({
-        inline: true,
-        hoverable: true,
-        position: 'bottom left',
-        delay: {
-            show: 300,
-            hide: 800
-        }
-    });
+
+
 
 // Semantic ui form validation
 $('.ui.form')
@@ -195,4 +187,27 @@ $(document).ready(function () {
     else {
         $("#sortDetails").hide();
     }
+
+
+    $('.example .menu .browse')
+        .popup({
+            inline: true,
+            hoverable: true,
+            popup: '.menu.browse',
+            position: 'bottom left',
+            delay: {
+                show: 300,
+                hide: 800
+            }
+        });
+
+
+
 });
+
+$('.message .close')
+    .on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    });
