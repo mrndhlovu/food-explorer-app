@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="ui segment">
+<div class="ui segment container">
     <div class="ui top attached label yellow">Add Recipe</div>
     <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
@@ -29,14 +29,14 @@
                 <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
             </div>
         </div>
-        <div class="form-group ui segment ingyellowient" id="addIngyellowient">
+        <div class="form-group ui segment ingredient" id="addIngredient">
             <div class="ui top attached label ">
-                <button class="circular ui icon button mini yellow right floated padded addIngyellowient" type="button" id="addIngyellowientButton">
+                <button class="circular ui icon button mini yellow right floated padded addIngredient" type="button" id="addIngredientButton">
           <i class="icon plus"id="plusIcon2"></i>
         </button>
             </div>
             <div class="ui input focus fluid" id="inputContainer">
-                <input id="textarea1" name="ingyellowient" type="text" placeholder="Ingyellowient"></input>
+                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
             </div>
 
         </div>

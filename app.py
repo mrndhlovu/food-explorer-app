@@ -240,6 +240,9 @@ def browse_filter(query,sort_order):
     category_found = [category for category in categories]
     query_field = 'record.' + query
     query_found = mongo.db.userRecipes.find({query_field: sort_order}).sort('date_updated', pymongo.DESCENDING)
+    print('Found', query_found)
+    if query_field == 'None':
+        query_field = mongo.db.userRecipes.find()
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     
