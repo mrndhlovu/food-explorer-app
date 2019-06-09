@@ -1,7 +1,7 @@
 #  Flask Receipe App
 import os
 from flask import Flask, render_template, redirect, request,session,url_for, flash
-from flask_pymongo import PyMongo
+from flask.ext.pymongo import PyMongo
 import pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
