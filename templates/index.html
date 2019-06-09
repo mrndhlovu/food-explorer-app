@@ -1,5 +1,21 @@
 {% extends 'base.html' %} {% block content %}
 <div class="ui container">
+    {% with messages = get_flashed_messages %}
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="archive icon"></i> Archive Old Messages
+        </div>
+        <div class="content">
+            <p>Wrong password, please try again</p>
+        </div>
+        <div class="actions">
+            <div class="ui green ok inverted button">
+                <i class="checkmark icon"></i> Yes
+            </div>
+        </div>
+    </div>
+    {% if messages %} {% endif%} {% endwith %}
+
     <div class="ui placeholder segment login-form-wrapper">
         <div class="ui two column very relaxed stackable grid">
             <div class="middle aligned column">

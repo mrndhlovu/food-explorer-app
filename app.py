@@ -1,6 +1,6 @@
 #  Flask Receipe App
 import os
-from flask import Flask, render_template, redirect, request,session,url_for
+from flask import Flask, render_template, redirect, request,session,url_for, flash
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -89,8 +89,6 @@ def remove_favourites(_id):
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe = mongo.db.userRecipes
-    recipe_image = request.files['recipe_image']
-    mongo.save_file(recipe_image.filename, recipe_image)
     userRecipe = { 'uploaded_by': session['username'],
         'record': {
             "title":   request.form['title'],
@@ -105,7 +103,6 @@ def insert_recipe():
          'down_votes': 0,
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d'),
-        'recipe_image_name': recipe_image.filename
     }
     recipe.insert_one(userRecipe)
     return redirect(url_for('get_cuisine'))
@@ -305,15 +302,8 @@ def logout():
 # register user  
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    username_taken = 'That username has been taken, try again with a different username. Please refresh the page.'
     if request.method == 'POST':
-        
-        profile_image = request.files['profile_image']
-        mongo.save_file(profile_image.filename, profile_image)
-        
-        if 'profile_image' in profile_image.filename:
-            image = profile_image.filename
-        else:
-            image = 'null'
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         if user_found is None:
@@ -322,12 +312,12 @@ def register():
             'username' : request.form['username'],
             'email' : request.form['email'], 
             'passcode' : request.form['password'],
-            'profile_image': image
             })
             session['username'] = request.form['username'],
            
             return redirect(url_for('index'))
-        return 'That username has been taken, try again with a different username. Please refresh the page.'
+            
+        return flash('That username has been taken, try again with a different username. Please refresh the page.')
     return render_template('register.html')
     
 
