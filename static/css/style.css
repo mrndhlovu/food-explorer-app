@@ -174,3 +174,7 @@ a:hover {
 .deleteIcon {
     margin-top: 1rem !important;
 }
+
+.focus {
+    padding-bottom: 0.2rem !important;
+}

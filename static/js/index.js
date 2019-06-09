@@ -15,6 +15,52 @@ $('.example .menu .browse')
         }
     });
 
+// Semantic ui form validation
+$('.ui.form')
+    .form({
+        fields: {
+            name: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter your name'
+                }]
+            },
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter a username'
+                }]
+            },
+            password: {
+                identifier: 'password',
+                rules: [{
+                        type: 'empty',
+                        prompt: 'Please enter a password'
+                    },
+                    {
+                        type: 'minLength[2]',
+                        prompt: 'Your password must be at least {ruleValue} characters'
+                    }
+                ]
+            },
+        }
+    });
+
+$('.ui.form').form({
+    fields: {
+        color: {
+            identifier: 'color',
+            rules: [{
+                type: 'regExp',
+                value: /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/i,
+            }]
+        }
+    }
+});
+
+
 $('.ui.modal')
     .modal('show');
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
     <div class="ui segment" id="EditRecipeForm">
-        <div class="ui top attached label red">Edit Recipe</div>
+        <div class="ui top attached label yellow">Edit Recipe</div>
 
 
         <div class="ui segment">
@@ -33,42 +33,42 @@
         </div>
         <div class="ui segment">
             <div class="ui top attached label">Allergens</div>
-            <button id="addAllergenButton" class="addAllergen circular ui icon button mini red right floated padded" type="button">
+            <button id="addAllergenButton" class="addAllergen circular ui icon button mini yellow right floated padded" type="button">
                       <i class="icon plus"></i>
                     </button>
             <div class="form-group" id="addAllergen">
                 {% for allergens in recipes.record.allergens %}
                 <div class="ui input focus fluid " id="inputContainer{{ loop.index }}">
-                    <i class='icon delete deleteIcon red label allergens' id="deleteAllergen{{ loop.index0 }}"></i>
+                    <i class='icon delete deleteIcon yellow label allergens' id="deleteAllergen{{ loop.index0 }}"></i>
                     <input id="allergens" name="allergens" value='{{allergens}}'>
                 </div> {% endfor %}
             </div>
         </div>
         <div class="ui segment">
-            <div class="ui top attached label">Ingredients</div>
-            <button id="addIngredientButton" class=" addIngredient circular ui icon button mini red right floated padded" type="button">
+            <div class="ui top attached label">Ingyellowients</div>
+            <button id="addIngyellowientButton" class=" addIngyellowient circular ui icon button mini yellow right floated padded" type="button">
                       <i class="icon plus"></i>
                     </button>
-            <div class="form-group" id="addIngredient">
-                {% for ingredients in recipes.record.ingredients %}
-                <div class="ui input focus fluid" id="ingredientsContainer{{ loop.index0 }}">
-                    <i class="icon delete deleteIcon red label ingredient" id="deleteIngredient{{ loop.index0 }}"></i>
-                    <input id="ingredients{{ loop.index0 }}" name="ingredient" value='{{ingredients}}'></div> {% endfor %}
+            <div class="form-group" id="addIngyellowient">
+                {% for ingyellowients in recipes.record.ingyellowients %}
+                <div class="ui input focus fluid" id="ingyellowientsContainer{{ loop.index0 }}">
+                    <i class="icon delete deleteIcon yellow label ingyellowient" id="deleteIngyellowient{{ loop.index0 }}"></i>
+                    <input id="ingyellowients{{ loop.index0 }}" name="ingyellowient" value='{{ingyellowients}}'></div> {% endfor %}
             </div>
         </div>
         <div class="ui segment">
             <div class="ui top attached label">Directions</div>
-            <button id="addInstructionButton" class=" addInstruction circular ui icon button mini red right floated padded" type="button">
+            <button id="addInstructionButton" class=" addInstruction circular ui icon button mini yellow right floated padded" type="button">
                       <i class="icon plus"></i>
                     </button>
             <div class="form-group addInstruction" id="addInstruction">
                 {% for directions in recipes.record.directions %}
                 <div class="ui input focus fluid" id="directionsContainer{{ loop.index0 }}">
-                    <i class="icon delete deleteIcon red label directions" id="deleteInstruction{{ loop.index0 }}"></i>
+                    <i class="icon delete deleteIcon yellow label directions" id="deleteInstruction{{ loop.index0 }}"></i>
                     <input id="directions{{ loop.index0 }}" name="directions" value='{{directions}}'></div> {% endfor %}
             </div>
         </div>
-        <button class="ui bottom attached label red" type="submit">Done</button>
+        <button class="ui bottom attached label yellow" type="submit">Done</button>
     </div>
 </form>
 

@@ -29,7 +29,7 @@
                         <span class="recipeCardText voteText">{{recipe.up_votes}}</span>
                         <a href="{{ url_for('up_votes', _id=recipe._id)}}">
                             <button class="circular ui icon button voteButton">
-                                <i class="up arrow  icon black"></i>
+                                <i class="thumbs up icon black"></i>
                             </button>
                         </a>
                     </div>
@@ -42,7 +42,7 @@
                         <span class="recipeCardText voteText">{{recipe.down_votes}}</span>
                         <a href="{{ url_for('down_votes', _id=recipe._id)}}">
                             <button class="circular ui icon button voteButton">
-                             <i class="down arrow  icon black "></i>
+                             <i class="thumbs down icon black"></i>
                             </button>
                             </a>
                     </div>
