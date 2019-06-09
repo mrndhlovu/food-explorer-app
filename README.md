@@ -42,7 +42,7 @@ static folder holds the following files:
 * editrecipe -  this page is only seen by a logged-in user where they can edit only a recipe they uploaded. The form fields are pre-populated with data from the backend and can be delete by the 'x' buttons or can add new infomation by clicking the plus icon on the left of each segment. When editing is done, data can be sent back to the database with the new updates by clicking the 'Done' button. The user has also the option to only delete a recipe they uploaded by clicking the 'Delete' button.
 * addrecipe.html - on this page a user logged in user can create and share a new recipe. New feilds can be rendered or removed to fit the user's options. By click the red 'plus' button they can add a new field and the 'x' to delete field.
 * app.py:  this file handles all the backend functinality of the website which includes user login,user logout, database queries, database schema setup,deleting or creating a recipe.
-* Procfile 
+* Procfile: Instruction file for heroku on how to run the pp.
 * requirements : 
 * js folder -  stores index.js file which keeps all the fronted functionalty of the site.
 * images folder stores images used by recipes.
@@ -60,7 +60,7 @@ ___
  7. CSS
  8. JQuery
  9. Cloud9: Intergrated Development Environment
- 10. 
+ 10.
  
 
 
