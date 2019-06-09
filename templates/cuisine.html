@@ -1,10 +1,4 @@
-{% extends 'base.html' %} {% block content %}{% with messages = get_flashed_messages() %} {% if messages %}
-
-<div class="ui success mini message">
-    <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
-
-</div>
-{% endif %} {% endwith %}
+{% extends 'base.html' %} {% block content %}
 
 <div id="sortDetails" class="ui success mini message">
     <i class="close icon"></i> Number of Matches Found: {{ recipes.count() }}

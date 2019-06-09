@@ -6,7 +6,7 @@
 </div>
 {% endif %} {% endwith %}
 <div class="ui container  segment login-form-wrapper loginWrapper">
-    <div class="ui top attached label">Login or SignUp</div>
+    <div class="ui top attached label">Login or Signup</div>
     <div class="ui grid ">
         <div class="ten wide ten wide tablet eight ten computer column">
             <form class="ui form" method=POST action="{{url_for('login')}}">
@@ -26,12 +26,14 @@
                 Or
             </div>
         </div>
-        <div class="five wide six five tablet five wide computer column center aligned ">
+        <div class="five wide six five tablet five wide computer column middle aligned ">
+
             <a class="item register-btn" href="{{ url_for('register')}}">
-                <div class="ui small button yellow flatButton">
+                <div class="ui small button yellow flatButton fluid">
                     SignUp
                 </div>
             </a>
+
         </div>
     </div>
 

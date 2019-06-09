@@ -1,7 +1,7 @@
 #  Flask Receipe App
 import os
 from flask import Flask, render_template, redirect, request,session,url_for, flash
-from flask.ext.pymongo import PyMongo
+from flask_pymongo import PyMongo
 import pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -29,9 +29,14 @@ SECRET_KEY = 'some random password'
 
 @app.route('/index')
 def index():
+    today = today = DT.date.today()
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     if 'username' in session:
+        favourites = mongo.db.usersDB.find_one({'username': session['username']})
         return  redirect(url_for('get_cuisine'))
-    return render_template("index.html")
+    else: 
+        favourites = ' '
+        return render_template("index.html", most_recent=most_recent, favourites=favourites) 
 
 
 @app.route('/')    
@@ -48,11 +53,9 @@ def get_cuisine():
     today = today = DT.date.today()
     recipe = mongo.db.userRecipes.find()
     countries = [country for country in recipe ]
-    week_ago = today - DT.timedelta(days=30)
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    srted = most_recent.sort('date_updated',  pymongo.DESCENDING)
-    direction = lambda  most_recent: most_recent[1]
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=srted, favourites=favourites , countries=countries, user=user)
+    sorted_list = most_recent.sort('date_updated',  pymongo.DESCENDING)
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=sorted_list, favourites=favourites , countries=countries, user=user)
 
 
 @app.route('/add_recipe')
@@ -240,9 +243,6 @@ def browse_filter(query,sort_order):
     category_found = [category for category in categories]
     query_field = 'record.' + query
     query_found = mongo.db.userRecipes.find({query_field: sort_order}).sort('date_updated', pymongo.DESCENDING)
-    print('Found', query_found)
-    if query_field == 'None':
-        query_field = mongo.db.userRecipes.find()
     today = today = DT.date.today()
     week_ago = today - DT.timedelta(days=14)
     
@@ -261,7 +261,7 @@ def browse_filter(query,sort_order):
     elif query == 'search':
         search_query = request.args.get('search').lower()
         most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING)
-        found =  mongo.db.userRecipes.find({'record.directions': {'$regex': search_query}})
+        found =  mongo.db.userRecipes.find({'record.directions': {'$regex': search_query }})
         return  render_template("cuisine.html", recipes=found, categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries) 
     else:
         return  render_results   
@@ -304,11 +304,13 @@ def logout():
     session.pop('username', None)
     flash('You are have logged out sucessfully!')
     return redirect(url_for('get_cuisine'))
+    
 
 # register user  
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    username_taken = 'That username has been taken, try again with a different username. Please refresh the page.'
+    today = today = DT.date.today()
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     if request.method == 'POST':
         users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
@@ -323,7 +325,7 @@ def register():
             flash('Registered successfully!')
             return redirect(url_for('index'))
         flash('That username has been taken, try again with a different username.')
-    return render_template('register.html')
+    return render_template('register.html', most_recent=most_recent)
     
 
 if __name__  == '__main__':
