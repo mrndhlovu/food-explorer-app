@@ -18,7 +18,7 @@ $('.ui.modal')
     .modal('show');
 
 
-//  add ingredient or allergen input field
+//  add allergen, instructions or ingredient input field
 const addField = e => {
     e.stopImmediatePropagation();
 
@@ -71,7 +71,7 @@ const addField = e => {
 };
 
 
-// Delete allergen or ingredient input fields
+// Delete allergen, instructions or ingredient input fields
 const removeField = e => {
     console.log('should remove')
     const allergenContainer = document.getElementById("addAllergen");
@@ -102,42 +102,41 @@ window.onload = function () {
     if (addAllergenButton) {
         addAllergenButton.addEventListener('click', addField);
 
+        const editAllergen = document.getElementById('addAllergen').childElementCount;
+        for (let i = 0; i <= editAllergen; i++) {
+            let deleteIcon = document.getElementById(`deleteAllergen${i}`);
+            if (editAllergen && deleteIcon) {
+                deleteIcon.addEventListener('click', removeField);
+            }
+
+        }
+
     }
     const addIngredientButton = document.getElementById('addIngredientButton');
     if (addIngredientButton) {
         addIngredientButton.addEventListener('click', addField);
 
+        const editIngredient = document.getElementById('addIngredient').childElementCount;
+        for (let i = 0; i <= editIngredient; i++) {
+            let deleteIcon = document.getElementById(`deleteIngredient${i}`);
+            if (editIngredient && deleteIcon) {
+                deleteIcon.addEventListener('click', removeField);
+            }
+        }
+
     }
     const addInstructionButton = document.getElementById('addInstructionButton');
     if (addInstructionButton) {
         addInstructionButton.addEventListener('click', addField);
-    }
-    const editIngredient = document.getElementById('addIngredient').childElementCount;
-    const editAllergen = document.getElementById('addAllergen').childElementCount;
-    const editInstruction = document.getElementById('addInstruction').childElementCount;
 
-    for (let i = 0; i <= editAllergen; i++) {
-        let deleteIcon = document.getElementById(`deleteAllergen${i}`);
-        if (editAllergen && deleteIcon) {
-            deleteIcon.addEventListener('click', removeField);
-        }
-
-    }
-
-    for (let i = 0; i <= editIngredient; i++) {
-        let deleteIcon = document.getElementById(`deleteIngredient${i}`);
-        if (editIngredient && deleteIcon) {
-            deleteIcon.addEventListener('click', removeField);
+        const editInstruction = document.getElementById('addInstruction').childElementCount;
+        for (let i = 0; i <= editInstruction; i++) {
+            let deleteIcon = document.getElementById(`deleteInstruction${i}`);
+            if (editInstruction && deleteIcon) {
+                deleteIcon.addEventListener('click', removeField);
+            }
         }
     }
-
-    for (let i = 0; i <= editInstruction; i++) {
-        let deleteIcon = document.getElementById(`deleteInstruction${i}`);
-        if (editInstruction && deleteIcon) {
-            deleteIcon.addEventListener('click', removeField);
-        }
-    }
-
 };
 
 $(document).ready(function () {
@@ -147,8 +146,4 @@ $(document).ready(function () {
     else {
         $("#sortDetails").hide();
     }
-
-
-
-
 });
