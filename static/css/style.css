@@ -6,13 +6,27 @@ body {
     color: rgba(0, 0, 0, .87);
 }
 
+#loginStatus {
+    padding-bottom: 0.6rem;
+}
+
 #submit-button {
     background-color: #dededf !important;
     color: #4083c4 !important;
 }
 
+.searchBarContainer {
+    padding-bottom: 0.4rem;
+}
+
+.filterRecipeDropdownText {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding-left: 1.5rem;
+}
+
 .recipes-list {
-    height: 80vh;
+    height: 100vh;
 }
 
 .image-container {
@@ -24,6 +38,10 @@ body {
     height: 100%;
 }
 
+.navText {
+    text-transform: uppercase !important;
+    font-size: 0.98rem !important;
+}
 
 .recipe-wrapper .side-container {
     background-color: #b0bec5;
@@ -75,7 +93,7 @@ a:hover {
 }
 
 .sortDropdown {
-    margin: 0.8rem;
+    margin: 0.6rem 0.8rem;
 }
 
 .sortDropText {
@@ -138,6 +156,8 @@ a:hover {
 
 .filterWrapper {
     margin-top: -5px;
+    border-radius: 0;
+    height: 2.7rem;
 }
 
 .favourites,

@@ -1,3 +1,4 @@
+// Semantics UI jQuery Functions
 $('.activating.element')
     .popup();
 
@@ -139,6 +140,8 @@ window.onload = function () {
     }
 };
 
+
+//Show or hide search result bar
 $(document).ready(function () {
     if (window.location.href.indexOf("browse_filter") > 1) {
         $("#sortDetails").show();

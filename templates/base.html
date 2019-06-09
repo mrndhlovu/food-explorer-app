@@ -9,42 +9,44 @@
     </head>
 
     <body>
-        <div class=" ui container">
-            <div class="ui menu">
-                <div class="header">
-                    <a class="item" href="{{ url_for('get_cuisine')}}">Food Explorers</a>
-                </div>
-                <a class="item" href="{{ url_for('get_cuisine')}}">Recipes</a>
-                <a class="item" href="{{ url_for('add_recipe')}}">Add Recipe</a>
-                <div class="right menu">
-                    {% if 'username' in session %}
-                    <a class="item" href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a> {% else %}
-                    <a class="item" href="{{ url_for('index')}}">Login</a>
-                    <a class="item" href="{{ url_for('register')}}">Register</a>{% endif %}
+        <div class="ui container">
+            <div class="ui container">
+                <div class="ui menu">
+                    <div class="header">
+                        <a class="item navText" href="{{ url_for('get_cuisine')}}">Food Explorers</a>
+                    </div>
+                    <a class="item navText" href="{{ url_for('get_cuisine')}}">Recipes</a>
+                    <a class="item navText" href="{{ url_for('add_recipe')}}">Add Recipe</a>
+                    <div class="right menu">
+                        {% if 'username' in session %}
+                        <a class="item navText" href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a> {% else %}
+                        <a class="item navText" href="{{ url_for('index')}}">Login</a>
+                        <a class="item navText" href="{{ url_for('register')}}">Register</a>{% endif %}
+                    </div>
                 </div>
             </div>
-            <div class="right menu" id='user'>
-                {% if 'username' in session %}
 
-                <div class="ui tiny label  "><span class="login">Logged in as: {{ session['username'] }}</span>
-                    <a class="item">
-            <i class="icon user black"></i>
-                  </a> </div>
-                {% else %} {% endif %}
-            </div>
-            <div class="container">
+            <div class=" ui container">
                 <div class="ui container searchBox">
+                    <div class="right aligned" id='loginStatus'>
+                        {% if 'username' in session %}
+                        <div class="ui tiny label"><span class="login">Logged in as: {{ session['username'] }}</span>
+                            <a class="item">
+                        <i class="icon user green"></i>
+                  </a> </div>
+                        {% else %} {% endif %}
+                    </div>
                     <div class="row">
-                        <div class="col-md-8 col-sm-6 col-xs-12">
+                        <div class="col-md-8 col-sm-6 col-xs-12 searchBarContainer">
                             <form class="ui action input fluid" action="{{ url_for('browse_filter', query='search', sort_order=" ") }}">
                                 <input type="text" name="search" placeholder="Search...">
-                                <button class="ui button searchButton" type="submit"><span class="ui black small">Search</span></button>
+                                <button class="ui button searchButton" type="submit"><span class="ui black small"><span class="searchButtonText">Search</span></span></button>
                             </form>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="ui left aligned divided list segment filterWrapper">
                                 <div class="ui dropdown right aligned sortDropdown">
-                                    <div class="text sortDropText">Filter Recipes</div>
+                                    <div class="text sortDropText"><span class="filterRecipeDropdownText">Filter Recipes</span></div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
                                         <div class="ui left pointing dropdown link item">
@@ -110,10 +112,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                         {% block content %} {% endblock %}
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12 sideBarWrapper">
+                    <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 sideBarWrapper">
                         <div class="ui segment">
                             <div class="ui divided list">
                                 <div class="ui top attached label  center aligned light red">Most Recent</div>
