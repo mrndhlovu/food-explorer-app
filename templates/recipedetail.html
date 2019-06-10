@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
 
-<div class="ui mini message">
+<div class="ui mini message success">
     <i class="close icon"></i> {% for message in messages %} {{ message }}{% endfor %}
 </div>
 {% endif %} {% endwith %} {% for recipe in recipe %}
@@ -14,7 +14,7 @@
 
 
         <div class="ui image center aligned bordered">
-            <div class="ui mini  ribbon label red">
+            <div class="ui mini ribbon label red">
                 <i class="spoon icon"></i> {{recipe.record.category}}
             </div>
 

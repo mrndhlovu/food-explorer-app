@@ -11,7 +11,6 @@ import statistics
 import datetime
 import base64
 import datetime as DT
-
 import json
 
 
@@ -324,12 +323,12 @@ def register():
             session['username'] = request.form['username']
             flash('Registered successfully!')
             return redirect(url_for('index'))
-        flash('That username has been taken, try again with a different username.')
+        flash('That username has been taken, try again with a different username.') 
     return render_template('register.html', most_recent=most_recent)
     
 
 if __name__  == '__main__':
-    app.secret_key = '123'
+    app.secret_key = 'simple 123 key'
     app.run(debug=True)
     
     

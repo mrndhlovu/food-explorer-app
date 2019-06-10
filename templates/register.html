@@ -4,18 +4,8 @@
     <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
 </div>
 {% endif %} {% endwith %}
-<div class="ui container ">
-
-
-    <div class="row">
-        <h3 class="ui header">
-            <i class="id card icon"></i>
-            <div class="content">
-                Sign Up
-            </div>
-        </h3>
-    </div>
-
+<div class="ui container segment ">
+    <div class="ui top attached label">Signup</div>
     <div class="row form-wrapper ui placeholder segment register-form loginWrapper">
         <div class="col-md-12 middle aligned column">
             <form class="ui form" action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data">
