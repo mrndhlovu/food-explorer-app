@@ -26,6 +26,19 @@ app.config['SECRET_KEY'] = 'some random password'
 SECRET_KEY = 'some random password'
 
 
+if __name__  == '__main__':
+    app.secret_key = 'simple 123 key'
+    app.run(debug=True)
+    
+    
+
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+        port=int(os.environ.get('PORT')),
+        debug=False)
+        
+
+
 @app.route('/index')
 def index():
     today = today = DT.date.today()
@@ -327,16 +340,6 @@ def register():
     return render_template('register.html', most_recent=most_recent)
     
 
-if __name__  == '__main__':
-    app.secret_key = 'simple 123 key'
-    app.run(debug=True)
-    
-    
 
-if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-        port=int(os.environ.get('PORT')),
-        debug=True)
-        
 
 
