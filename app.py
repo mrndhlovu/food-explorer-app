@@ -20,10 +20,6 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@cluster0-j5cta.mongodb.ne
 
 mongo = PyMongo(app)
 
-app.secret_key = 'some random password'
-app.config['SECRET_KEY'] = 'some random password' 
-SECRET_KEY = 'some random password'
-
 
 @app.route('/index')
 def index():
@@ -329,7 +325,6 @@ def register():
 if __name__  == '__main__':
     app.secret_key = 'simple 123 key'
     app.run(debug=True)
-    
     
 
 if __name__ == '__main__':
