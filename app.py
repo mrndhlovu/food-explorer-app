@@ -18,6 +18,12 @@ app = Flask(__name__)
 app.config["MONGO_DNAME"] = 'cuisineAppDB'
 app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@cluster0-j5cta.mongodb.net/cuisineAppDB?retryWrites=true'
 
+app.secret_key = 'some random password'
+app.config['SECRET_KEY'] = 'some random password' 
+app.config['SESSION_TYPE'] = 'filesystem' 
+SECRET_KEY = 'some random password'
+
+
 mongo = PyMongo(app)
 
 
@@ -325,7 +331,7 @@ def register():
 if __name__  == '__main__':
     app.secret_key = 'simple 123 key'
     app.run(debug=False)
-    app.run(host = '0.0.0.0',port=5000)
+    app.run(host = '0.0.0.0',port=500)
     
 
 if __name__ == '__main__':
