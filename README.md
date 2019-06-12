@@ -1,9 +1,10 @@
 Foods Explorers
+
 ===
 
 
 
-This website main is targeted at foodies and who would like to explore food options from around the world. On this site website users can view recipes shared by other people and can also signup and upload recipes to share recipes. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
+This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
 
 
 ### Website Files
@@ -24,6 +25,7 @@ static folder holds the following files:
 11. js folder > index.js
 12. images folder > (holds image files)
 13. css folder > style.css
+14. wireframes > mockup images
 ```
 
 ###  UX and Features
@@ -31,7 +33,7 @@ static folder holds the following files:
 #### base.html
 This is the main template used throughout the website. It renders the head links, navigation bar, search box, recipe filter dropdown, side bar and also the script tags used throughout the website. All website content is rendered or graphed in the middle of this base template. 
 #### index.html
- On this page a user can sign into their account or click signup to register for a new one.
+ On this page a user can sign in into their account or click signup to register for a new one.
 #### register.html
 From this page a user can sign up for a new account.
 #### cuisine.html
@@ -43,7 +45,7 @@ this is the landing page of the website, which list all recipes stored in the da
 * see number of views
 * see date the recipe was uploaded.
 * see a favourites section on the sidebar if they are logged in.
- If they have any recipes save to favourites, if a recipe is in the favourites list, the recipe image will have a heart icon on the top left corner. If  the icon is clicked, the recipe would be removed from user's favourites list.
+ If a recipe is in the favourites list, the recipe image will have a heart icon on the top left corner. If  the icon is clicked, the recipe would be removed from user's favourites list.
 #### recipedetail.html
 this is where a user can see a recipe in detail. From this page if a user is logged in or is the owner of the recipe being viewed, then the edit, delete and add recipe buttons are shown below, otherwise they do not render.
 #### editrecipe 
@@ -167,10 +169,10 @@ ___
 
 
 ### Testing
- Tested the website main using Google. This made it easy to edit the site structure on the website on the fly and then transferring the css code over to style.css file. 
+ Tested the website main using Google dev tools. This made it easy to edit the site structure on the website on the fly and then transferring the css code over to the style.css file. 
 . For mobile responsive testing i used the toggle device tool option, which is part of google dev tools. From here I tested the website view in all device option available, which range from small screen like Galaxy S5 to large screens like Ipad Pro and even desktop view.
 
-Issues I had here however where that sometimes the site would not appear appear as expected, until the page is refreshed a couple of times. Could have been a Chrome caching issue but at times the cache was as little as 10MB. 
+Issues I had here however where that sometimes the site would not appear as expected, until the page is refreshed a couple of times. Could have been a Chrome caching issue but at times the cache was as little as 10MB. 
 
 
 ##### Other browsers
@@ -183,11 +185,11 @@ Bugs and other issues
 ===
 
 
-1. The the website uses the same image for all recipes which can be improved to having the ability to upload a unique image for each recipe.
-2. One image is also used as a user avatar. Can be improved by add a unique image as the user signs up.
-3. When a user likes a recipe, that is only tracked on the backend but not shown on the website. This can be improved by turn a button to a different color when recipe is liked.
-4. Flash message can be confusing when there is more than one.
-5. Semantic UI responsive grid can have issues when in mobile view. The site responds using the chrome responsive toggle bar but sometimes wont work on a selected mobile view.
+1. The website uses the same image for all recipes which can be improved to having the ability to upload a unique image for each recipe.
+2. One image is also used as a user avatar. Can be improved by adding a unique image as the user signs up.
+3. When a user likes a recipe, that is only tracked on the backend but not shown on the website. This can be improved by turning a button to a different color when recipe is liked.
+4. Flash messages can be confusing when there is more than one.
+5. Semantic UI responsive grid can have issues when in mobile view. The site responds well using the chrome responsive toggle bar but sometimes wont work on a selected mobile view.
 
 
 Acknowledgments
