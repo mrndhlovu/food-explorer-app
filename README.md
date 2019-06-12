@@ -1,4 +1,4 @@
-[Foods Explorers](https://food-explorers.herokuapp.com/)
+[Food Explorers](https://food-explorers.herokuapp.com/)
 ===
 
 This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
