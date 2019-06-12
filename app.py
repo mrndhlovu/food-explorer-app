@@ -46,7 +46,6 @@ def get_cuisine():
         favourites = mongo.db.usersDB.find_one({'username': session['username']})
     else:
         favourites = ''
-        
     categories = mongo.db.categories.find()
     category_found = [category for category in categories]
     user = mongo.db.usersDB.find()
@@ -330,8 +329,7 @@ def register():
 
 if __name__  == '__main__':
     app.secret_key = 'simple 123 key'
-    app.run(debug=False)
-    app.run(host = '0.0.0.0',port=500)
+    app.run(debug=True)
     
 
 if __name__ == '__main__':
