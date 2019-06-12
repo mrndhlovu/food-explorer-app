@@ -71,14 +71,11 @@ Download the wireframe.xml file from the wireframes folder and then:
 
 ###### Hand draw mockups
 
-![](/Wireframes/imageone.png)
-![](/Wireframes/imagetwo.png)
-![](/Wireframes/imagethree.png)
-![](/Wireframes/imagefour.png)
+![](/wireframes/imageone.png)
+![](/wireframes/imagetwo.png)
+![](/wireframes/imagethree.png)
+![](/wireframes/imagefour.png)
 
-
-
-These can be found also in the wireframes folder
 
 #### MongoDB database collections structure used: 
 
@@ -203,6 +200,7 @@ Acknowledgments
 * [Semantic UI](https://semantic-ui.com/)
 * [Draw.io](draw.io)
 * [Pexels](https://www.pexels.com/) - Royalty free images.
+* [W3C CSS](https://jigsaw.w3.org/css-validator/validator) css code validator
 
 
 
