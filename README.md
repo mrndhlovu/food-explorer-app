@@ -1,8 +1,6 @@
 Foods Explorers
 ===
 
-
-
 This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
 
 
@@ -27,8 +25,8 @@ static folder holds the following files:
 14. wireframes > mockup images
 ```
 
-###  UX and Features
----
+UX and Features
+===
 #### base.html
 This is the main template used throughout the website. It renders the head links, navigation bar, search box, recipe filter dropdown, side bar and also the script tags used throughout the website. All website content is rendered or graphed in the middle of this base template. 
 #### index.html
@@ -78,14 +76,11 @@ ___
 ![](/wireframes/imagefour.png)
 
 
-#### MongoDB database collections structure used: 
-
+MongoDB database collections structure used: 
+===
 
 ###### Recipes collection
 ```
-
-
-
 _id:5d001f65bb6aae000b028d4c
 uploaded_by:"Soup Loving Morah"
 record:Object
@@ -148,8 +143,9 @@ userLikes:Array
 
 
 
-### Technologies Used
-___
+Technologies Used
+===
+
  1. MongoDB: the storing and retrieving all the recipes and user data.
  2. Javascript: for frontend functionality of the website.
  3. Bootstrap: for handling the some parts of grid layout on the website.
