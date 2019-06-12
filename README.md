@@ -1,4 +1,4 @@
-Foods Explorers
+[Foods Explorers](https://food-explorers.herokuapp.com/)
 ===
 
 This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
@@ -161,6 +161,7 @@ Technologies Used
 12. Git: for version tracking of the app.
 13. Google chrome development tools
 14. Draw.io: for wireframes
+15. Heroku: Hosting the App
 
 
 ### Testing
@@ -187,6 +188,12 @@ Bugs and other issues
 5. Semantic UI responsive grid can have issues when in mobile view. The site responds well using the chrome responsive toggle bar but sometimes wont work on a selected mobile view.
 
 
+Deployment
+===
+
+This website is deployed and hosted on Heroku. I created a free account and push my Cloud9 repo to Heroku so it can be accessible by any one with an internet connection. The app code is also on Github pages, which where you are currently reading this file from.  
+
+
 Acknowledgments
 ===
 
@@ -198,6 +205,7 @@ Acknowledgments
 * [Draw.io](draw.io)
 * [Pexels](https://www.pexels.com/) - Royalty free images.
 * [W3C CSS](https://jigsaw.w3.org/css-validator/validator) css code validator
+* [Heroku](heroku.com)
 
 
 
