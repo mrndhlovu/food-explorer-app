@@ -70,8 +70,8 @@ Download the wireframe.xml file from the wireframes folder and then:
 
 *  use [draw.io](https://draw.io) to view the wireframe file. 
 
-###### Hand draw mockups
-
+### Hand draw mockups
+___
 ![](/wireframes/imageone.png)
 ![](/wireframes/imagetwo.png)
 ![](/wireframes/imagethree.png)
