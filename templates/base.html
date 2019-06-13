@@ -9,8 +9,8 @@
     </head>
 
     <body>
-        <div class="ui grid container">
-            <div class="sixteen wide column">
+        <div class="ui grid container mainContainer">
+            <div class="fifteen wide column">
                 <div class="ui menu">
                     <div class="header">
                         <a class="item navText" href="{{ url_for('get_cuisine')}}">Food Explorers</a>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sixteen wide column">
+            <div class="fifteen wide column">
                 <div class="ui grid">
                     <div class="ui right aligned" id='loginStatus'>
                         {% if 'username' in session %}
@@ -37,15 +37,18 @@
                     </div>
                 </div>
                 <div class="ui grid">
-                    <div class="sixteen wide mobile twleve wide tablet twleve wide computer column searchBarContainer ">
+                    <div class="fifteen wide mobile twleve wide tablet twleve wide computer column searchBarContainer ">
                         <form class="ui action input fluid " action="{{ url_for( 'browse_filter', query='search' , sort_order=" " ) }} ">
                             <input type="text " name="search" placeholder="Search... ">
                             <button class="ui button searchButton " type="submit "><span class="ui black small "><span class="searchButtonText ">Search</span></span></button>
                         </form>
                     </div>
+
+
+
                     <div class="eight wide mobile  six wide tablet six wide computer column ">
-                        <div class="ui left aligned divided list segment filterWrapper ">
-                            <div class="ui dropdown right aligned sortDropdown ">
+                        <div class="ui list padded filterWrapper ">
+                            <div class="ui floating dropdown labeled icon button  fluid right aligned sortDropdown ">
                                 <div class="text sortDropText "><span class="filterRecipeDropdownText ">Filter Recipes</span></div>
                                 <i class="dropdown icon "></i>
                                 <div class="menu ">
@@ -111,10 +114,10 @@
                 </div>
             </div>
             <div class="ui grid ">
-                <div class="sixteen wide mobile twelve wide tablet twelve wide computer column">
+                <div class="col-sm-12 col-xs-12 col-md-8 col-lg-8">
                     {% block content %} {% endblock %}
                 </div>
-                <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
+                <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 sideBarWrapper ">
                     <div class="ui segment">
                         <div class="ui divided list ">
                             <div class="ui top attached label center aligned light yellow ">Most Recent</div>

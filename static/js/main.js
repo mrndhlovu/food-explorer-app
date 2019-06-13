@@ -211,3 +211,8 @@ $('.message .close')
             .closest('.message')
             .transition('fade');
     });
+
+$('.ui.dropdown')
+    .dropdown({
+        allowCategorySelection: true
+    });

@@ -73,6 +73,8 @@ def logout():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
+    
     if request.method == 'POST':
         user_found = users.find_one({'username' : request.form['username']})
         
@@ -90,7 +92,7 @@ def register():
             return redirect(url_for('index'))
         flash('That username has been taken, try again with a different username.')
         
-    return render_template('register.html', most_recent=most_recent)
+    return render_template('register.html', most_recent=most_recent , categories=category_found,countries=countries)
 
 
 @app.route('/index')
@@ -103,7 +105,9 @@ def index():
     else: 
         favourites = ' '
         
-        return render_template("index.html", most_recent=most_recent, favourites=favourites) 
+        most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)  
+        
+        return render_template("index.html", most_recent=most_recent, favourites=favourites, countries=countries, categories=category_found) 
         
 
 # render recipes
