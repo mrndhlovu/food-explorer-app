@@ -57,6 +57,7 @@ $('.ui.modal')
     .modal('show');
 
 
+
 //  add allergen, instructions or ingredient input field
 const addField = e => {
     e.stopImmediatePropagation();
@@ -200,6 +201,7 @@ $(document).ready(function () {
                 hide: 800
             }
         });
+
 
 
 

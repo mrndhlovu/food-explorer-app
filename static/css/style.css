@@ -10,6 +10,20 @@ body {
     padding-bottom: 0.6rem;
 }
 
+.navBar {
+    background-color: #e8e8e8 !important;
+}
+
+a,
+.nav-link {
+    color: #000!important;
+}
+
+
+a:hover {
+    color: #443939 !important;
+}
+
 #submit-button {
     background-color: #dededf !important;
     color: #4083c4 !important;
@@ -27,6 +41,12 @@ body {
 .filterRecipeDropdownText {
     font-size: 0.7rem;
     text-transform: uppercase;
+
+}
+
+
+.loggedInUser {
+    margin-top: 0.4rem !important;
 }
 
 .recipes-list {
@@ -184,4 +204,14 @@ input,
 
 .focus {
     padding-bottom: 0.2rem !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.container {
+        margin-right: 0px !important;
+    }
+
+    #recipeCardContainer {
+        margin-left: 1.5rem !important;
+    }
 }
