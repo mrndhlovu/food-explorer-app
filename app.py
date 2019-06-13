@@ -27,11 +27,23 @@ SECRET_KEY = 'some random password'
 mongo = PyMongo(app)
 
 
+#  Declaring global variables
+categories = mongo.db.categories.find()
+category_found = [category for category in categories]
+
+recipe = mongo.db.userRecipes.find()
+users = mongo.db.usersDB
+
+countries = [country for country in recipe ]
+
+today = today = DT.date.today()
+most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
+
+
+
 # check if user is has a username already if true point to add recipe page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
-    users = mongo.db.usersDB
     login_user = users.find_one({'username' : request.form['username']})
     login_pass = users.find_one({'passcode' : request.form['password']})
     
@@ -61,11 +73,7 @@ def logout():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     
-    today = today = DT.date.today()
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    
     if request.method == 'POST':
-        users = mongo.db.usersDB
         user_found = users.find_one({'username' : request.form['username']})
         
         if user_found is None:
@@ -88,11 +96,8 @@ def register():
 @app.route('/index')
 def index():
     
-    today = today = DT.date.today()
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    
     if 'username' in session:
-        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+        favourites = users.find_one({'username': session['username']})
         return  redirect(url_for('get_cuisine'))
         
     else: 
@@ -107,21 +112,14 @@ def index():
 def get_cuisine():
     
     if 'username' in session:
-        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+        favourites = users.find_one({'username': session['username']})
         
     else:
         favourites = ''
         
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
-    user = mongo.db.usersDB.find()
-    today = today = DT.date.today()
-    recipe = mongo.db.userRecipes.find()
-    countries = [country for country in recipe ]
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    sorted_list = most_recent.sort('date_updated',  pymongo.DESCENDING)
-    
-    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories = category_found, most_recent=sorted_list, favourites=favourites , countries=countries, user=user)
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)    
+   
+    return render_template("cuisine.html", recipes=mongo.db.userRecipes.find().sort('date_updated', pymongo.DESCENDING), categories=category_found, most_recent=most_recent, favourites=favourites , countries=countries, user=users)
     
 
 # add new recipe
@@ -129,19 +127,16 @@ def get_cuisine():
 def add_recipe():
     
     if 'username' in session:
-        favourites = mongo.db.usersDB.find_one({'username': session['username']})
+        favourites = users.find_one({'username': session['username']})
         
     else:
         favourites = ''
         
-    today = today = DT.date.today()
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
+
     if 'username' in session:
-        
         flash('Recipe added!')
-        return render_template("addrecipe.html", categories = category_found, most_recent= most_recent, favourites=favourites)
+        
+        return render_template("addrecipe.html", categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries )
         
     else:    
         flash('You have to login or signup first!') 
@@ -152,7 +147,7 @@ def add_recipe():
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     
-    recipe = mongo.db.userRecipes
+    recipe_records = mongo.db.userRecipes
     
     userRecipe = { 'uploaded_by': session['username'],
         'record': {
@@ -169,7 +164,7 @@ def insert_recipe():
         'views': 0,
         'date_updated': datetime.datetime.now().strftime('%Y-%m-%d'),
     }
-    recipe.insert_one(userRecipe)
+    recipe_records.insert_one(userRecipe)
     flash('Recipe added!')
     
     return redirect(url_for('get_cuisine'))        
@@ -184,19 +179,14 @@ def edit_recipe(_id):
         
     else:
         favourites = ''
-        
-    today = DT.date.today()
-    week_ago = today - DT.timedelta(days=30)
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lt': current_date, '$gt': week_ago.strftime('%Y-%m-%d') }}).limit(5)
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
+    
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     
     if 'username' in session:
         flash('Click the plus( + ) icon to add new column!')
         flash('Click the close( x ) icon to delete column!')
         
-        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) ,most_recent=most_recent, favourites=favourites)
+        return render_template("editrecipe.html", recipe=id, categories=category_found, recipes=mongo.db.userRecipes.find_one({'_id': ObjectId(_id)}) , most_recent=most_recent, favourites=favourites, countries=countries)
     flash('You have to login first!')    
     
     return render_template('register.html')
@@ -245,15 +235,11 @@ def show_detail(recipe_id):
     count = mongo.db.userRecipes
     count.update({'_id': ObjectId(recipe_id)},
     { "$inc": { "views": 1 },})
-    
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
-    today = today = DT.date.today()
-    week_ago = today - DT.timedelta(days=14)
-    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d'), '$gte': week_ago.strftime('%Y-%m-%d') }}).limit(5)
+   
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)
     flash('Click the heart icon to save to Favourites!')
     
-    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent, favourites=favourites )   
+    return render_template("recipedetail.html", recipe=mongo.db.userRecipes.find({'_id': ObjectId(recipe_id)}), categories=category_found,most_recent=most_recent, favourites=favourites, countries=countries )   
 
  
 # update edited recipe 
@@ -273,6 +259,7 @@ def update_recipe(_id):
             "date_updated": datetime.datetime.now().strftime('%Y-%m-%d'),
         },
     })
+    
     return redirect(url_for('show_detail', recipe_id=_id))
 
     
@@ -336,13 +323,9 @@ def browse_filter(query,sort_order):
     else:
         favourites = ''
         
-    recipe = mongo.db.userRecipes.find()
-    countries = [country for country in recipe]
-    categories = mongo.db.categories.find()
-    category_found = [category for category in categories]
     query_field = 'record.' + query
     query_found = mongo.db.userRecipes.find({query_field: sort_order}).sort('date_updated', pymongo.DESCENDING)
-    today = today = DT.date.today()
+
     week_ago = today - DT.timedelta(days=14)
     
     most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5).sort('date_updated',  pymongo.DESCENDING )
