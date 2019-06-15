@@ -1,37 +1,35 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui container segment login-form-wrapper loginWrapper">
-    <div class="ui top attached label">Login or Signup</div>
-    <div class="ui grid ">
+<div class="ui segments">
+
+    <div class="ui segment">
+        <div class="ui top attached label">Login</div>
         <div class="ten wide ten wide tablet eight ten computer column">
             <form class="ui form" method=POST action="{{url_for('login')}}">
-                <div class="form-group">
+                <div class="field">
                     <label>Username</label>
-                    <input type="text" name="username" placeholder="Username" id='username'>
+                    <input type="text" name="username" placeholder="Username" id="username">
                 </div>
-                <div class="form-group">
+                <div class="field ">
                     <label>Password</label>
                     <input type="password" name="password" placeholder="Password">
                 </div>
-                <button type="submit" class="ui tiny yellow button flatButton" onclick="{{ url_for('login')}}" )>Log In</button>
+                <button type="submit " class="ui tiny yellow button flatButton " onclick="{{ url_for( 'login')}} " )>Log In</button>
             </form>
-        </div>
-        <div class="one wide one wide tablet one wide computer column">
-            <div class="ui vertical divider">
-                Or
-            </div>
-        </div>
-        <div class="five wide six five tablet five wide computer column middle aligned ">
-
-            <a class="item register-btn" href="{{ url_for('register')}}">
-                <div class="ui small button yellow flatButton fluid">
-                    SignUp
-                </div>
-            </a>
-
         </div>
     </div>
 
+    <div class="ui secondary segment ">
 
+        <div class="ui top attached label ">Signup</div>
+        <div class="five wide six five tablet five wide computer column middle aligned ">
+
+            <a class="item register-btn " href="{{ url_for( 'register')}} ">
+                <div class="ui small button yellow flatButton fluid ">
+                    SignUp
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 
