@@ -129,7 +129,7 @@ def get_cuisine():
 # add new recipe
 @app.route('/add_recipe')
 def add_recipe():
-    
+    most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftime('%Y-%m-%d') }}).limit(5)  
     if 'username' in session:
         favourites = users.find_one({'username': session['username']})
         
@@ -138,7 +138,7 @@ def add_recipe():
         
 
     if 'username' in session:
-        flash('Recipe added!')
+        flash('User the ( + ) to add and ( x ) to delete!')
         
         return render_template("addrecipe.html", categories=category_found, most_recent=most_recent, favourites=favourites, countries=countries )
         

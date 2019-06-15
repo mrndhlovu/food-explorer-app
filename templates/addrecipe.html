@@ -1,56 +1,59 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui segment container">
-    <div class="ui top attached label yellow">Add Recipe</div>
-    <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <input id="title" name="title" type="text" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <select name="category" class="ui fluid search dropdown">
+<div class="ui segments">
+    <div class="ui segment">
+        <div class="ui top attached label yellow">Add Recipe</div>
+        <form class="ui form" action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input id="title" name="title" type="text" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <select name="category" class="ui fluid search dropdown">
                           <option name="category" value="">Choose Category</option>
                           {% for cat in categories %}
                           <option name="category">{{ cat.category_name }}</option>
                          {% endfor %}
             </select>
-        </div>
+            </div>
 
-        <div class="form-group">
-            <input id="country" name="country" type="text" placeholder="Country">
-        </div>
-        <div class="form-group ui segment " id="addAllergen">
-            <div class="ui top attached label ">
-                <button class="addAllergen circular ui icon button mini yellow right floated" type="button" id="addAllergenButton">  
+            <div class="form-group">
+                <input id="country" name="country" type="text" placeholder="Country">
+            </div>
+            <div class="form-group ui segment " id="addAllergen">
+                <div class="ui top attached label ">
+                    <button class="addAllergen circular ui icon button mini yellow right floated" type="button" id="addAllergenButton">  
               <i class="icon plus " id="plusIcon"></i>
             </button>
+                </div>
+                <div class="ui input focus fluid" id="inputContainer">
+                    <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
+                </div>
             </div>
-            <div class="ui input focus fluid" id="inputContainer">
-                <input class="focus" id="allergens" name="allergens" type="text" placeholder="Allergen">
-            </div>
-        </div>
-        <div class="form-group ui segment ingredient" id="addIngredient">
-            <div class="ui top attached label ">
-                <button class="circular ui icon button mini yellow right floated padded addIngredient" type="button" id="addIngredientButton">
+            <div class="form-group ui segment ingredient" id="addIngredient">
+                <div class="ui top attached label ">
+                    <button class="circular ui icon button mini yellow right floated padded addIngredient" type="button" id="addIngredientButton">
           <i class="icon plus"id="plusIcon2"></i>
         </button>
-            </div>
-            <div class="ui input focus fluid" id="inputContainer">
-                <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
-            </div>
+                </div>
+                <div class="ui input focus fluid" id="inputContainer">
+                    <input id="textarea1" name="ingredient" type="text" placeholder="Ingredient"></input>
+                </div>
 
-        </div>
-        <div class="form-group ui segment" id="addInstruction">
-            <div class="ui top attached label ">
-                <button class="circular ui icon button mini yellow right floated padded addInstruction" type="button" id="addInstructionButton">
+            </div>
+            <div class="form-group ui segment" id="addInstruction">
+                <div class="ui top attached label ">
+                    <button class="circular ui icon button mini yellow right floated padded addInstruction" type="button" id="addInstructionButton">
                 <i class="icon plus"id="plusIcon3"></i>
             </button>
-            </div>
-            <div class="ui input focus fluid" id="inputContainer">
-                <input id="textarea1" name="directions" type="text" placeholder="Directions">
-            </div>
+                </div>
+                <div class="ui input focus fluid" id="inputContainer">
+                    <input id="textarea1" name="directions" type="text" placeholder="Directions">
+                </div>
 
-        </div>
-
+            </div>
+    </div>
+    <div class="ui secondary segment">
         <button class="fluid ui button yellow submitButton" type="submit">Add Recipe</button>
+    </div>
     </form>
 
 </div>
