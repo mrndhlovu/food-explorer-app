@@ -214,16 +214,13 @@ input,
     .searchWrapper {
         padding-bottom: 2px!important;
     }
-
-    /*.ui.container {*/
-    /*    margin-right: 0px !important;*/
-    /*}*/
-    /*#recipeCardContainer {*/
-    /*    margin-left: 1.5rem !important;*/
-    /*}*/
 }
 
-#noMobileFilter,
+
 #mobileScreen {
+    display: none;
+}
+
+#noMobileFilter {
     display: none;
 }
