@@ -56,7 +56,7 @@ def login():
             
     flash('Please enter the correct username or password!')    
     
-    return render_template('index.html') 
+    return render_template('index.html', most_recent=most_recent) 
 
    
 # user logout
