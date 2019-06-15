@@ -1,7 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui container" id="EditRecipeForm">
+<div class="ui segments" id = "EditRecipeForm">
+    <div class="ui top attached label yellow">Edit Recipe</div>
     <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
-        <div class="ui top attached label yellow">Edit Recipe</div>
+
         <div class="ui segment">
             <div class="ui top attached label">Title</div>
             <div class="form-group">
@@ -63,10 +64,12 @@
                 {% for directions in recipes.record.directions %}
                 <div class="ui input focus fluid" id="directionsContainer{{ loop.index0 }}">
                     <i class="icon delete deleteIcon yellow label directions" id="deleteInstruction{{ loop.index0 }}"></i>
-                    <input id="directions{{ loop.index0 }}" name="directions" value='{{directions}}'></div> {% endfor %}
+                    <textarea rows="3" id="directions{{ loop.index0 }}" name="directions" value='{{directions}}'>{{directions}}</textarea></div> {% endfor %}
             </div>
         </div>
-        <button class="ui bottom attached label yellow" type="submit">Done</button>
+        <div class="ui secondary segment">
+            <button class="ui bottom attached label yellow" type="submit">Done</button>
+        </div>
 
     </form>
 </div>
