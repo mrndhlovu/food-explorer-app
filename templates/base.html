@@ -125,7 +125,8 @@
         {% with messages = get_flashed_messages() %} {% if messages %}
 
         <div class="ui container success mini message flashMessages">
-            <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
+            <i class="close icon"></i> {% for message in messages %}
+            <p>{{ message }}</p> {% endfor %}
 
         </div>
 
