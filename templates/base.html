@@ -138,84 +138,87 @@
                     </div>
 
                 </div>
+            </div>
 
-                <div class="ui segment" id='mobileScreen'>
-                    <div class="ui top attached label">Filter Recipes</div>
-                    <div class="btn-group">
-                        <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="ui segment" id='mobileScreen'>
+                <div class="ui top attached label">Filter Recipes</div>
+                <div class="btn-group">
+                    <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span>Categories</span>
                                           </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            {% for cat in categories %}
-                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
-                                <div class="item">
-                                    <div class="ui blue empty circular label "></div>
-                                    <span class="sortDropText "> {{ cat.category_name }} </span>
-                                </div>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="sixteen wide mobile eight wide tablet eight wide computer column">
-
-                    {% block content %} {% endblock %}
-
-                </div>
-                <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
-                    <div class="ui segment">
-                        <div class="ui divided list ">
-                            <div class="ui top attached label center aligned light yellow ">Most Recent</div>
-                            {% for recent in most_recent %}
-                            <div class="ui card mostRecent ">
-                                <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
-                                <div class="extra content ">
-                                    <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }}">
-                                        <div class="center aligned author ">
-                                            <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg ">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="center aligned author recentTime ">
-
-                                    <span class="favText ">{{recent.record.title}}</span>
-                                </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        {% for cat in categories %}
+                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                            <div class="item">
+                                <div class="ui blue empty circular label "></div>
+                                <span class="sortDropText "> {{ cat.category_name }} </span>
                             </div>
-                            {% endfor %}
-                        </div>
+                        </a>
+                        {% endfor %}
                     </div>
-                    {% if 'username' in session %}
-                    <div class="ui segment ">
-                        <div class="ui list ">
-                            <div class="ui top attached label light yellow ">Favorites</div>
-                            {% for favourite in favourites['userFavourites'] %}
-                            <div class="ui card favourites " id="favouritesIds ">
-                                <div class="extra content ">
-                                    <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} ">
-                                        <div class="author ">
-                                            <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> {{ favourite.name }}
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
-            <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <div class="sixteen wide mobile eight wide tablet eight wide computer column">
 
-            <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js "></script>
+                {% block content %} {% endblock %}
 
-            <script type="text/javascript " src="/static/js/main.js "></script>
+            </div>
+            <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
+                <div class="ui segment">
+                    <div class="ui divided list ">
+                        <div class="ui top attached label center aligned light yellow ">Most Recent</div>
+                        {% for recent in most_recent %}
+                        <div class="ui card mostRecent ">
+                            <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
+                            <div class="extra content ">
+                                <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }}">
+                                    <div class="center aligned author ">
+                                        <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg ">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="center aligned author recentTime ">
 
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                                <span class="favText ">{{recent.record.title}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if 'username' in session %}
+                <div class="ui segment ">
+                    <div class="ui list ">
+                        <div class="ui top attached label light yellow ">Favorites</div>
+                        {% for favourite in favourites['userFavourites'] %}
+                        <div class="ui card favourites " id="favouritesIds ">
+                            <div class="extra content ">
+                                <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} ">
+                                    <div class="author ">
+                                        <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> {{ favourite.name }}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
 
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js "></script>
+
+        <script type="text/javascript " src="/static/js/main.js "></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 

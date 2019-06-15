@@ -11,6 +11,7 @@ import datetime
 import base64
 import datetime as DT
 import json
+import sys
 
 
 app = Flask(__name__)
@@ -44,6 +45,7 @@ most_recent = mongo.db.userRecipes.find({ 'date_updated': {'$lte': today.strftim
 # check if user is has a username already if true point to add recipe page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+   
     login_user = users.find_one({'username' : request.form['username']})
     login_pass = users.find_one({'passcode' : request.form['password']})
     
@@ -114,7 +116,7 @@ def index():
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
-    
+    print('My path++++....',sys.path[1])
     if 'username' in session:
         favourites = users.find_one({'username': session['username']})
         
