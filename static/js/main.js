@@ -149,11 +149,9 @@ const detectmob = () => {
         navigator.userAgent.match(/BlackBerry/i) ||
         navigator.userAgent.match(/Windows Phone/i)
     ) {
-        console.log('mobile view')
         return mobileDropdown.style.display = 'block';
     }
     else {
-        console.log('desktop view')
         return filterAccordion.style.display = 'block';
     }
 }

@@ -86,7 +86,7 @@
                         <div class="content">
 
                             {% for cat in categories %}
-                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                            <a class="item " href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name )}} " id="category">
                                 <div class="title">
                                     <div class="ui blue empty circular label "></div>
                                     <span class="sortDropText "> {{ cat.category_name }} </span>
@@ -100,7 +100,7 @@
                         <div class="content">
 
                             {% for country in countries %}
-                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                            <a class="item" href="{{ url_for( 'browse_filter', query='country' , sort_order= country.record.country )}}" id="country">
                                 <div class="title">
                                     <div class="ui yellow empty circular label "></div>
                                     <span class="sortDropText "> {{ country.record.country }}</span>
@@ -149,9 +149,9 @@
                                           </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 {% for cat in categories %}
-                                <a class="item" href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name )}}" id="up_votes">
+                                <a class="item" href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name )}}" id="category">
                                     <div class="title">
-                                        <div class="ui pink empty circular label "></div>
+                                        <div class="ui pink empty circular label labelColor"></div>
                                         <span class="sortDropText "> {{ cat.category_name }} </span>
                                     </div>
                                 </a>
@@ -166,9 +166,9 @@
                                           </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 {% for country in countries %}
-                                <a class="item" href="{{ url_for( 'browse_filter', query='country' , sort_order= country.record.country )}}" id="up_votes">
+                                <a class="item" href="{{ url_for( 'browse_filter', query='country' , sort_order= country.record.country )}}" id="country">
                                     <div class="title">
-                                        <div class="ui olive empty circular label "></div>
+                                        <div class="ui olive empty circular label labelColor"></div>
                                         <span class="sortDropText "> {{ country.record.country }} </span>
                                     </div>
                                 </a>
@@ -182,33 +182,33 @@
                                           </button>
                             <div class="dropdown-menu dropdown-menu-right">
 
-                                <a class="item" href="{{ url_for( 'browse_filter', query='views' , sort_order=" descending " )}}" id="views">
-                                    <div class="item">
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="views ">
-                                            <div class="title ">
-                                                <i class="ui blue empty circular label  "></i> <span class="sortDropText ">Views Descending</span>
-                                            </div>
-                                        </a>
-                                        <div class="ui divider"></div>
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="views ">
-                                            <div class="title ">
-                                                <i class="ui blue empty circular label"></i> <span class="sortDropText ">Views Ascending</span>
-                                            </div>
-                                        </a>
-                                        <div class="ui divider"></div>
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="votes ">
-                                            <div class="title ">
-                                                <i class="ui green empty circular label"></i> <span class="sortDropText ">Most Votes Ascending</span>
-                                            </div>
-                                        </a>
-                                        <div class="ui divider"></div>
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="votes ">
-                                            <div class="title ">
-                                                <i class="ui black empty circular label"></i> <span class="sortDropText ">Most Votes Descending</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </a>
+
+                                <div class="item">
+                                    <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="views ">
+                                        <div class="title ">
+                                            <i class="ui blue empty circular label labelColor"></i> <span class="sortDropText ">Views Descending</span>
+                                        </div>
+                                    </a>
+                                    <div class="ui divider"></div>
+                                    <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="views ">
+                                        <div class="title ">
+                                            <i class="ui blue empty circular label labelColor"></i> <span class="sortDropText ">Views Ascending</span>
+                                        </div>
+                                    </a>
+                                    <div class="ui divider"></div>
+                                    <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="votes ">
+                                        <div class="title ">
+                                            <i class="ui green empty circular label labelColor"></i> <span class="sortDropText ">Most Votes Ascending</span>
+                                        </div>
+                                    </a>
+                                    <div class="ui divider"></div>
+                                    <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="votes ">
+                                        <div class="title ">
+                                            <i class="ui black empty circular label labelColor"></i> <span class="sortDropText ">Most Votes Descending</span>
+                                        </div>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>

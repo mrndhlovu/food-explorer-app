@@ -121,6 +121,12 @@ a:hover {
 
 .sortDropText {
     font-size: 0.8rem!important;
+
+    padding-left: 1rem;
+}
+
+.labelColor {
+    margin-left: 0.5rem!important;
 }
 
 .favText {
