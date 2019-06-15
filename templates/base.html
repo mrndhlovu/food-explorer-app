@@ -7,10 +7,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
     </head>
 
     <body>
@@ -21,22 +17,23 @@
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                <div class="collapse navbar-collapse" id="navbarMenu">
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse dToprightNavText" id="navbarMenu">
+                    <ul class="navbar-nav navUl">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('get_cuisine')}}">Recipes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('add_recipe')}}">Add Recipe</a>
                         </li>
+
                         {% if 'username' in session %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="{{ url_for('logout')}}" onclick="{{ url_for('logout')}}">Logout</a>
                         </li>{% else %}
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link" href="{{ url_for('index')}}">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link" href="{{ url_for('register')}}">Register</a>
                         </li>{% endif %}
                     </ul>

@@ -230,3 +230,9 @@ input,
 #noMobileFilter {
     display: none;
 }
+
+@media (min-width: 576px) {
+    .dToprightNavText {
+        margin-left: 161px !important;
+    }
+}
