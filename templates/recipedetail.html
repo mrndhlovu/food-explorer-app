@@ -1,24 +1,18 @@
 {% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
 
 <div class="ui segments" id="recipeLoad">
-
-    <div class="ui top attached label">
-        <span class=" meta left floated "> {{ recipe.record.title.upper() }}</span>
-        <span class=" meta right floated ">Last Modified: {{ recipe.date_updated}}</span>
-    </div>
-
-
+    <div class="ui top attached label small">{{ recipe.record.title.upper() }}</div>
     <div class="ui image center aligned bordered">
         <div class="ui mini ribbon label red">
             <i class="spoon icon"></i> {{recipe.record.category}}
         </div>
 
-        <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner massive label">
+        <a href="{{ url_for( 'favourites', _id=recipe._id, name=recipe.record.title ) }}" class="ui right corner label">
                   <i class="heart  red icon"></i></a>
 
         <!-- If recipe has been saved and heart icon is clicked again: recipe is removed from favourites list-->
         {% for favourite in favourites['userFavourites'] %} {% if 'username' in session and recipe._id|string == favourite.id %}
-        <a href="{{ url_for( 'remove_favourites', _id=recipe._id ) }}" class="ui right corner massive label">
+        <a href="{{ url_for( 'remove_favourites', _id=recipe._id ) }}" class="ui right corner label">
                   <i class="heart  red icon"></i></a> {% else %}{% endif %}{% endfor %}
 
         <img class="centered small bordered image" src="/static/images/food-2068217_640.jpg">
@@ -27,12 +21,21 @@
 </div>
 <!-- Indicate a recipe has been save in favourites-->
 {% for favourite in favourites['userFavourites'] %} {% if 'username' in session and recipe._id|string == favourite.id %}
-<div class="ui success mini message">
+<div class="ui success mini message flashMessages">
     <i class="close icon"></i>
-    <span>This recipe is saved in your favourites!</span>
+    <span>{{ recipe.record.title.upper()}} is saved in your favourites!</span>
 </div>{% else %}{% endif %}{% endfor %}
 
-<div class="ui vertical segment ">
+<div class="ui segment">
+    <div class="ui top attached label small">Summary</div>
+    <a class="ui basic label">Views: {{recipe.views}}</a>
+    <a class="ui basic label">Last Modified: {{ recipe.date_updated}}</a>
+    <a class="ui basic label">By: {{ recipe.uploaded_by }}</a>
+    <a class="ui pointing blue basic label"> Likes: {{recipe.up_votes}}</a>
+    <a class="ui pointing blue basic label"> DiskLikes: {{recipe.down_votes}}</a>
+</div>
+
+<div class="ui segment ">
     <div class="ui top attached label">Ingredients</div>
     <div class="ingredients ui left aligned">
         {% for ingredients in recipe.record.ingredients %}
@@ -42,7 +45,7 @@
         {% endfor %}
     </div>
 </div>
-<div class="ui vertical segment">
+<div class="ui  segment">
     <div class="ui top attached label">Directions</div>
     <table class="ui small table">
         <tbody>

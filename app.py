@@ -224,7 +224,7 @@ def remove_favourites(_id):
                 users.update({'username': session['username']},{"$pull": {"userFavourites":{ "id": remove_id }}})
     flash('Removed')            
     
-    return redirect(url_for('get_cuisine'))
+    return redirect(url_for('show_detail', recipe_id=_id))
     
 
 # Render recipe detail and track number of views
