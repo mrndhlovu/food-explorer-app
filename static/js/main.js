@@ -137,6 +137,29 @@ const removeField = e => {
 };
 
 
+var filterAccordion = document.getElementById('noMobileFilter')
+var mobileDropdown = document.getElementById('mobileScreen')
+
+const detectmob = () => {
+    if (navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+    ) {
+        console.log('mobile view')
+        return mobileDropdown.style.display = 'block';
+    }
+    else {
+        console.log('desktop view')
+        return filterAccordion.style.display = 'block';
+    }
+}
+
+detectmob();
+
 window.onload = function () {
     const addAllergenButton = document.getElementById('addAllergenButton');
     if (addAllergenButton) {
@@ -180,18 +203,16 @@ window.onload = function () {
 };
 
 
-var filterAccordion = document.getElementById('noMobileFilter')
-var mobileDropdown = document.getElementById('mobileScreen')
-
 
 
 //  hidden accordion if mobile screen
-if (screen.width <= 640) {
-    mobileDropdown.style.display = 'block';
-}
-else {
-    filterAccordion.style.display = 'block';
-}
+// if (screen.width <= 640) {
+
+// }
+// else {
+
+// }
+
 
 
 //Show or hide search result bar
