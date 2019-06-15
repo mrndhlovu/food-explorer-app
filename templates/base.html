@@ -139,43 +139,80 @@
 
                 </div>
 
-                <div class="ui horizontal segments" id='mobileScreen'>
+                <div class="ui horizontal segments " id='mobileScreen'>
 
                     <div class="ui top attached label">Filter Recipes</div>
-                    <div class="ui segment">
-                        <div class="btn-group">
-                            <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="ui segment equal width red">
+                        <div class="btn-group teal ">
+                            <button type="button" class="btn column btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span>Category</span>
                                           </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 {% for cat in categories %}
                                 <a class="item" href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name )}}" id="up_votes">
-                                    <div class="item">
-                                        <div class="ui blue empty circular label "></div>
+                                    <div class="title">
+                                        <div class="ui pink empty circular label "></div>
                                         <span class="sortDropText "> {{ cat.category_name }} </span>
                                     </div>
                                 </a>
+                                <div class="ui divider"></div>
                                 {% endfor %}
                             </div>
                         </div>
-                    </div>
-                    <div class="ui segment">
+
                         <div class="btn-group">
-                            <button type="button" class="btn  dropdown-toggle small" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span>Country</span>
                                           </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 {% for country in countries %}
                                 <a class="item" href="{{ url_for( 'browse_filter', query='country' , sort_order= country.record.country )}}" id="up_votes">
-                                    <div class="item">
-                                        <div class="ui blue empty circular label "></div>
+                                    <div class="title">
+                                        <div class="ui olive empty circular label "></div>
                                         <span class="sortDropText "> {{ country.record.country }} </span>
                                     </div>
                                 </a>
+                                <div class="ui divider"></div>
                                 {% endfor %}
                             </div>
                         </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Other</span>
+                                          </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+
+                                <a class="item" href="{{ url_for( 'browse_filter', query='views' , sort_order=" descending " )}}" id="views">
+                                    <div class="item">
+                                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="views ">
+                                            <div class="title ">
+                                                <i class="ui blue empty circular label  "></i> <span class="sortDropText ">Views Descending</span>
+                                            </div>
+                                        </a>
+                                        <div class="ui divider"></div>
+                                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="views ">
+                                            <div class="title ">
+                                                <i class="ui blue empty circular label"></i> <span class="sortDropText ">Views Ascending</span>
+                                            </div>
+                                        </a>
+                                        <div class="ui divider"></div>
+                                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="votes ">
+                                            <div class="title ">
+                                                <i class="ui green empty circular label"></i> <span class="sortDropText ">Most Votes Ascending</span>
+                                            </div>
+                                        </a>
+                                        <div class="ui divider"></div>
+                                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="votes ">
+                                            <div class="title ">
+                                                <i class="ui black empty circular label"></i> <span class="sortDropText ">Most Votes Descending</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="sixteen wide mobile eight wide tablet eight wide computer column">
