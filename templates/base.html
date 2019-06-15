@@ -10,15 +10,13 @@
     </head>
 
     <body>
-
-        <div class="sixteen wide  column">
-
+        <div class="sixteen wide column">
             <!--Bootstrap responsive navigation-->
             <nav class="navbar navbar-expand-sm navbar-light bg-light navBar">
                 <a class="navbar-brand" href="{{ url_for('get_cuisine')}}">Food Explorers</a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-            <span class="navbar-toggler-icon"></span>
-                </button>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -39,142 +37,144 @@
                         </li>{% endif %}
                     </ul>
                 </div>
-
             </nav>
-        </div>
-
-        <div class="ui grid container loggedInUser">
-            <div class="ui right aligned" id='loginStatus'>
+            <div class="ui container loggedInUser">
                 {% if 'username' in session %}
                 <div class="ui tiny label"><span class="login">Logged in as: {{ session['username'] }}</span>
                     <a class="item">
-                                                <i class="icon user green"></i>
-                                          </a> </div>
+                <i class="icon user green"></i>
+                </a> </div>
                 {% else %} {% endif %}
             </div>
         </div>
-        <div class="ui grid">
-            <div class="sixteen wide column">
+        <div class="ui grid padded">
+            <div class="sixteen wide mobile twleve wide tablet twleve wide computer column  searchWrapper">
+                <form class="ui action input fluid " action="{{ url_for( 'browse_filter', query='search' , sort_order=" " ) }} ">
+                    <input type="text " name="search" placeholder="Search... ">
+                    <button class="ui button searchButton " type="submit "><span class="ui black small "><span class="searchButtonText ">Search</span></span></button>
+                </form>
+            </div>
+            <div class="sixteen wide mobile  four wide tablet four wide computer column filterWrapper">
+                <div class="ui floating dropdown labeled icon button fluid segment ">
 
-                <div class="ui grid container">
-                    <div class="sixteen wide mobile twleve wide tablet twleve wide computer column searchBarContainer ">
-                        <form class="ui action input fluid " action="{{ url_for( 'browse_filter', query='search' , sort_order=" " ) }} ">
-                            <input type="text " name="search" placeholder="Search... ">
-                            <button class="ui button searchButton " type="submit "><span class="ui black small "><span class="searchButtonText ">Search</span></span></button>
-                        </form>
-                    </div>
-
-
-                    <div class="eight wide mobile  six wide tablet six wide computer column ">
-                        <div class=" ui floating dropdown labeled icon button segment">
-
-                            <div class="text sortDropText "><span class=" ">FilterRecipes</span></div>
-                            <i class="dropdown icon "></i>
-                            <div class="menu ">
-                                <div class="ui down pointing dropdown link item ">
-                                    <div class="header ">
-                                        <i class="dropdown icon "></i><span class="sortDropText "> Filter by Categories</span>
-                                    </div>
-                                    <div class="menu ">
-                                        {% for cat in categories %}
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name)}} " id="country ">
-                                            <div class="item ">
-                                                <i class="olive circle icon "></i> <span class="sortDropText "> {{cat.category_name }} </span>
-                                            </div>
-                                        </a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="divider "></div>
-                                <div class="ui left pointing dropdown link item ">
-                                    <div class="header ">
-                                        <i class="dropdown icon "></i><span class="sortDropText "> Filter by Countries</span>
-                                    </div>
-                                    <div class="menu ">
-                                        {% for country in countries %}
-                                        <a class="item " href="{{ url_for( 'browse_filter', query='country' , sort_order=country.record.country)}} " id="country ">
-                                            <div class="item ">
-                                                <i class="olive circle icon "></i> <span class="sortDropText "> {{country.record.country }} </span>
-                                            </div>
-                                        </a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="divider "></div>
-                                <div class="header ">
-                                    <i class="tags icon "></i> Other Filters
-                                </div>
-                                <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
-                                    <div class="item ">
-                                        <div class="ui yellow empty circular label "></div>
-                                        <span class="sortDropText "> Most Votes Descending</span>
-                                    </div>
-                                </a>
-                                <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="up_votes ">
-                                    <div class="item ">
-                                        <div class="ui yellow empty circular label "></div>
-                                        <span class="sortDropText ">Most Votes Ascending</span>
-                                    </div>
-                                </a>
-                                <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="country ">
-                                    <div class="item ">
-                                        <i class="eye icon "></i><span class="sortDropText "> Views Ascending</span>
-                                    </div>
-                                </a>
-                                <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="country ">
-                                    <div class="item ">
-                                        <i class="eye icon "></i> <span class="sortDropText ">Views Descending</span>
-                                    </div>
-                                </a>
+                    <div class="text sortDropText "><span class=" ">FilterRecipes</span></div>
+                    <i class="dropdown icon "></i>
+                    <div class="menu ">
+                        <div class="ui dropdown link item ">
+                            <div class="header ">
+                                <i class="dropdown icon "></i><span class="sortDropText "> Filter by Categories</span>
                             </div>
-
+                            <div class="menu ">
+                                {% for cat in categories %}
+                                <a class="item " href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name)}} " id="country ">
+                                    <div class="item ">
+                                        <i class="olive circle icon "></i> <span class="sortDropText "> {{cat.category_name }} </span>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
                         </div>
+                        <div class="divider "></div>
+                        <div class="ui down pointing dropdown link item ">
+                            <div class="header ">
+                                <i class="dropdown icon "></i><span class="sortDropText "> Filter by Countries</span>
+                            </div>
+                            <div class="menu ">
+                                {% for country in countries %}
+                                <a class="item " href="{{ url_for( 'browse_filter', query='country' , sort_order=country.record.country)}} " id="country ">
+                                    <div class="item ">
+                                        <i class="olive circle icon "></i> <span class="sortDropText "> {{country.record.country }} </span>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="divider "></div>
+                        <div class="header ">
+                            <i class="tags icon "></i> Other Filters
+                        </div>
+                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                            <div class="item ">
+                                <div class="ui yellow empty circular label "></div>
+                                <span class="sortDropText "> Most Votes Descending</span>
+                            </div>
+                        </a>
+                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="up_votes ">
+                            <div class="item ">
+                                <div class="ui yellow empty circular label "></div>
+                                <span class="sortDropText ">Most Votes Ascending</span>
+                            </div>
+                        </a>
+                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="country ">
+                            <div class="item ">
+                                <i class="eye icon "></i><span class="sortDropText "> Views Ascending</span>
+                            </div>
+                        </a>
+                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="country ">
+                            <div class="item ">
+                                <i class="eye icon "></i> <span class="sortDropText ">Views Descending</span>
+                            </div>
+                        </a>
                     </div>
+
                 </div>
             </div>
-            <div class="ui grid ">
-                <div class="sixteen wide mobile eleven wide tablet eleven wide computer column">
+        </div>
+
+        <!-- Flash messages-->
+        {% with messages = get_flashed_messages() %} {% if messages %}
+
+        <div class="ui container success mini message flashMessages">
+            <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
+
+        </div>
+
+        {% endif %} {% endwith %}
+
+        <div class="ui grid padded">
+            <div class="sixteen wide mobile eleven wide tablet eleven wide computer column">
+                <div class="ui padded container">
                     {% block content %} {% endblock %}
                 </div>
-                <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
-                    <div class="ui segment">
-                        <div class="ui divided list ">
-                            <div class="ui top attached label center aligned light yellow ">Most Recent</div>
-                            {% for recent in most_recent %}
-                            <div class="ui card mostRecent ">
-                                <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
-                                <div class="extra content ">
-                                    <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }} ">
-                                        <div class="center aligned author ">
-                                            <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg ">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="center aligned author recentTime ">
-
-                                    <span class="favText ">{{recent.record.title}}</span>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% if 'username' in session %}
-                    <div class="ui segment ">
-                        <div class="ui list ">
-                            <div class="ui top attached label light yellow ">Favorites</div>
-                            {% for favourite in favourites['userFavourites'] %}
-                            <div class="ui card favourites " id="favouritesIds ">
-                                <div class="extra content ">
-                                    <div class="author ">
-                                        <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} "> <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> </a>{{ favourite.name }}
+            </div>
+            <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
+                <div class="ui segment">
+                    <div class="ui divided list ">
+                        <div class="ui top attached label center aligned light yellow ">Most Recent</div>
+                        {% for recent in most_recent %}
+                        <div class="ui card mostRecent ">
+                            <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
+                            <div class="extra content ">
+                                <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }} ">
+                                    <div class="center aligned author ">
+                                        <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg ">
                                     </div>
+                                </a>
+                            </div>
+                            <div class="center aligned author recentTime ">
+
+                                <span class="favText ">{{recent.record.title}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if 'username' in session %}
+                <div class="ui segment ">
+                    <div class="ui list ">
+                        <div class="ui top attached label light yellow ">Favorites</div>
+                        {% for favourite in favourites['userFavourites'] %}
+                        <div class="ui card favourites " id="favouritesIds ">
+                            <div class="extra content ">
+                                <div class="author ">
+                                    <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} "> <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> </a>{{ favourite.name }}
                                 </div>
                             </div>
-                            {% endfor %}
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>

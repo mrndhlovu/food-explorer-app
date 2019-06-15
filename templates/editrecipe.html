@@ -1,10 +1,4 @@
-{% extends 'base.html' %} {% block content %}{% with messages = get_flashed_messages() %} {% if messages %}
-
-<div class="ui mini message">
-    <i class="close icon"></i> {% for message in messages %}
-    <p>{{ message }}</p> {% endfor %}
-</div>
-{% endif %} {% endwith %}
+{% extends 'base.html' %} {% block content %}
 <div class="ui container" id="EditRecipeForm">
     <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
         <div class="ui top attached label yellow">Edit Recipe</div>

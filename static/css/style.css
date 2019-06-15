@@ -6,9 +6,7 @@ body {
     color: rgba(0, 0, 0, .87);
 }
 
-#loginStatus {
-    padding-bottom: 0.6rem;
-}
+#loginStatus {}
 
 .navBar {
     background-color: #e8e8e8 !important;
@@ -46,7 +44,8 @@ a:hover {
 
 
 .loggedInUser {
-    margin-top: 0.4rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem;
 }
 
 .recipes-list {
@@ -180,12 +179,7 @@ input,
     margin-left: -0.1rem
 }
 
-.filterWrapper {
-    margin-top: -5px;
-    border-radius: 0;
-    height: 2.7rem;
-    margin-bottom: 10px
-}
+
 
 .favourites,
 .mostRecent {
@@ -194,8 +188,11 @@ input,
     width: auto!important;
 }
 
-.sideBarWrapper {
-    margin-top: 1rem!important
+.flashMessages {
+    border-radius: 0 !important;
+    background-color: #e0e1e2 !important;
+    color: #000 !important;
+    box-shadow: 0 0 0 1px #bcbdbd inset, 0 0 0 0 transparent !important;
 }
 
 .deleteIcon {
@@ -207,11 +204,21 @@ input,
 }
 
 @media only screen and (max-width: 767px) {
-    .ui.container {
-        margin-right: 0px !important;
+    .filterWrapper {
+        padding-top: 0.8rem !important;
+        border-radius: 0;
+
+
     }
 
-    #recipeCardContainer {
-        margin-left: 1.5rem !important;
+    .searchWrapper {
+        padding-bottom: 2px!important;
     }
+
+    /*.ui.container {*/
+    /*    margin-right: 0px !important;*/
+    /*}*/
+    /*#recipeCardContainer {*/
+    /*    margin-left: 1.5rem !important;*/
+    /*}*/
 }

@@ -1,11 +1,5 @@
-{% extends 'base.html' %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
-
-<div class="ui negative mini message">
-    <i class="close icon"></i> {% for message in messages %} {{ message }} {% endfor %}
-
-</div>
-{% endif %} {% endwith %}
-<div class="ui container  segment login-form-wrapper loginWrapper">
+{% extends 'base.html' %} {% block content %}
+<div class="ui container segment login-form-wrapper loginWrapper">
     <div class="ui top attached label">Login or Signup</div>
     <div class="ui grid ">
         <div class="ten wide ten wide tablet eight ten computer column">
