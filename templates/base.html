@@ -54,71 +54,9 @@
                     <button class="ui button searchButton " type="submit "><span class="ui black small "><span class="searchButtonText ">Search</span></span></button>
                 </form>
             </div>
-            <div class="sixteen wide mobile  four wide tablet four wide computer column filterWrapper">
-                <div class="ui floating dropdown labeled icon button fluid segment ">
 
-                    <div class="text sortDropText "><span class=" ">FilterRecipes</span></div>
-                    <i class="dropdown icon "></i>
-                    <div class="menu ">
-                        <div class="ui dropdown link item ">
-                            <div class="header ">
-                                <i class="dropdown icon "></i><span class="sortDropText "> Filter by Categories</span>
-                            </div>
-                            <div class="menu ">
-                                {% for cat in categories %}
-                                <a class="item " href="{{ url_for( 'browse_filter', query='category' , sort_order=cat.category_name)}} " id="country ">
-                                    <div class="item ">
-                                        <i class="olive circle icon "></i> <span class="sortDropText "> {{cat.category_name }} </span>
-                                    </div>
-                                </a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="divider "></div>
-                        <div class="ui down pointing dropdown link item ">
-                            <div class="header ">
-                                <i class="dropdown icon "></i><span class="sortDropText "> Filter by Countries</span>
-                            </div>
-                            <div class="menu ">
-                                {% for country in countries %}
-                                <a class="item " href="{{ url_for( 'browse_filter', query='country' , sort_order=country.record.country)}} " id="country ">
-                                    <div class="item ">
-                                        <i class="olive circle icon "></i> <span class="sortDropText "> {{country.record.country }} </span>
-                                    </div>
-                                </a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="divider "></div>
-                        <div class="header ">
-                            <i class="tags icon "></i> Other Filters
-                        </div>
-                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
-                            <div class="item ">
-                                <div class="ui yellow empty circular label "></div>
-                                <span class="sortDropText "> Most Votes Descending</span>
-                            </div>
-                        </a>
-                        <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="up_votes ">
-                            <div class="item ">
-                                <div class="ui yellow empty circular label "></div>
-                                <span class="sortDropText ">Most Votes Ascending</span>
-                            </div>
-                        </a>
-                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="country ">
-                            <div class="item ">
-                                <i class="eye icon "></i><span class="sortDropText "> Views Ascending</span>
-                            </div>
-                        </a>
-                        <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="country ">
-                            <div class="item ">
-                                <i class="eye icon "></i> <span class="sortDropText ">Views Descending</span>
-                            </div>
-                        </a>
-                    </div>
 
-                </div>
-            </div>
+
         </div>
 
         <!-- Flash messages-->
@@ -133,7 +71,71 @@
         {% endif %} {% endwith %}
 
         <div class="ui grid padded">
-            <div class="sixteen wide mobile eleven wide tablet eleven wide computer column">
+            <div class="sixteen wide mobile four wide tablet four wide computer column">
+                <div class="ui segment">
+
+                    <div class="ui top attached label yellow">Filter Recipes</div>
+                    <div class="ui styled accordion">
+                        <div class="title">
+                            <i class="dropdown icon"></i> <span>Categories</span>
+                        </div>
+                        <div class="content">
+
+                            {% for cat in categories %}
+                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                                <div class="title">
+                                    <div class="ui blue empty circular label "></div>
+                                    <span class="sortDropText "> {{ cat.category_name }} </span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="title">
+                            <i class="dropdown icon"></i> <span>Country</span>
+                        </div>
+                        <div class="content">
+
+                            {% for country in countries %}
+                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                                <div class="title">
+                                    <div class="ui yellow empty circular label "></div>
+                                    <span class="sortDropText "> {{ country.record.country }}</span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="title">
+                            <i class="dropdown icon"></i> <span>Other</span>
+                        </div>
+                        <div class="content">
+                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='descending' )}} " id="up_votes ">
+                                <div class="title">
+                                    <div class="ui green empty circular label "></div>
+                                    <span class="sortDropText "> Most Votes Descending</span>
+                                </div>
+                            </a>
+                            <a class="item " href="{{ url_for( 'browse_filter', query='up_votes' , sort_order='ascending' )}} " id="up_votes ">
+                                <div class="title ">
+                                    <div class="ui pink empty circular label "></div>
+                                    <span class="sortDropText ">Most Votes Ascending</span>
+                                </div>
+                            </a>
+                            <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='ascending' )}} " id="country ">
+                                <div class="title ">
+                                    <i class="eye icon "></i><span class="sortDropText "> Views Ascending</span>
+                                </div>
+                            </a>
+                            <a class="item " href="{{ url_for( 'browse_filter', query='views' , sort_order='descending' )}} " id="country ">
+                                <div class="title ">
+                                    <i class="eye icon "></i> <span class="sortDropText ">Views Descending</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="sixteen wide mobile eight wide tablet eight wide computer column">
 
                 {% block content %} {% endblock %}
 
@@ -146,7 +148,7 @@
                         <div class="ui card mostRecent ">
                             <div class="ui top attached label center aligned sortDropText "> {{recent.date_updated }}</div>
                             <div class="extra content ">
-                                <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }} ">
+                                <a href="{{ url_for( 'show_detail', recipe_id=recent._id ) }}">
                                     <div class="center aligned author ">
                                         <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg ">
                                     </div>
@@ -167,9 +169,11 @@
                         {% for favourite in favourites['userFavourites'] %}
                         <div class="ui card favourites " id="favouritesIds ">
                             <div class="extra content ">
-                                <div class="author ">
-                                    <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} "> <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> </a>{{ favourite.name }}
-                                </div>
+                                <a href="{{ url_for( 'show_detail', recipe_id=favourites.userFavourites[ loop.index0 ].id ) }} ">
+                                    <div class="author ">
+                                        <img class="ui avatar image " src="/static/images/waffle-heart-2697904_1280.jpg "> {{ favourite.name }}
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {% endfor %}
