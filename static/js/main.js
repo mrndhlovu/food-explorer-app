@@ -180,6 +180,20 @@ window.onload = function () {
 };
 
 
+var filterAccordion = document.getElementById('noMobileFilter')
+var mobileDropdown = document.getElementById('mobileScreen')
+
+
+
+//  hidden accordion if mobile screen
+if (screen.width <= 640) {
+    mobileDropdown.style.display = 'block';
+}
+else {
+    filterAccordion.style.display = 'block';
+}
+
+
 //Show or hide search result bar
 $(document).ready(function () {
     if (window.location.href.indexOf("browse_filter") > 1) {
@@ -189,22 +203,11 @@ $(document).ready(function () {
         $("#sortDetails").hide();
     }
 
-
-    $('.example .menu .browse')
-        .popup({
-            inline: true,
-            hoverable: true,
-            popup: '.menu.browse',
-            position: 'bottom left',
-            delay: {
-                show: 300,
-                hide: 800
-            }
-        });
+    if (filterAccordion) {
+        $('.ui.accordion').accordion();
+    }
 
 
-
-    $('.ui.accordion').accordion();
     $('.dropdown-toggle').dropdown()
 
 
@@ -221,15 +224,3 @@ $('.ui.dropdown')
     .dropdown({
         allowCategorySelection: true
     });
-
-var filterAccordion = document.getElementById('noMobileFilter')
-var mobileDropdown = document.getElementById('mobileScreen')
-
-//  hidden accordion if mobile screen
-if (screen.width <= 640) {
-    console.log('mobileview')
-    mobileDropdown.style.display = 'block';
-}
-else {
-    filterAccordion.style.display = 'block';
-}
