@@ -222,8 +222,8 @@ $('.ui.dropdown')
         allowCategorySelection: true
     });
 
-const filterAccordion = document.getElementById('noMobileFilter')
-const mobileDropdown = document.getElementById('mobileScreen')
+var filterAccordion = document.getElementById('noMobileFilter')
+var mobileDropdown = document.getElementById('mobileScreen')
 
 //  hidden accordion if mobile screen
 if (screen.width <= 640) {
