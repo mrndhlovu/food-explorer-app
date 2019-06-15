@@ -222,3 +222,8 @@ input,
     /*    margin-left: 1.5rem !important;*/
     /*}*/
 }
+
+#noMobileFilter,
+#mobileScreen {
+    display: none;
+}

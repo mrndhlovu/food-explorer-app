@@ -203,7 +203,10 @@ $(document).ready(function () {
         });
 
 
+
     $('.ui.accordion').accordion();
+    $('.dropdown-toggle').dropdown()
+
 
 });
 
@@ -218,3 +221,15 @@ $('.ui.dropdown')
     .dropdown({
         allowCategorySelection: true
     });
+
+const filterAccordion = document.getElementById('noMobileFilter')
+const mobileDropdown = document.getElementById('mobileScreen')
+
+//  hidden accordion if mobile screen
+if (screen.width <= 640) {
+    console.log('mobileview')
+    mobileDropdown.style.display = 'block';
+}
+else {
+    filterAccordion.style.display = 'block';
+}
