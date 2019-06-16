@@ -53,12 +53,25 @@ $('.ui.form').form({
 });
 
 
+$('.message .close')
+    .on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    });
+
+$('.ui.dropdown')
+    .dropdown({
+        allowCategorySelection: true
+    });
+
+
 $('.ui.modal')
     .modal('show');
 
 
 
-//  add allergen, instructions or ingredient input field
+//  create allergen, instructions or ingredient input field
 const addField = e => {
     e.stopImmediatePropagation();
 
@@ -113,7 +126,6 @@ const addField = e => {
 
 // Delete allergen, instructions or ingredient input fields
 const removeField = e => {
-    console.log('should remove')
     const allergenContainer = document.getElementById("addAllergen");
     const ingredientContainer = document.getElementById("addIngredient");
     const instructionsContainer = document.getElementById("addInstruction");
@@ -137,9 +149,12 @@ const removeField = e => {
 };
 
 
-var filterAccordion = document.getElementById('noMobileFilter')
-var mobileDropdown = document.getElementById('mobileScreen')
+const deskTopFilterAccordion = document.getElementById('noMobileFilter')
+const mobileFilterDropdown = document.getElementById('mobileScreen')
 
+
+
+// find device type and load recipe filter  
 const detectmob = () => {
     if (navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -149,16 +164,17 @@ const detectmob = () => {
         navigator.userAgent.match(/BlackBerry/i) ||
         navigator.userAgent.match(/Windows Phone/i)
     ) {
-        return mobileDropdown.style.display = 'block';
+        return mobileFilterDropdown.style.display = 'block';
     }
     else {
-        return filterAccordion.style.display = 'block';
+        return deskTopFilterAccordion.style.display = 'block';
     }
 }
 
-detectmob();
+let userData;
 
-window.onload = function () {
+window.onload = () => {
+    detectmob();
     const addAllergenButton = document.getElementById('addAllergenButton');
     if (addAllergenButton) {
         addAllergenButton.addEventListener('click', addField);
@@ -198,18 +214,90 @@ window.onload = function () {
             }
         }
     }
+
+    const recipesFound = document.getElementById('recipeListContainer');
+    if (recipesFound) {
+        for (let i = 0; i <= recipesFound.childElementCount; i++) {
+            const likeButton = document.getElementById(`liked${i}`);
+            if (likeButton) {
+
+                likeButton.addEventListener('click', recipeVote, true)
+            }
+
+        }
+
+    }
+
+    const username = document.getElementById('onlineUsername');
+    if (username) {
+        let userRecord = `user-${username.innerHTML}`
+        userData = JSON.parse(localStorage.getItem(userRecord)) || {
+            username: username.innerHTML,
+            userLikes: [],
+        };
+        localStorage.setItem(userRecord, JSON.stringify(userData))
+        userData = JSON.parse(localStorage.getItem(userRecord))
+    }
+    else {
+        return false
+    }
 };
 
+const recipeVote = e => {
+
+    const { userLikes } = userData;
+    const likeButton = e.target;
+    let recipesLiked = [];
 
 
 
-//  hidden accordion if mobile screen
-// if (screen.width <= 640) {
+    if (likeButton.children.item(0) !== null) {
+        const recipeId = likeButton.children.item(0).id;
+        const likeRecipeButton = likeButton.class
+        console.log(likeButton)
+        if (userLikes.indexOf(recipeId) >= 0) {
+            userLikes.pop(recipeId)
+            localStorage.setItem(`user-${userData.username}`, JSON.stringify(userData))
+            const updateRecord = JSON.parse(localStorage.getItem(`user-${userData.username}`))
 
-// }
-// else {
+        }
+        else {
+            userLikes.push(recipeId);
+            localStorage.setItem(`user-${userData.username}`, JSON.stringify(userData))
+            const updateRecord = JSON.parse(localStorage.getItem(`user-${userData.username}`))
 
-// }
+        }
+
+
+        // if (userLikes) {
+        //     userLikes.push(likeId.id);
+        //     console.log('Userdata: ', userData)
+
+        //     // console.log('created : ', recipesLiked)
+        //     localStorage.setItem('userData', JSON.stringify(userData))
+        //     const newFile = JSON.parse(localStorage.getItem('userData'))
+        //     console.log('From LocalStorage: ', newFile)
+
+
+        //     console.log('shold set new recipesLiked array to LS: ', userData)
+        // }
+        // else {
+        //     console.log('You liked this already')
+        //     return false
+        // }
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -222,24 +310,11 @@ $(document).ready(function () {
         $("#sortDetails").hide();
     }
 
-    if (filterAccordion) {
+    if (deskTopFilterAccordion) {
         $('.ui.accordion').accordion();
     }
 
 
     $('.dropdown-toggle').dropdown()
 
-
 });
-
-$('.message .close')
-    .on('click', function () {
-        $(this)
-            .closest('.message')
-            .transition('fade');
-    });
-
-$('.ui.dropdown')
-    .dropdown({
-        allowCategorySelection: true
-    });

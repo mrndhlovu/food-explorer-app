@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-
 <div class="eight column row">
-    <div class="ui one cards" id="cards">
+    <div class="ui one cards" id="recipeListContainer">
         {% for recipe in recipes %}
         <div class="ui card" id="recipeCardContainer">
             <div class="content mini">
@@ -24,10 +23,10 @@
                 </div>
                 <div class="ui medium transparent left icon input right floated">
                     <span class="recipeCardText voteText">{{recipe.up_votes}}</span>
-                    <a href="{{ url_for('up_votes', _id=recipe._id)}}">
-                            <button class="circular ui icon button voteButton">
-                                <i class="thumbs up icon black"></i>
-                            </button>
+                    <a href="#">
+                          <button class="circular ui icon button voteButton" id="liked{{loop.index0}}">
+                                <i class="thumbs up icon black" id={{recipe._id}}></i>
+                          </button>
                         </a>
                 </div>
             </div>

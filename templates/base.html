@@ -39,9 +39,9 @@
                     </ul>
                 </div>
             </nav>
-            <div class="ui container loggedInUser">
+            <div class="ui container loggedInUser" id="loggedInUser">
                 {% if 'username' in session %}
-                <div class="ui tiny label"><span class="login">Logged in as: {{ session['username'] }}</span>
+                <div class="ui tiny label"><span class="login">Logged in as:<span id="onlineUsername">{{ session['username'] }}</span></span>
                     <a class="item">
                 <i class="icon user green"></i>
                 </a> </div>
