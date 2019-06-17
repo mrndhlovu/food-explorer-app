@@ -177,7 +177,7 @@ While trying to handle the responsive design of the website, I forgot to add thi
 
 It gives the browser instructions on how to handle page dimensions and scale accordingly.
 
-Had issues with some semantic ui components like accordions and dropdowns, as they do not work in mobile view. which resulted in having a different views of the recipes filter in mobile and desktopview. Worked out well at the end
+Had issues with some semantic ui components like accordions and dropdowns, as they do not work in mobile view. which resulted in having a different views of the recipes filter in mobile and desktopview.
 
 ##### Other browsers used for testing
 
@@ -190,7 +190,11 @@ Bugs and other issues
 
 1. The website uses the same image for all recipes which can be improved to having the ability to upload a unique image for each recipe.
 2. One image is also used as a user avatar. Can be improved by adding a unique image as the user signs up.
-3. When a user likes a recipe, that is only tracked on the backend but not shown on the website. This can be improved by turning a button to a different color when recipe is liked.
+3. As whe a user logs in, a localstorage file if created to track user likes and and change the like button when clicked, however there is an issue with keeping the color state of the button when page reloads.
+4. User can upvote or downvote a recipe more than once.
+5. No form validation
+6. 
+
 
 Deployment
 ===
@@ -210,19 +214,3 @@ Acknowledgments
 * [Pexels](https://www.pexels.com/) - Royalty free images.
 * [W3C CSS](https://jigsaw.w3.org/css-validator/validator) css code validator
 * [Heroku](heroku.com)
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
