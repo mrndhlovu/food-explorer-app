@@ -11,7 +11,9 @@
 
     <body>
         <div class="sixteen wide column">
+
             <!--Bootstrap responsive navigation-->
+
             <nav class="navbar navbar-expand-sm navbar-light bg-light navBar">
                 <a class="navbar-brand" href="{{ url_for('get_cuisine')}}">Food Explorers</a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
@@ -39,6 +41,8 @@
                     </ul>
                 </div>
             </nav>
+
+            <!--Show logged in user-->
             <div class="ui container loggedInUser" id="loggedInUser">
                 {% if 'username' in session %}
                 <div class="ui tiny label"><span class="login">Logged in as:<span id="onlineUsername">{{ session['username'] }}</span></span>
@@ -70,6 +74,9 @@
         </div>
 
         {% endif %} {% endwith %}
+
+
+        <!-- left sidebar desktopview filters accordion-->
 
         <div class="ui grid padded">
             <div class="sixteen wide mobile four wide tablet four wide computer column">
@@ -135,6 +142,8 @@
                     </div>
 
                 </div>
+
+                <!--mobileview recipefilter dropdown-->
 
                 <div class="ui horizontal segments " id='mobileScreen'>
 
@@ -212,11 +221,15 @@
 
                 </div>
             </div>
+
+            <!---->
             <div class="sixteen wide mobile eight wide tablet eight wide computer column">
 
                 {% block content %} {% endblock %}
 
             </div>
+
+            <!-- Right sidebar-->
             <div class="sixteen wide mobile four wide tablet four wide computer column sideBarWrapper ">
                 <div class="ui segment">
                     <div class="ui divided list ">

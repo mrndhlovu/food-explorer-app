@@ -116,7 +116,6 @@ def index():
 @app.route('/')    
 @app.route('/get_cuisine')
 def get_cuisine():
-    
     if 'username' in session:
         favourites = users.find_one({'username': session['username']})
         
@@ -284,7 +283,7 @@ def up_votes(_id):
         recipe.update({'_id': ObjectId(_id)},
         { "$inc": { "up_votes": 1 },})
         
-        return flash('Liked')
+        return redirect(url_for('get_cuisine'))
     return render_template('index.html')   
     
     

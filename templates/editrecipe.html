@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<div class="ui segments" id = "EditRecipeForm">
+<!-- Edit recipe-->
+
+<div class="ui segments" id="EditRecipeForm">
     <div class="ui top attached label yellow">Edit Recipe</div>
     <form class="ui form" action="{{ url_for('update_recipe', _id=recipes._id) }}" method="POST" class="col s12">
 

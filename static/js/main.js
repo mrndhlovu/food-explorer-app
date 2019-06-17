@@ -151,7 +151,7 @@ const removeField = e => {
 
 const deskTopFilterAccordion = document.getElementById('noMobileFilter')
 const mobileFilterDropdown = document.getElementById('mobileScreen')
-
+let userData;
 
 
 // find device type and load recipe filter  
@@ -171,7 +171,6 @@ const detectmob = () => {
     }
 }
 
-let userData;
 
 window.onload = () => {
     detectmob();
@@ -214,20 +213,22 @@ window.onload = () => {
             }
         }
     }
-
+    //  add eventListener to like button
     const recipesFound = document.getElementById('recipeListContainer');
     if (recipesFound) {
         for (let i = 0; i <= recipesFound.childElementCount; i++) {
             const likeButton = document.getElementById(`liked${i}`);
             if (likeButton) {
 
-                likeButton.addEventListener('click', recipeVote, true)
+                likeButton.addEventListener('click', handleLikeClick)
             }
 
         }
 
     }
 
+
+    //  create localStorage record 
     const username = document.getElementById('onlineUsername');
     if (username) {
         let userRecord = `user-${username.innerHTML}`
@@ -237,68 +238,50 @@ window.onload = () => {
         };
         localStorage.setItem(userRecord, JSON.stringify(userData))
         userData = JSON.parse(localStorage.getItem(userRecord))
+
+
+        if (userData.username && userData.userLikes > 0) {
+            console.log("Will do to icon")
+        }
     }
     else {
         return false
     }
 };
 
-const recipeVote = e => {
+const base_url = window.location.origin;
+console.log(base_url)
+
+
+// ha
+const handleLikeClick = e => {
 
     const { userLikes } = userData;
     const likeButton = e.target;
     let recipesLiked = [];
 
-
+    // check if recipe liked and change the icon color
 
     if (likeButton.children.item(0) !== null) {
         const recipeId = likeButton.children.item(0).id;
-        const likeRecipeButton = likeButton.class
-        console.log(likeButton)
+        const likeRecipeButton = document.getElementsByClassName(`recipeId${recipeId}`)
+
         if (userLikes.indexOf(recipeId) >= 0) {
             userLikes.pop(recipeId)
             localStorage.setItem(`user-${userData.username}`, JSON.stringify(userData))
             const updateRecord = JSON.parse(localStorage.getItem(`user-${userData.username}`))
-
+            likeButton.classList = "circular ui icon button  voteButton"
         }
         else {
             userLikes.push(recipeId);
             localStorage.setItem(`user-${userData.username}`, JSON.stringify(userData))
             const updateRecord = JSON.parse(localStorage.getItem(`user-${userData.username}`))
-
+            likeButton.classList = "circular ui icon button  yellow voteButton"
         }
-
-
-        // if (userLikes) {
-        //     userLikes.push(likeId.id);
-        //     console.log('Userdata: ', userData)
-
-        //     // console.log('created : ', recipesLiked)
-        //     localStorage.setItem('userData', JSON.stringify(userData))
-        //     const newFile = JSON.parse(localStorage.getItem('userData'))
-        //     console.log('From LocalStorage: ', newFile)
-
-
-        //     console.log('shold set new recipesLiked array to LS: ', userData)
-        // }
-        // else {
-        //     console.log('You liked this already')
-        //     return false
-        // }
 
     }
 
-
-
-
 }
-
-
-
-
-
-
-
 
 
 //Show or hide search result bar

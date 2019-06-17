@@ -1,4 +1,4 @@
-[Food Explorers](https://food-explorers.herokuapp.com/)
+ [Food explorers](https://tools.hubteam.com/getting-started-tasks/)
 ===
 
 This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe, sharing a recipe and voting for a recipe. The website uses both front-end and backend technologies, it is driven by MongoDB database structures and presentation is handled by Bootstrap, Semantic UI, and JavaScript. 
@@ -196,12 +196,66 @@ Bugs and other issues
 4. User can upvote or downvote a recipe more than once.
 5. No form validation
 6. Search functionality can be improved.
+7. No Unit Test.
+8. No pagination
+9. Had to update Procfile with 
+```
+web: gunicorn app:app
+```
+With the help of my mentor 
+
+Setup Process
+* [Food explorers](https://tools.hubteam.com/getting-started-tasks/)
+* Set up a blank Cloud9 workspace
+* Did not have to install Python as its part of the Cloud9 IDE.(Only had to change support version to Python Version 3)
+* Created folders structure
+* Installed Flask framework from the CLI
+```
+sudo pip3 install flask
+```
+* Created app.py file
 
 
 Deployment
 ===
 
 This website is deployed and hosted on Heroku. I created a free account and push my Cloud9 repo to Heroku so the website can be accessible by any one with an internet connection. The app code is also on Github pages, which where you are currently reading this file from.  
+
+* Setup a free Heroku hosting account, then created an app with the app name 'food-explorers'
+* Logged into heroku account from Cloud9 CLI using: 
+```
+heroku login
+```
+* Back in heroku under settings I setup 'Config Vars' 
+```
+IP = 0.0.0.0
+PORT = 5000
+```
+* on Cloud9 I then linked my local repo to heroku app I created 
+```
+git remote add heroku https://git.heroku.com/food-explorers.git
+
+```
+
+* Created requirements.txt file by running
+```
+sudo pip3 freeze --local>requirements.txt
+```
+* added Procfile
+```
+echo web: python app.py > Procfile
+
+``` 
+
+* commited all staged files then pushed files from Cloud9 repo to heroku remote repository.
+```
+git push heroku master
+
+```
+
+
+
+
 
 
 Acknowledgments

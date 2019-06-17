@@ -23,9 +23,9 @@
                 </div>
                 <div class="ui medium transparent left icon input right floated">
                     <span class="recipeCardText voteText">{{recipe.up_votes}}</span>
-                    <a href="#">
+                    <a href="{{ url_for('up_votes', _id=recipe._id)}}">
                           <button class="circular ui icon button voteButton" id="liked{{loop.index0}}">
-                                <i class="thumbs up icon black" id={{recipe._id}}></i>
+                                <i class="thumbs up icon black recipeId{{recipe._id}}" id={{recipe._id}}></i>
                           </button>
                         </a>
                 </div>

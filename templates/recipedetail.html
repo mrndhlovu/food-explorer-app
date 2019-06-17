@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %} {% for recipe in recipe %}
 
+<!--Recipe detail-->
+
 <div class="ui segments" id="recipeLoad">
     <div class="ui top attached label small">{{ recipe.record.title.upper() }}</div>
     <div class="ui image center aligned bordered">
@@ -19,6 +21,7 @@
         <div class="ui bottom right attached label red mini">Country of Origin : {{recipe.record.country}}</div>
     </div>
 </div>
+
 <!-- Indicate a recipe has been save in favourites-->
 {% for favourite in favourites['userFavourites'] %} {% if 'username' in session and recipe._id|string == favourite.id %}
 <div class="ui success mini message flashMessages">
@@ -59,6 +62,7 @@
     </table>
 </div>
 
+<!--If user owns recipe and logged in show edit buttons-->
 
 {% if recipe.uploaded_by == session.username %}
 <div class="ui secondary segment">
