@@ -44,7 +44,7 @@ this is the landing page of the website, which list all recipes stored in the da
 * see a favourites section on the sidebar if logged in.
  If a recipe is in the favourites list, the recipe image will have a heart icon on the top left corner. If the icon is clicked, the recipe would be removed from user's favourites list. 
 #### recipedetail.html
-this is where a user can see a recipe in detail. From this page if a user is logged in and the owner of the recipe, then the edit, delete and addrecipe buttons are rendered at the bottom of the page, otherwise they. A recipe summary is also shown to give an overview of a dish.
+this is where a user can see a recipe in detail. From this page if a user is logged in and the owner of the recipe, then the edit, delete and addrecipe buttons are rendered at the bottom of the page, otherwise they are hidden. A recipe summary is also shown to give an overview of a dish.
 #### editrecipe 
 this page is only seen by a logged-in user where they can edit only a recipe they uploaded. The form fields are pre-populated with data from the backend and can be deleted by clicking on the 'x' icon or can add new recipe information by clicking the plus icon. When editing is done, data can be sent back to the database with the new updates by clicking the 'Done' button. The user also has the option to delete a recipe they uploaded by clicking the 'x' button.
 #### addrecipe.html
