@@ -205,7 +205,7 @@ web: gunicorn app:app
 With the help of my mentor 
 
 Setup Process
-* [Food explorers](https://tools.hubteam.com/getting-started-tasks/)
+* [Food explorers](https://food-explorers.herokuapp.com/)
 * Set up a blank Cloud9 workspace
 * Already had a Free MongoDB account, I just setup the collections.
 * Did not have to install Python as its part of the Cloud9 IDE.(Only had to change support version to Python Version 3)
