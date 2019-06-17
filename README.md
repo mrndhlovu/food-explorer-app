@@ -62,6 +62,8 @@ stores placeholder images used by each recipe.
 #### css folder 
 stores the style.css file which handles some of the styling of the website.
 
+### Other features
+* Most Recent sidebar: This renders 5  clickable and most recent recipes uploaded on the website.
 
 #### Wireframes 
 Download the wireframe.xml file from the wireframes folder and then:
@@ -76,7 +78,7 @@ ___
 ![](/wireframes/imagefour.png)
 
 
-MongoDB database collections structure used: 
+MongoDB database collections structures used: 
 ===
 
 ###### Recipes collection
@@ -177,7 +179,7 @@ While trying to handle the responsive design of the website, I forgot to add thi
 
 It gives the browser instructions on how to handle page dimensions and scale accordingly.
 
-Had issues with some semantic ui components like accordions and dropdowns, as they do not work in mobile view. which resulted in having a different views of the recipes filter in mobile and desktopview.
+Had issues with some semantic ui components like accordions and dropdowns, as they do not work in mobile view. which resulted in having a different views of the recipe filter in mobile and desktopview.
 
 ##### Other browsers used for testing
 
@@ -190,16 +192,16 @@ Bugs and other issues
 
 1. The website uses the same image for all recipes which can be improved to having the ability to upload a unique image for each recipe.
 2. One image is also used as a user avatar. Can be improved by adding a unique image as the user signs up.
-3. As whe a user logs in, a localstorage file if created to track user likes and and change the like button when clicked, however there is an issue with keeping the color state of the button when page reloads.
+3. As a user logs in, a localstorage file if created to track user likes and and change the like button when clicked, however there is an issue with keeping the color state of the button when page reloads.
 4. User can upvote or downvote a recipe more than once.
 5. No form validation
-6. 
+6. Search functionality can be improved.
 
 
 Deployment
 ===
 
-This website is deployed and hosted on Heroku. I created a free account and push my Cloud9 repo to Heroku so it can be accessible by any one with an internet connection. The app code is also on Github pages, which where you are currently reading this file from.  
+This website is deployed and hosted on Heroku. I created a free account and push my Cloud9 repo to Heroku so the website can be accessible by any one with an internet connection. The app code is also on Github pages, which where you are currently reading this file from.  
 
 
 Acknowledgments
