@@ -1,7 +1,7 @@
 [Food Explorers](https://food-explorers.herokuapp.com/)
 ===
 
-This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe to favourites, sharing a recipe or liking a recipe. The website uses both front-end and driven by the structure of the back-end technologies like  bootstrap, Semantic UI, flask and MongoDB. 
+This website is mainly targeted at foodies who would like to explore food options from around the world. On this website users can view recipes shared by other people and can also signup and upload recipes they want to share. Users can like, dislike or save a recipe to favorites. Users have to sign up for an account to gain access to some features within the website, for example saving a recipe, sharing a recipe and voting for a recipe. The website uses both front-end and backend technologies, it is driven by MongoDB database structures and presentation is handled by Bootstrap, Semanitc UI, and JavaScript. 
 
 
 ### Website Files
@@ -28,27 +28,27 @@ static folder holds the following files:
 UX and Features
 ===
 #### base.html
-This is the main template used throughout the website. It renders the head links, navigation bar, search box, recipe filter dropdown, side bar and also the script tags used throughout the website. All website content is rendered or graphed in the middle of this base template. 
+This is the main template used throughout the website. It renders the head links, navigation bar, search box, recipe filter dropdown, side bars and also the script tags used throughout the website. All website content is rendered in the middle of this base template.The recipe filter side bar is different on mobileview from desktop meaning the app will dictate a user's device and render the appropriate filter.
 #### index.html
- On this page a user can sign in into their account or click signup to register for a new one.
+ On this page a user can login to their account or register a new one.
 #### register.html
-From this page a user can sign up for a new account.
+From this page a user can sign up for a new account. There is no form validation or password encryption.
 #### cuisine.html
-this is the landing page of the website, which list all recipes stored in the database. From this page users can:
+this is the landing page of the website, which list all recipes stored in the database. As a user you can:
 
-* click an image and be redirected to a ‘recipedetail.html’ page.
+* click an image and be redirected to a page with more detailed information about a recipe.
 * see author of the recipe
 * see the number of upvotes and downvotes
-* see number of views
-* see date the recipe was uploaded.
-* see a favourites section on the sidebar if they are logged in.
- If a recipe is in the favourites list, the recipe image will have a heart icon on the top left corner. If  the icon is clicked, the recipe would be removed from user's favourites list.
+* see number of views for each recipe.
+* see date a recipe was uploaded.
+* see a favourites section on the sidebar if logged in.
+ If a recipe is in the favourites list, the recipe image will have a heart icon on the top left corner. If the icon is clicked, the recipe would be removed from user's favourites list. 
 #### recipedetail.html
-this is where a user can see a recipe in detail. From this page if a user is logged in or is the owner of the recipe being viewed, then the edit, delete and add recipe buttons are shown below, otherwise they do not render.
+this is where a user can see a recipe in detail. From this page if a user is logged in and the owner of the recipe, then the edit, delete and addrecipe buttons are rendered at the bottom of the page, otherwise they. A recipe summary is also shown to give an overview of a dish.
 #### editrecipe 
-this page is only seen by a logged-in user where they can edit only a recipe they uploaded. The form fields are pre-populated with data from the backend and can be deleted by clicking on the 'x' icon or can add new recipe information by clicking the plus icon. When editing is done, data can be sent back to the database with the new updates by clicking the 'Done' button. The user also has the option to delete a recipe they uploaded by clicking the 'Delete' button.
+this page is only seen by a logged-in user where they can edit only a recipe they uploaded. The form fields are pre-populated with data from the backend and can be deleted by clicking on the 'x' icon or can add new recipe information by clicking the plus icon. When editing is done, data can be sent back to the database with the new updates by clicking the 'Done' button. The user also has the option to delete a recipe they uploaded by clicking the 'x' button.
 #### addrecipe.html
-on this page a user logged in will create and share a new recipe. New fields can be rendered or removed to fit the user's demands. By clicking the 'plus' button they can add a new field and the 'x' to delete the field. Save button sends data to storage on the database.
+on this page a user logged in will create and share a new recipe. New fields can be rendered or removed to fit the user's demands. By clicking the 'plus' button they can add a new field and the 'x' to delete the field. 'Add Recipe' button sends data for storage on the database.
 #### app.py  
 this file handles all the backend functionality of the website which includes user login information, handles CRUD queries, sets up the database structure which the website is dependent on.
 #### Procfile
@@ -56,9 +56,9 @@ Instruction file for heroku on how to run the app.
 ####  requirements 
 this file lists the dependencies required by python for the app to run.
 #### js folder
-stores index.js file which keeps some of the front-end functionality of the site.
+stores index.js file which handles some of the front-end functionality of the site like creating or deleting form fields, bootstrap and semantic ui functions.
 #### images folder 
-stores images used by recipes.
+stores placeholder images used by each recipe.
 #### css folder 
 stores the style.css file which handles some of the styling of the website.
 
@@ -80,6 +80,7 @@ MongoDB database collections structure used:
 ===
 
 ###### Recipes collection
+
 ```
 _id:5d001f65bb6aae000b028d4c
 uploaded_by:"Soup Loving Morah"
@@ -148,7 +149,7 @@ Technologies Used
 
  1. MongoDB: the storing and retrieving all the recipes and user data.
  2. Javascript: for frontend functionality of the website.
- 3. Bootstrap: for handling the some parts of grid layout on the website.
+ 3. Bootstrap: for handling the some parts of grid layout on the website as the resposive nature of the navigation bar.
  4. Semantic UI: a frontend framework like bootstrap but with more advanced build tools mostly used on the site for handling the majority of the layout and some css styling. 
  5. Python version 3.4.3
  6. Pip: packet manager for Python
@@ -159,19 +160,26 @@ Technologies Used
 10. JavaScript
 11. Heroku: App deployment.
 12. Git: for version tracking of the app.
-13. Google chrome development tools
+13. Google chrome development tools.
 14. Draw.io: for wireframes
 15. Heroku: Hosting the App
 
 
 ### Testing
- Tested the website main using Google dev tools. This made it easy to edit the site structure on the website on the fly and then transferring the css code over to the style.css file. 
-. For mobile responsive testing i used the toggle device tool option, which is part of google dev tools. From here I tested the website view in all device option available, which range from small screen like Galaxy S5 to large screens like Ipad Pro and even desktop view.
+ Tested the website mainly using Google dev tools. This made it easy to edit the site structure on the website on the fly and then transferring the css code over to the style.css file. 
+. For mobile responsive testing I used the toggle device tool option, which is part of google dev tools. From here I tested the website view in all device option available, which range from small screen like Galaxy S5 to large screens like Ipad Pro and even desktop view.
 
-Issues I had here however where that sometimes the site would not appear as expected, until the page is refreshed a couple of times. Could have been a Chrome caching issue but at times the cache was as little as 10MB. 
+While trying to handle the responsive design of the website, I forgot to add this file: 
 
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
 
-##### Other browsers
+It gives the browser instructions on how to handle page dimensions and scale accordingly.
+
+Had issues with some semantic ui components like accordions and dropdowns, as they do not work in mobile view. which resulted in having a different views of the recipes filter in mobile and desktopview. Worked out well at the end
+
+##### Other browsers used for testing
 
 * Firefox
 * Microsoft Edge
@@ -180,13 +188,9 @@ Issues I had here however where that sometimes the site would not appear as expe
 Bugs and other issues
 ===
 
-
 1. The website uses the same image for all recipes which can be improved to having the ability to upload a unique image for each recipe.
 2. One image is also used as a user avatar. Can be improved by adding a unique image as the user signs up.
 3. When a user likes a recipe, that is only tracked on the backend but not shown on the website. This can be improved by turning a button to a different color when recipe is liked.
-4. Flash messages can be confusing when there is more than one.
-5. Semantic UI responsive grid can have issues when in mobile view. The site responds well using the chrome responsive toggle bar but sometimes wont work on a selected mobile view.
-
 
 Deployment
 ===
